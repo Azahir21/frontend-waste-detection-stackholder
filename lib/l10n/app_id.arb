@@ -1,0 +1,161 @@
+{
+  "@@locale": "id",
+  "app_title": "Lara'an",
+  "@app_title": {
+    "description": "Ditampilkan di bagian atas layar."
+  },
+  "home": "Beranda",
+  "@home": {
+    "description": "Ditampilkan di layar beranda."
+  },
+  "statistics": "Statistik",
+  "@statistics": {
+    "description": "Ditampilkan di layar statistik."
+  },
+  "user_management": "Manajemen Pengguna",
+  "@user_management": {
+    "description": "Ditampilkan di layar manajemen pengguna."
+  },
+  "logout": "Keluar",
+  "@logout": {
+    "description": "Ditampilkan di layar keluar."
+  },
+  "wifi": "Wi-Fi",
+  "@wifi": {
+    "description": "Ditampilkan pada wifi."
+  },
+  "mobile_data": "Data Seluler",
+  "@mobile_data": {
+    "description": "Ditampilkan pada data seluler."
+  },
+  "network_problem": "Masalah Jaringan",
+  "@network_problem": {
+    "description": "Ditampilkan pada dialog masalah jaringan."
+  },
+  "please_check_connection": "Silakan periksa koneksi Anda",
+  "@please_check_connection": {
+    "description": "Ditampilkan pada dialog silakan periksa koneksi."
+  },
+  "connected_successfully": "Berhasil Terhubung",
+  "@connected_successfully": {
+    "description": "Ditampilkan pada dialog berhasil terhubung."
+  },
+  "connected_successfully_message": "Terhubung ke {network}",
+  "@connected_successfully_message": {
+    "description": "Ditampilkan pada dialog berhasil terhubung.",
+    "placeholders": {
+      "network": {
+        "type": "String",
+        "example": "jaringan"
+      }
+    }
+  },
+  "session_expired": "Sesi Berakhir",
+  "@session_expired": {
+    "description": "Ditampilkan pada dialog Sesi Berakhir."
+  },
+  "please_login_again": "Silakan masuk kembali",
+  "@please_login_again": {
+    "description": "Ditampilkan pada dialog silakan masuk kembali."
+  },
+  "location_services_disabled": "Layanan lokasi dinonaktifkan",
+  "@location_services_disabled": {
+    "description": "Pesan yang ditampilkan saat layanan lokasi dinonaktifkan."
+  },
+  "please_enable_services": "Silakan aktifkan layanan",
+  "@please_enable_services": {
+    "description": "Permintaan kepada pengguna untuk mengaktifkan layanan lokasi."
+  },
+  "location_permissions_denied": "Izin lokasi ditolak",
+  "@location_permissions_denied": {
+    "description": "Pesan yang ditampilkan saat izin lokasi ditolak."
+  },
+  "please_enable_permissions": "Silakan aktifkan izin",
+  "@please_enable_permissions": {
+    "description": "Permintaan kepada pengguna untuk mengaktifkan izin lokasi."
+  },
+  "location_permissions_denied_forever": "Izin lokasi ditolak secara permanen",
+  "@location_permissions_denied_forever": {
+    "description": "Pesan yang ditampilkan saat izin lokasi ditolak secara permanen."
+  },
+  "cannot_request_permissions": "Kami tidak dapat meminta izin",
+  "@cannot_request_permissions": {
+    "description": "Penjelasan bahwa izin tidak dapat diminta saat ditolak secara permanen."
+  },
+  "sunday": "Min",
+  "@sunday": {
+    "description": "Ditampilkan di hari Minggu."
+  },
+  "monday": "Sen",
+  "@monday": {
+    "description": "Ditampilkan di hari Senin."
+  },
+  "tuesday": "Sel",
+  "@tuesday": {
+    "description": "Ditampilkan di hari Selasa."
+  },
+  "wednesday": "Rab",
+  "@wednesday": {
+    "description": "Ditampilkan di hari Rabu."
+  },
+  "thursday": "Kam",
+  "@thursday": {
+    "description": "Ditampilkan di hari Kamis."
+  },
+  "friday": "Jum",
+  "@friday": {
+    "description": "Ditampilkan di hari Jumat."
+  },
+  "saturday": "Sab",
+  "@saturday": {
+    "description": "Ditampilkan di hari Sabtu."
+  },
+  "january": "Jan",
+  "@january": {
+    "description": "Ditampilkan di bulan Januari."
+  },
+  "february": "Feb",
+  "@february": {
+    "description": "Ditampilkan di bulan Februari."
+  },
+  "march": "Mar",
+  "@march": {
+    "description": "Ditampilkan di bulan Maret."
+  },
+  "april": "Apr",
+  "@april": {
+    "description": "Ditampilkan di bulan April."
+  },
+  "may": "Mei",
+  "@may": {
+    "description": "Ditampilkan di bulan Mei."
+  },
+  "june": "Jun",
+  "@june": {
+    "description": "Ditampilkan di bulan Juni."
+  },
+  "july": "Jul",
+  "@july": {
+    "description": "Ditampilkan di bulan Juli."
+  },
+  "august": "Agu",
+  "@august": {
+    "description": "Ditampilkan di bulan Agustus."
+  },
+  "september": "Sep",
+  "@september": {
+    "description": "Ditampilkan di bulan September."
+  },
+  "october": "Okt",
+  "@october": {
+    "description": "Ditampilkan di bulan Oktober."
+  },
+  "november": "Nov",
+  "@november": {
+    "description": "Ditampilkan di bulan November."
+  },
+  "december": "Des",
+  "@december": {
+    "description": "Ditampilkan di bulan Desember."
+  }
+}

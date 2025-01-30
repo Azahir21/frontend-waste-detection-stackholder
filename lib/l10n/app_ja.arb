@@ -1,0 +1,161 @@
+{
+  "@@locale": "ja",
+  "app_title": "ララーン",
+  "@app_title": {
+    "description": "画面上部に表示されます。"
+  },
+  "home": "ホーム",
+  "@home": {
+    "description": "ホーム画面に表示されます。"
+  },
+  "statistics": "統計",
+  "@statistics": {
+    "description": "統計画面に表示されます。"
+  },
+  "user_management": "ユーザー管理",
+  "@user_management": {
+    "description": "ユーザー管理画面に表示されます。"
+  },
+  "logout": "ログアウト",
+  "@logout": {
+    "description": "ログアウト画面に表示されます。"
+  },
+  "wifi": "Wi-Fi",
+  "@wifi": {
+    "description": "Wi-Fiに表示されます。"
+  },
+  "mobile_data": "モバイルデータ",
+  "@mobile_data": {
+    "description": "モバイルデータに表示されます。"
+  },
+  "network_problem": "ネットワークの問題",
+  "@network_problem": {
+    "description": "ネットワーク問題ダイアログに表示されます。"
+  },
+  "please_check_connection": "接続を確認してください",
+  "@please_check_connection": {
+    "description": "接続確認要求ダイアログに表示されます。"
+  },
+  "connected_successfully": "接続に成功しました",
+  "@connected_successfully": {
+    "description": "接続成功ダイアログに表示されます。"
+  },
+  "connected_successfully_message": "{network}に接続しました",
+  "@connected_successfully_message": {
+    "description": "接続成功ダイアログに表示されます。",
+    "placeholders": {
+      "network": {
+        "type": "String",
+        "example": "ネットワーク"
+      }
+    }
+  },
+  "session_expired": "セッションが期限切れです",
+  "@session_expired": {
+    "description": "セッション期限切れダイアログに表示されます。"
+  },
+  "please_login_again": "再度ログインしてください",
+  "@please_login_again": {
+    "description": "再ログイン要求ダイアログに表示されます。"
+  },
+  "location_services_disabled": "位置情報サービスが無効になっています",
+  "@location_services_disabled": {
+    "description": "位置情報サービスが無効な場合に表示されるメッセージです。"
+  },
+  "please_enable_services": "サービスを有効にしてください",
+  "@please_enable_services": {
+    "description": "ユーザーに位置情報サービスの有効化を求めるプロンプトです。"
+  },
+  "location_permissions_denied": "位置情報の権限が拒否されています",
+  "@location_permissions_denied": {
+    "description": "位置情報の権限が拒否された場合に表示されるメッセージです。"
+  },
+  "please_enable_permissions": "権限を有効にしてください",
+  "@please_enable_permissions": {
+    "description": "ユーザーに位置情報の権限の有効化を求めるプロンプトです。"
+  },
+  "location_permissions_denied_forever": "位置情報の権限が永久に拒否されています",
+  "@location_permissions_denied_forever": {
+    "description": "位置情報の権限が永久に拒否された場合に表示されるメッセージです。"
+  },
+  "cannot_request_permissions": "権限をリクエストできません",
+  "@cannot_request_permissions": {
+    "description": "永久に拒否された場合に権限をリクエストできないことの説明です。"
+  },
+  "sunday": "日",
+  "@sunday": {
+    "description": "日曜日に表示されます。"
+  },
+  "monday": "月",
+  "@monday": {
+    "description": "月曜日に表示されます。"
+  },
+  "tuesday": "火",
+  "@tuesday": {
+    "description": "火曜日に表示されます。"
+  },
+  "wednesday": "水",
+  "@wednesday": {
+    "description": "水曜日に表示されます。"
+  },
+  "thursday": "木",
+  "@thursday": {
+    "description": "木曜日に表示されます。"
+  },
+  "friday": "金",
+  "@friday": {
+    "description": "金曜日に表示されます。"
+  },
+  "saturday": "土",
+  "@saturday": {
+    "description": "土曜日に表示されます。"
+  },
+  "january": "1月",
+  "@january": {
+    "description": "1月に表示されます。"
+  },
+  "february": "2月",
+  "@february": {
+    "description": "2月に表示されます。"
+  },
+  "march": "3月",
+  "@march": {
+    "description": "3月に表示されます。"
+  },
+  "april": "4月",
+  "@april": {
+    "description": "4月に表示されます。"
+  },
+  "may": "5月",
+  "@may": {
+    "description": "5月に表示されます。"
+  },
+  "june": "6月",
+  "@june": {
+    "description": "6月に表示されます。"
+  },
+  "july": "7月",
+  "@july": {
+    "description": "7月に表示されます。"
+  },
+  "august": "8月",
+  "@august": {
+    "description": "8月に表示されます。"
+  },
+  "september": "9月",
+  "@september": {
+    "description": "9月に表示されます。"
+  },
+  "october": "10月",
+  "@october": {
+    "description": "10月に表示されます。"
+  },
+  "november": "11月",
+  "@november": {
+    "description": "11月に表示されます。"
+  },
+  "december": "12月",
+  "@december": {
+    "description": "12月に表示されます。"
+  }
+}

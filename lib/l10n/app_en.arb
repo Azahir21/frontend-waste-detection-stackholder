@@ -1,0 +1,161 @@
+{
+  "@@locale": "en",
+  "wifi": "Wi-Fi",
+  "@wifi": {
+    "description": "Shown on the wifi."
+  },
+  "app_title": "Lara'an",
+  "@app_title": {
+    "description": "Shown on top of the screen."
+  },
+  "home": "Home",
+  "@home": {
+    "description": "Shown on the home screen."
+  },
+  "statistics": "Statistics",
+  "@statistics": {
+    "description": "Shown on the statistics screen."
+  },
+  "user_management": "User Management",
+  "@user_management": {
+    "description": "Shown on the user management screen."
+  },
+  "logout": "Logout",
+  "@logout": {
+    "description": "Shown on the logout screen."
+  },
+  "mobile_data": "Mobile Data",
+  "@mobile_data": {
+    "description": "Shown on the mobile data."
+  },
+  "network_problem": "Network Problem",
+  "@network_problem": {
+    "description": "Shown on the network problem dialog."
+  },
+  "please_check_connection": "Please check your connection",
+  "@please_check_connection": {
+    "description": "Shown on the please check connection dialog."
+  },
+  "connected_successfully": "Connected Successfully",
+  "@connected_successfully": {
+    "description": "Shown on the connected successfully dialog."
+  },
+  "connected_successfully_message": "Connected to {network}",
+  "@connected_successfully_message": {
+    "description": "Shown on the connected successfully dialog.",
+    "placeholders": {
+      "network": {
+        "type": "String",
+        "example": "network"
+      }
+    }
+  },
+  "session_expired": "Session Expired",
+  "@session_expired": {
+    "description": "Shown on the Session Expired dialog."
+  },
+  "please_login_again": "Please login again",
+  "@please_login_again": {
+    "description": "Shown on the please login again dialog."
+  },
+  "location_services_disabled": "Location services are disabled",
+  "@location_services_disabled": {
+    "description": "Message shown when location services are disabled."
+  },
+  "please_enable_services": "Please enable the services",
+  "@please_enable_services": {
+    "description": "Prompt to ask the user to enable location services."
+  },
+  "location_permissions_denied": "Location permissions are denied",
+  "@location_permissions_denied": {
+    "description": "Message shown when location permissions are denied."
+  },
+  "please_enable_permissions": "Please enable the permissions",
+  "@please_enable_permissions": {
+    "description": "Prompt to ask the user to enable location permissions."
+  },
+  "location_permissions_denied_forever": "Location permissions are permanently denied",
+  "@location_permissions_denied_forever": {
+    "description": "Message shown when location permissions are permanently denied."
+  },
+  "cannot_request_permissions": "We cannot request permissions",
+  "@cannot_request_permissions": {
+    "description": "Explanation that permissions cannot be requested when permanently denied."
+  },
+  "sunday": "Sun",
+  "@sunday": {
+    "description": "Shown on the sunday."
+  },
+  "monday": "Mon",
+  "@monday": {
+    "description": "Shown on the monday."
+  },
+  "tuesday": "Tues",
+  "@tuesday": {
+    "description": "Shown on the tuesday."
+  },
+  "wednesday": "Wed",
+  "@wednesday": {
+    "description": "Shown on the wednesday."
+  },
+  "thursday": "Thurs",
+  "@thursday": {
+    "description": "Shown on the thursday."
+  },
+  "friday": "Fri",
+  "@friday": {
+    "description": "Shown on the friday."
+  },
+  "saturday": "Sat",
+  "@saturday": {
+    "description": "Shown on the saturday."
+  },
+  "january": "Jan",
+  "@january": {
+    "description": "Shown on the january."
+  },
+  "february": "Feb",
+  "@february": {
+    "description": "Shown on the february."
+  },
+  "march": "Mar",
+  "@march": {
+    "description": "Shown on the march."
+  },
+  "april": "Apr",
+  "@april": {
+    "description": "Shown on the april."
+  },
+  "may": "May",
+  "@may": {
+    "description": "Shown on the may."
+  },
+  "june": "Jun",
+  "@june": {
+    "description": "Shown on the june."
+  },
+  "july": "Jul",
+  "@july": {
+    "description": "Shown on the july."
+  },
+  "august": "Aug",
+  "@august": {
+    "description": "Shown on the august."
+  },
+  "september": "Sep",
+  "@september": {
+    "description": "Shown on the september."
+  },
+  "october": "Oct",
+  "@october": {
+    "description": "Shown on the october."
+  },
+  "november": "Nov",
+  "@november": {
+    "description": "Shown on the november."
+  },
+  "december": "Dec",
+  "@december": {
+    "description": "Shown on the december."
+  }
+}

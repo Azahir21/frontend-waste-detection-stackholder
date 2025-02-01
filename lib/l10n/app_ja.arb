@@ -181,5 +181,147 @@
   "email_pass_cant_empty": "メールアドレスとパスワードは空欄にできません。",
   "@email_pass_cant_empty": {
     "description": "入力エラーダイアログに表示されます。"
+  },
+  "waste_data_error": "廃棄物データの読み込みに失敗しました",
+  "@waste_data_error": {
+    "description": "廃棄物データエラーダイアログに表示されます。"
+  },
+  "waste_time_series_error": "廃棄物時系列データの読み込みに失敗しました",
+  "@waste_time_series_error": {
+    "description": "廃棄物時系列エラーダイアログに表示されます。"
+  },
+  "no_data": "データがありません",
+  "@no_data": {
+    "description": "データがない場合に表示されるダイアログです。"
+  },
+  "show_previous_data": "選択された時点ではデータがありません。以前のデータを表示しています。",
+  "@show_previous_data": {
+    "description": "データがない場合に表示されるダイアログです。"
+  },
+  "start_date": "開始日",
+  "@start_date": {
+    "description": "開始日に表示されます。"
+  },
+  "end_date": "終了日",
+  "@end_date": {
+    "description": "終了日に表示されます。"
+  },
+  "no_data_found": "データが見つかりません",
+  "@no_data_found": {
+    "description": "データが見つからない場合に表示されます。"
+  },
+  "day_count": "{counted}日",
+  "@day_count": {
+    "description": "日数のカウントに表示されます。",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "filter_timeseries": "時系列をフィルター",
+  "@filter_timeseries": {
+    "description": "時系列フィルターダイアログボックスに表示されます。"
+  },
+  "reset": "リセット",
+  "@reset": {
+    "description": "リセットボタンです。"
+  },
+  "daily_data": "日次データ",
+  "@daily_data": {
+    "description": "日次データのタイトルです。"
+  },
+  "cumulative_data": "累積データ",
+  "@cumulative_data": {
+    "description": "累積データのタイトルです。"
+  },
+  "failed_to_pick_end_date": "終了日を選択できませんでした",
+  "@failed_to_pick_end_date": {
+    "description": "ユーザーが開始日を選択する前に終了日を選択しようとしたときに表示されます。"
+  },
+  "please_input_start_date_first": "最初に開始日を入力してください。",
+  "@please_input_start_date_first": {
+    "description": "ユーザーに最初に開始日を選択するように促すときに表示されます。"
+  },
+  "capture_time": "キャプチャ時間:",
+  "@capture_time": {
+    "description": "キャプチャ時間情報のラベル。"
+  },
+  "ok": "OK",
+  "@ok": {
+    "description": "OKボタンに表示されます。"
+  },
+  "cancel": "キャンセル",
+  "@cancel": {
+    "description": "キャンセルボタンに表示されます。"
+  },
+  "amount": "数量 : {counted}",
+  "@amount": {
+    "description": "チェックアウト画面でゴミの数量に表示されます。",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "number_of_points": "{counted} ポイント",
+  "@number_of_points": {
+    "description": "チェックアウト画面でポイント数に表示されます。",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "location": "位置情報",
+  "@location": {
+    "description": "撮影場所またはユーザーの位置情報に表示されます。"
+  },
+  "waste_detected": "廃棄物が検出されました",
+  "@waste_detected": {
+    "description": "廃棄物検出ダイアログに表示されます。"
+  },
+  "action_not_continue": "アクションを続行できません",
+  "@action_not_continue": {
+    "description": "アクション続行不可ダイアログに表示されます。"
+  },
+  "illegal_dumping_recycle_error": "ゴミ集積所はリサイクル不可",
+  "@illegal_dumping_recycle_error": {
+    "description": "Label for waste pile recycle error"
+  },
+  "status": "ステータス",
+  "@status": {
+    "description": "ステータス"
+  },
+  "pickup_true": "受け取り済み",
+  "@pickup_true": {
+    "description": "受け取り済み"
+  },
+  "pickup_false": "未受け取り",
+  "@pickup_false": {
+    "description": "未受け取り"
+  },
+  "detail_information_pickup": "受け取り詳細",
+  "@detail_information_pickup": {
+    "description": "Header for pickup details section"
+  },
+  "pickup_by": "受け取り人",
+  "@pickup_by": {
+    "description": "Label for person who picked up the item"
+  },
+  "pickup_at": "受け取り時間",
+  "@pickup_at": {
+    "description": "Label for pickup timestamp"
+  },
+  "illegal_dumping_site": "ゴミ集積所",
+  "@illegal_dumping_site": {
+    "description": "Label for waste pile site"
+  },
+  "illegal_trash": "不法ゴミ",
+  "@illegal_trash": {
+    "description": "Label for waste pile"
   }
 }

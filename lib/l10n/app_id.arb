@@ -181,5 +181,147 @@
   "email_pass_cant_empty": "Email dan kata sandi tidak boleh kosong.",
   "@email_pass_cant_empty": {
     "description": "Ditampilkan di dialog kesalahan input."
+  },
+  "waste_data_error": "Gagal memuat data sampah",
+  "@waste_data_error": {
+    "description": "Ditampilkan di dialog kesalahan data sampah."
+  },
+  "waste_time_series_error": "Gagal memuat seri waktu sampah",
+  "@waste_time_series_error": {
+    "description": "Ditampilkan di dialog kesalahan seri waktu sampah."
+  },
+  "no_data": "Tidak ada data",
+  "@no_data": {
+    "description": "Ditampilkan di layar data kosong."
+  },
+  "show_previous_data": "Tidak ada data yang ditemukan untuk rentang waktu yang dipilih. Menampilkan data sebelumnya.",
+  "@show_previous_data": {
+    "description": "Ditampilkan di layar data kosong."
+  },
+  "start_date": "Tanggal Mulai",
+  "@start_date": {
+    "description": "Ditampilkan di tanggal mulai."
+  },
+  "end_date": "Tanggal Akhir",
+  "@end_date": {
+    "description": "Ditampilkan di tanggal akhir."
+  },
+  "no_data_found": "Tidak ada data ditemukan",
+  "@no_data_found": {
+    "description": "Ditampilkan saat tidak ada data ditemukan."
+  },
+  "day_count": "Hari ke-{counted}",
+  "@day_count": {
+    "description": "Ditampilkan di hitungan hari.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "filter_timeseries": "Filter Deret Waktu",
+  "@filter_timeseries": {
+    "description": "Ditampilkan di kotak dialog filter deret waktu."
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Ditampilkan pada tombol reset."
+  },
+  "daily_data": "Data Harian",
+  "@daily_data": {
+    "description": "Ditampilkan pada data harian."
+  },
+  "cumulative_data": "Data Kumulatif",
+  "@cumulative_data": {
+    "description": "Ditampilkan pada data kumulatif."
+  },
+  "failed_to_pick_end_date": "Gagal memilih tanggal akhir",
+  "@failed_to_pick_end_date": {
+    "description": "Ditampilkan saat pengguna mencoba memilih tanggal akhir sebelum memilih tanggal mulai."
+  },
+  "please_input_start_date_first": "Silakan masukkan tanggal mulai terlebih dahulu.",
+  "@please_input_start_date_first": {
+    "description": "Ditampilkan saat meminta pengguna untuk memilih tanggal mulai terlebih dahulu."
+  },
+  "capture_time": "Waktu Penangkapan:",
+  "@capture_time": {
+    "description": "Label untuk informasi waktu penangkapan."
+  },
+  "ok": "Oke",
+  "@ok": {
+    "description": "Ditampilkan di tombol oke."
+  },
+  "cancel": "Batal",
+  "@cancel": {
+    "description": "Ditampilkan di tombol batal."
+  },
+  "amount": "Jumlah : {counted}",
+  "@amount": {
+    "description": "Ditampilkan di jumlah sampah di layar pembayaran.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "number_of_points": "{counted} Poin",
+  "@number_of_points": {
+    "description": "Ditampilkan di jumlah poin di layar pembayaran.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "location": "Lokasi",
+  "@location": {
+    "description": "Ditampilkan di lokasi yang diambil atau lokasi pengguna."
+  },
+  "waste_detected": "Sampah Terdeteksi",
+  "@waste_detected": {
+    "description": "Ditampilkan pada dialog sampah terdeteksi."
+  },
+  "action_not_continue": "Tindakan tidak dapat dilanjutkan",
+  "@action_not_continue": {
+    "description": "Ditampilkan pada dialog tindakan tidak dapat dilanjutkan."
+  },
+  "illegal_dumping_recycle_error": "TPS ilegal tidak dapat di daur ulang",
+  "@illegal_dumping_recycle_error": {
+    "description": "Label for illegal dumping recycle error"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status"
+  },
+  "pickup_true": "sudah diambil",
+  "@pickup_true": {
+    "description": "sudah diambil"
+  },
+  "pickup_false": "belum diambil",
+  "@pickup_false": {
+    "description": "belum diambil"
+  },
+  "detail_information_pickup": "Detail Pengambilan",
+  "@detail_information_pickup": {
+    "description": "Header for pickup details section"
+  },
+  "pickup_by": "Diambil oleh",
+  "@pickup_by": {
+    "description": "Label for person who picked up the item"
+  },
+  "pickup_at": "Waktu pengambilan",
+  "@pickup_at": {
+    "description": "Label for pickup timestamp"
+  },
+  "illegal_dumping_site": "TPS Ilegal",
+  "@illegal_dumping_site": {
+    "description": "Label for illegal dumping site"
+  },
+  "illegal_trash": "Sampah Ilegal",
+  "@illegal_trash": {
+    "description": "Label for illegal trash"
   }
 }

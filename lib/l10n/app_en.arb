@@ -181,5 +181,147 @@
   "email_pass_cant_empty": "Email and password cannot be empty.",
   "@email_pass_cant_empty": {
     "description": "Shown on the input error dialog."
+  },
+  "waste_data_error": "Failed to load waste data",
+  "@waste_data_error": {
+    "description": "Shown on the waste data error dialog."
+  },
+  "waste_time_series_error": "Failed to load waste time series",
+  "@waste_time_series_error": {
+    "description": "Shown on the waste time series error dialog."
+  },
+  "no_data": "No Data",
+  "@no_data": {
+    "description": "Shown on the no data."
+  },
+  "show_previous_data": "No data found for the selected time range. Showing previous data.",
+  "@show_previous_data": {
+    "description": "Shown on the show previous data."
+  },
+  "start_date": "Start Date",
+  "@start_date": {
+    "description": "Shown on the start date."
+  },
+  "end_date": "End Date",
+  "@end_date": {
+    "description": "Shown on the end date."
+  },
+  "no_data_found": "No data found",
+  "@no_data_found": {
+    "description": "Shown on the no data found."
+  },
+  "day_count": "Days {counted}",
+  "@day_count": {
+    "description": "Shown on the day count.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "filter_timeseries": "Filter Time Series",
+  "@filter_timeseries": {
+    "description": "Shown on the filter time series dialog box."
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Shown on the reset button."
+  },
+  "daily_data": "Daily Data",
+  "@daily_data": {
+    "description": "Shown on the daily data."
+  },
+  "cumulative_data": "Cumulative Data",
+  "@cumulative_data": {
+    "description": "Shown on the cumulative data."
+  },
+  "failed_to_pick_end_date": "Failed to pick end date",
+  "@failed_to_pick_end_date": {
+    "description": "Shown when the user tries to pick an end date before selecting a start date."
+  },
+  "please_input_start_date_first": "Please input the start date first.",
+  "@please_input_start_date_first": {
+    "description": "Shown when prompting the user to select a start date first."
+  },
+  "capture_time": "Capture Time:",
+  "@capture_time": {
+    "description": "Label for capture time information."
+  },
+  "ok": "Ok",
+  "@ok": {
+    "description": "Shown on the ok button."
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Shown on the cancel button."
+  },
+  "amount": "Amount : {counted}",
+  "@amount": {
+    "description": "Shown on the amount of waste in chackout screen.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "number_of_points": "{counted} Points",
+  "@number_of_points": {
+    "description": "Shown on the number of points in chackout screen.",
+    "placeholders": {
+      "counted": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "location": "Location",
+  "@location": {
+    "description": "Shown on the taken location or user location."
+  },
+  "waste_detected": "Waste Detected",
+  "@waste_detected": {
+    "description": "Shown on the waste detected dialog."
+  },
+  "action_not_continue": "Action cannot be continued",
+  "@action_not_continue": {
+    "description": "Shown on the action not continue dialog."
+  },
+  "illegal_dumping_recycle_error": "Waste pile cannot be recycled",
+  "@illegal_dumping_recycle_error": {
+    "description": "Label for waste pile recycle error"
+  },
+  "status": "Status",
+  "@status": {
+    "description": "Status"
+  },
+  "pickup_true": "already picked up",
+  "@pickup_true": {
+    "description": "already picked up"
+  },
+  "pickup_false": "not yet picked up",
+  "@pickup_false": {
+    "description": "not yet picked up"
+  },
+  "detail_information_pickup": "Pickup Details",
+  "@detail_information_pickup": {
+    "description": "Header for pickup details section"
+  },
+  "pickup_by": "Picked up by",
+  "@pickup_by": {
+    "description": "Label for person who picked up the item"
+  },
+  "pickup_at": "Pickup time",
+  "@pickup_at": {
+    "description": "Label for pickup timestamp"
+  },
+  "illegal_dumping_site": "Waste Pile",
+  "@illegal_dumping_site": {
+    "description": "Label for waste pile site"
+  },
+  "illegal_trash": "Illegal Trash",
+  "@illegal_trash": {
+    "description": "Label for illegal trash"
   }
 }

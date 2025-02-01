@@ -157,5 +157,29 @@
   "december": "12月",
   "@december": {
     "description": "12月に表示されます。"
+  },
+  "login": "ログイン",
+  "@login": {
+    "description": "ログインボタンに表示されます。"
+  },
+  "email": "メール",
+  "@email": {
+    "description": "ログイン画面に表示されます。"
+  },
+  "password": "パスワード",
+  "@password": {
+    "description": "ログイン画面に表示されます。"
+  },
+  "login_error": "ログインエラー",
+  "@login_error": {
+    "description": "ログイン画面に表示されます。"
+  },
+  "input_error": "入力エラー",
+  "@input_error": {
+    "description": "入力エラーダイアログに表示されます。"
+  },
+  "email_pass_cant_empty": "メールアドレスとパスワードは空欄にできません。",
+  "@email_pass_cant_empty": {
+    "description": "入力エラーダイアログに表示されます。"
   }
 }

@@ -1,9 +1,5 @@
 {
   "@@locale": "en",
-  "wifi": "Wi-Fi",
-  "@wifi": {
-    "description": "Shown on the wifi."
-  },
   "app_title": "Lara'an",
   "@app_title": {
     "description": "Shown on top of the screen."
@@ -27,6 +23,10 @@
   "mobile_data": "Mobile Data",
   "@mobile_data": {
     "description": "Shown on the mobile data."
+  },
+  "wifi": "Wi-Fi",
+  "@wifi": {
+    "description": "Shown on the wifi."
   },
   "network_problem": "Network Problem",
   "@network_problem": {
@@ -157,5 +157,29 @@
   "december": "Dec",
   "@december": {
     "description": "Shown on the december."
+  },
+  "login": "Login",
+  "@login": {
+    "description": "Shown on the login screen."
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Shown on the email field."
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Shown on the password field."
+  },
+  "login_error": "Login Error",
+  "@login_error": {
+    "description": "Shown on the login error dialog."
+  },
+  "input_error": "Input Error",
+  "@input_error": {
+    "description": "Shown on the input error dialog."
+  },
+  "email_pass_cant_empty": "Email and password cannot be empty.",
+  "@email_pass_cant_empty": {
+    "description": "Shown on the input error dialog."
   }
 }

@@ -157,5 +157,29 @@
   "december": "Des",
   "@december": {
     "description": "Ditampilkan di bulan Desember."
+  },
+  "login": "Masuk",
+  "@login": {
+    "description": "Ditampilkan di layar masuk."
+  },
+  "email": "Email",
+  "@email": {
+    "description": "Ditampilkan di layar masuk."
+  },
+  "password": "Kata Sandi",
+  "@password": {
+    "description": "Ditampilkan di layar masuk."
+  },
+  "login_error": "Kesalahan masuk",
+  "@login_error": {
+    "description": "Ditampilkan di layar masuk."
+  },
+  "input_error": "Kesalahan Input",
+  "@input_error": {
+    "description": "Ditampilkan di dialog kesalahan input."
+  },
+  "email_pass_cant_empty": "Email dan kata sandi tidak boleh kosong.",
+  "@email_pass_cant_empty": {
+    "description": "Ditampilkan di dialog kesalahan input."
   }
 }

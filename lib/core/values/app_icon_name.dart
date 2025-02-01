@@ -43,4 +43,8 @@ class AppIconName {
       const AppIconName("${_iconsPath}tps3r_pinlocation.png");
   static get wasteBankPinlocation =>
       const AppIconName("${_iconsPath}waste_bank_pinlocation.png");
+  static get userManagement =>
+      const AppIconName("${_iconsPath}user_management.png");
+  static get statistic => const AppIconName("${_iconsPath}statistic.png");
+  static get logout => const AppIconName("${_iconsPath}logout.png");
 }

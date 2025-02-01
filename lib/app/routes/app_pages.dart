@@ -17,13 +17,16 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
+      // change animation
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: _Paths.STATISTIC,
-      page: () => const StatisticView(),
+      page: () => StatisticView(),
       binding: StatisticBinding(),
+      transition: Transition.noTransition,
     ),
     GetPage(
       name: _Paths.LOGIN,

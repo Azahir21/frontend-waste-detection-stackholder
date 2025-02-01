@@ -20,6 +20,9 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    if (GetStorage().hasData('token')) {
+      Get.offAllNamed("/home");
+    }
   }
 
   Future<void> login() async {

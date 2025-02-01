@@ -14,42 +14,8 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   title: const Text('HomeView'),
-      //   centerTitle: true,
-      // ),
-      drawer: Drawer(
-        width: 125,
-        child: Column(
-          children: [
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                Get.toNamed('/home');
-              },
-            ),
-            ListTile(
-              title: Text('Statistic'),
-              onTap: () {
-                Get.toNamed('/statistic');
-              },
-            ),
-            ListTile(
-              title: Text('Logout'),
-              onTap: () {
-                Get.offAllNamed('/login');
-              },
-            ),
-          ],
-        ),
-      ),
-      body: Stack(
+      body: const Stack(
         children: [
-          IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState!.openDrawer();
-              },
-              icon: Icon(Icons.menu)),
           const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -20,9 +20,6 @@ class LoginController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (GetStorage().hasData('token')) {
-      Get.offAllNamed("/home");
-    }
   }
 
   Future<void> login() async {
@@ -46,7 +43,7 @@ class LoginController extends GetxController {
       GetStorage().write('token', loginData.accessToken);
       GetStorage().write('username', loginData.username);
       GetStorage().write('role', loginData.role);
-      Get.offAllNamed("/home");
+      Get.offAllNamed("/app");
     } catch (e) {
       print('Login error: $e');
     }

@@ -11,6 +11,7 @@ class CustomIconButtonWithText extends StatelessWidget {
   final Function() onTap;
   final Color color;
   final Color iconColor;
+  final Color? textColor;
   final double width;
   final double height;
   final double iconSize;
@@ -23,6 +24,7 @@ class CustomIconButtonWithText extends StatelessWidget {
     required this.onTap,
     required this.color,
     required this.iconColor,
+    this.textColor,
     required this.width,
     required this.height,
     required this.iconSize,
@@ -60,6 +62,9 @@ class CustomIconButtonWithText extends StatelessWidget {
     bool isActive = true,
     required Function() onTap,
     required BuildContext context,
+    required Color backgroundColor,
+    required Color iconColor,
+    Color? textColor,
     double width = 65.0,
     double height = 65.0,
     double iconSize = 32.0,
@@ -70,8 +75,9 @@ class CustomIconButtonWithText extends StatelessWidget {
       iconName: iconName,
       isActive: isActive,
       onTap: onTap,
-      color: Theme.of(context).appColors.iconButtonSecondary,
-      iconColor: Theme.of(context).appColors.iconSecondary,
+      color: backgroundColor,
+      iconColor: iconColor,
+      textColor: textColor ?? Theme.of(context).appColors.textPrimary,
       width: width,
       height: height,
       iconSize: iconSize,
@@ -108,7 +114,12 @@ class CustomIconButtonWithText extends StatelessWidget {
                 context: context,
               ),
               const SizedBox(height: 3),
-              AppText.customSize(label, size: 8, context: context)
+              AppText.customSize(
+                label,
+                size: 8,
+                color: textColor,
+                context: context,
+              )
             ],
           ),
         ),

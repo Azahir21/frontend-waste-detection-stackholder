@@ -47,4 +47,5 @@ class AppIconName {
       const AppIconName("${_iconsPath}user_management.png");
   static get statistic => const AppIconName("${_iconsPath}statistic.png");
   static get logout => const AppIconName("${_iconsPath}logout.png");
+  static get drawer => const AppIconName("${_iconsPath}drawer.png");
 }

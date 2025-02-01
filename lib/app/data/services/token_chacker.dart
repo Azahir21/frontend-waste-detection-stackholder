@@ -10,6 +10,12 @@ class TokenService {
   Future<bool> checkToken() async {
     OverlayLoadingProgress.stop();
     final token = GetStorage().read('token');
+    if (token == null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.offAllNamed('/login');
+      });
+      return false;
+    }
     if (token != null && JwtDecoder.isExpired(token)) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         GetStorage().remove('token');

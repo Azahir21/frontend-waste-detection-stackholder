@@ -80,20 +80,20 @@ class CenteredTextButtonWithIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: width,
-        height: height,
-        child: ElevatedButton(
-          onPressed: isEnabled ? onTap : null,
-          style: ButtonStyle(
-            backgroundColor: WidgetStateProperty.all<Color>(color),
-            shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+    return SizedBox(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        onPressed: isEnabled ? onTap : null,
+        style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all<Color>(color),
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
+        ),
+        child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

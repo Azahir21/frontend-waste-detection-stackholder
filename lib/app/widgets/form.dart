@@ -146,7 +146,7 @@ class _CustomFormState extends State<CustomForm> {
           obscureText: widget.isPassword && widget.obscureText,
           cursorColor: Colors.blue,
           style: TextStyle(
-            color: color.textPrimary,
+            color: color.textSecondary,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -154,7 +154,7 @@ class _CustomFormState extends State<CustomForm> {
             fillColor: color.formFieldBorder,
             labelText: widget.labelText,
             labelStyle: TextStyle(
-              color: color.textPrimary,
+              color: color.textSecondary,
               fontSize: 16,
               fontWeight: FontWeight.w500,
             ),

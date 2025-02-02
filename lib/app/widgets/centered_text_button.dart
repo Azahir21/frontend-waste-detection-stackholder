@@ -113,7 +113,7 @@ class CenteredTextButton extends StatelessWidget {
       color: Theme.of(context).appColors.buttonQuaternary,
       width: width,
       height: height,
-      fontColor: Theme.of(context).appColors.textBrown,
+      fontColor: Theme.of(context).appColors.textWhite,
     );
   }
 

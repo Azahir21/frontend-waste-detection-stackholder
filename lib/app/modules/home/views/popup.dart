@@ -4,6 +4,8 @@ import 'package:frontend_waste_management_stackholder/app/modules/home/controlle
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/item_tiles.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button_with_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/preview_page.dart';
@@ -143,24 +145,8 @@ class Popup extends GetView<HomeController> {
                       itemCount: detail.countedObjects!.length,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {
-                            if (detail.countedObjects![index].name !=
-                                "Garbage") {
-                              Get.toNamed("/recycle",
-                                  arguments:
-                                      detail.countedObjects![index].name);
-                            } else {
-                              showFailedSnackbar(
-                                  AppLocalizations.of(context)!
-                                      .action_not_continue,
-                                  AppLocalizations.of(context)!
-                                      .illegal_dumping_recycle_error);
-                            }
-                          },
-                          child: ItemTiles(
-                            countObject: detail.countedObjects![index],
-                          ),
+                        return ItemTiles(
+                          countObject: detail.countedObjects![index],
                         );
                       },
                     ),
@@ -190,6 +176,74 @@ class Popup extends GetView<HomeController> {
                   VerticalGap.formMedium(),
                   Visibility(
                     visible: detail.isPickup!,
+                    replacement: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AppText.labelSmallDefault("Sudah dipickup?",
+                            context: context),
+                        // checkbox widget
+                        Checkbox(
+                          value: detail.isPickup!,
+                          onChanged: (value) {
+                            Get.dialog(Dialog(
+                              child: Padding(
+                                padding: const EdgeInsets.all(32.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    AppText.labelDefaultEmphasis(
+                                      "Apakah sampah sudah di pickup?",
+                                      context: context,
+                                      textAlign: TextAlign.center,
+                                      color: color.textSecondary,
+                                    ),
+                                    VerticalGap.formMedium(),
+                                    AppText.labelSmallDefault(
+                                        "Harap pastikan bahwa sampah sudah di pickup oleh pengambil sampah",
+                                        color: color.textSecondary,
+                                        textAlign: TextAlign.center,
+                                        context: context),
+                                    VerticalGap.formBig(),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CenteredTextButtonWithIcon.secondary(
+                                          label: "tidak",
+                                          width: 100,
+                                          height: 35,
+                                          onTap: () {
+                                            // controller.updatePickupStatus(
+                                            //     detail.id!, true);
+                                            Get.back();
+                                          },
+                                          context: context,
+                                        ),
+                                        HorizontalGap.formHuge(),
+                                        CenteredTextButtonWithIcon.primary(
+                                          label: "ya",
+                                          width: 100,
+                                          height: 35,
+                                          onTap: () {
+                                            // controller.updatePickupStatus(
+                                            //     detail.id!, false);
+                                            Get.back();
+                                          },
+                                          context: context,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ));
+                          },
+                        ),
+                      ],
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +296,14 @@ class Popup extends GetView<HomeController> {
                         )
                       ],
                     ),
-                  )
+                  ),
+                  VerticalGap.formBig(),
+                  CenteredTextButton.quaternary(
+                    width: double.infinity,
+                    label: "Rute ke TPS",
+                    onTap: () {},
+                    context: context,
+                  ),
                 ],
               ),
             ),

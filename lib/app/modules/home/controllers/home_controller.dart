@@ -21,7 +21,7 @@ class HomeController extends GetxController {
   //TODO: Implement HomeController
   final isLoading = false.obs;
   final isHeatmap = false.obs;
-  final curruntPosition = const LatLng(0, 0).obs;
+  final curruntPosition = const LatLng(-7.447661, 112.698265).obs;
   final sampahsData = <SampahDetail>[].obs;
   final alignPositionOnUpdate = AlignOnUpdate.always.obs;
   final alignPositionStreamController = StreamController<double?>().obs;

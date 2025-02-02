@@ -47,9 +47,8 @@ class SampahDetail {
             ? null
             : DateTime.parse(json["captureTime"]),
         isPickup: json["is_pickup"],
-        pickupAt: json["pickup_at"] == null
-            ? null
-            : DateTime.parse(json["pickup_at"]),
+        pickupAt:
+            json["pickupAt"] == null ? null : DateTime.parse(json["pickupAt"]),
         pickupByUser: json["pickup_by_user"],
         point: json["point"],
         totalSampah: json["total_sampah"],

@@ -35,7 +35,15 @@ class ApiServices {
 
   Future<Response> put(String url, Map<String, dynamic> body) async {
     Uri uri = Uri.parse(url);
-    var response = await client.put(uri, body: jsonEncode(body));
+    var response = await client.put(
+      uri,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ${GetStorage().read('token')}',
+      },
+      body: jsonEncode(body),
+    );
     return response;
   }
 

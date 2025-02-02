@@ -323,5 +323,53 @@
   "illegal_trash": "Sampah Ilegal",
   "@illegal_trash": {
     "description": "Label for illegal trash"
+  },
+  "mark_pickup_success": "Tandai sebagai diambil",
+  "@mark_pickup_success": {
+    "description": "Shown on the mark pickup snackbar"
+  },
+  "mark_pickup_success_message": "Sampah telah ditandai sebagai diambil.",
+  "@mark_pickup_success_message": {
+    "description": "Shown on the mark pickup snackbar"
+  },
+  "mark_pickup_error": "Gagal menandai sebagai diambil",
+  "@mark_pickup_error": {
+    "description": "Shown on the mark pickup error snackbar"
+  },
+  "close": "Tutup",
+  "@close": {
+    "description": "Shown on the close button."
+  },
+  "back": "Kembali",
+  "@back": {
+    "description": "Shown on the back button."
+  },
+  "already": "Sudah",
+  "@already": {
+    "description": "Shown on the already."
+  },
+  "already_picked_up": "Sudah diambil",
+  "@already_picked_up": {
+    "description": "Shown on the already picked up."
+  },
+  "pickup_confirmation": "Apakah sampah sudah diambil?",
+  "@pickup_confirmation": {
+    "description": "Shown on the has the waste been picked up."
+  },
+  "pickup_confirmation_message": "Mohon konfirmasi apakah sampah sudah diambil.",
+  "@pickup_confirmation_message": {
+    "description": "Shown on the has the waste been picked up message."
+  },
+  "yes": "Ya",
+  "@yes": {
+    "description": "Shown on the yes button."
+  },
+  "no": "Tidak",
+  "@no": {
+    "description": "Shown on the no button."
+  },
+  "route_to_landfill": "Rute ke TPS",
+  "@route_to_landfill": {
+    "description": "Shown on the route to landfill."
   }
 }

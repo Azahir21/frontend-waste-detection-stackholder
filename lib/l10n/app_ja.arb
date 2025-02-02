@@ -323,5 +323,53 @@
   "illegal_trash": "不法ゴミ",
   "@illegal_trash": {
     "description": "Label for waste pile"
+  },
+  "mark_pickup_success": "受け取り済みにマーク",
+  "@mark_pickup_success": {
+    "description": "Shown on the mark pickup snackbar."
+  },
+  "mark_pickup_success_message": "ゴミは受け取り済みにマークされました。",
+  "@mark_pickup_success_message": {
+    "description": "Shown on the mark pickup snackbar."
+  },
+  "mark_pickup_error": "受け取り済みにマークできませんでした",
+  "@mark_pickup_error": {
+    "description": "Shown on the mark pickup error snackbar."
+  },
+  "close": "閉じる",
+  "@close": {
+    "description": "Shown on the close button."
+  },
+  "back": "戻る",
+  "@back": {
+    "description": "Shown on the back button."
+  },
+  "already": "すでに",
+  "@already": {
+    "description": "Shown on the already."
+  },
+  "already_picked_up": "すでに回収済み",
+  "@already_picked_up": {
+    "description": "Shown on the already picked up."
+  },
+  "pickup_confirmation": "ゴミは回収されましたか？",
+  "@pickup_confirmation": {
+    "description": "Shown on the has the waste been picked up."
+  },
+  "pickup_confirmation_message": "ゴミが回収されたか確認してください。",
+  "@pickup_confirmation_message": {
+    "description": "Shown on the has the waste been picked up message."
+  },
+  "yes": "はい",
+  "@yes": {
+    "description": "Shown on the yes button."
+  },
+  "no": "いいえ",
+  "@no": {
+    "description": "Shown on the no button."
+  },
+  "route_to_landfill": "埋立地へのルート",
+  "@route_to_landfill": {
+    "description": "Shown on the route to landfill."
   }
 }

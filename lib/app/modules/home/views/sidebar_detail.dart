@@ -6,7 +6,6 @@ import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart'
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button_with_icon.dart';
-import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
@@ -39,7 +38,7 @@ class SideBarDetail extends GetView<HomeController> {
                 child: Align(
                   alignment: Alignment.topRight,
                   child: CenteredTextButtonWithIcon.secondary(
-                      label: "close",
+                      label: AppLocalizations.of(context)!.back,
                       rightIcon: AppIconName.backButton,
                       width: 130,
                       height: 35,
@@ -170,7 +169,9 @@ class SideBarDetail extends GetView<HomeController> {
                 replacement: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AppText.labelSmallDefault("Sudah dipickup?",
+                    AppText.labelSmallDefault(
+                        "${AppLocalizations.of(context)!.already_picked_up}?",
+                        color: color.textSecondary,
                         context: context),
                     // checkbox widget
                     Checkbox(
@@ -185,13 +186,15 @@ class SideBarDetail extends GetView<HomeController> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 AppText.labelDefaultEmphasis(
-                                  "Apakah sampah sudah di pickup?",
+                                  AppLocalizations.of(context)!
+                                      .pickup_confirmation,
                                   context: context,
                                   color: color.textSecondary,
                                 ),
                                 VerticalGap.formMedium(),
                                 AppText.labelSmallDefault(
-                                    "Harap pastikan bahwa sampah sudah di pickup oleh pengambil sampah",
+                                    AppLocalizations.of(context)!
+                                        .pickup_confirmation_message,
                                     color: color.textSecondary,
                                     textAlign: TextAlign.center,
                                     context: context),
@@ -202,24 +205,23 @@ class SideBarDetail extends GetView<HomeController> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     CenteredTextButtonWithIcon.secondary(
-                                      label: "tidak",
-                                      width: 100,
+                                      label:
+                                          AppLocalizations.of(context)!.cancel,
+                                      width: 120,
                                       height: 35,
                                       onTap: () {
-                                        // controller.updatePickupStatus(
-                                        //     detail.id!, true);
                                         Get.back();
                                       },
                                       context: context,
                                     ),
                                     HorizontalGap.formHuge(),
                                     CenteredTextButtonWithIcon.primary(
-                                      label: "ya",
-                                      width: 100,
+                                      label:
+                                          AppLocalizations.of(context)!.already,
+                                      width: 120,
                                       height: 35,
                                       onTap: () {
-                                        // controller.updatePickupStatus(
-                                        //     detail.id!, false);
+                                        controller.markPickupSampah(detail.id!);
                                         Get.back();
                                       },
                                       context: context,
@@ -290,7 +292,7 @@ class SideBarDetail extends GetView<HomeController> {
               VerticalGap.formBig(),
               CenteredTextButton.quaternary(
                 width: double.infinity,
-                label: "Rute ke TPS",
+                label: AppLocalizations.of(context)!.route_to_landfill,
                 onTap: () {},
                 context: context,
               ),

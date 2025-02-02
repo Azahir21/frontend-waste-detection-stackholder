@@ -323,5 +323,53 @@
   "illegal_trash": "Illegal Trash",
   "@illegal_trash": {
     "description": "Label for illegal trash"
+  },
+  "mark_pickup_success": "Mark as picked up",
+  "@mark_pickup_success": {
+    "description": "Shown on the mark pickup snackbar."
+  },
+  "mark_pickup_success_message": "The waste has been marked as picked up.",
+  "@mark_pickup_success_message": {
+    "description": "Shown on the mark pickup snackbar."
+  },
+  "mark_pickup_error": "Failed to mark as picked up",
+  "@mark_pickup_error": {
+    "description": "Shown on the mark pickup error snackbar."
+  },
+  "close": "Close",
+  "@close": {
+    "description": "Shown on the close button."
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Shown on the back button."
+  },
+  "already": "Already",
+  "@already": {
+    "description": "Shown on the already."
+  },
+  "already_picked_up": "Already picked up",
+  "@already_picked_up": {
+    "description": "Shown on the already picked up."
+  },
+  "pickup_confirmation": "Has the waste been picked up?",
+  "@pickup_confirmation": {
+    "description": "Shown on the has the waste been picked up."
+  },
+  "pickup_confirmation_message": "Please confirm if the waste has been picked up.",
+  "@pickup_confirmation_message": {
+    "description": "Shown on the has the waste been picked up message."
+  },
+  "yes": "Yes",
+  "@yes": {
+    "description": "Shown on the yes button."
+  },
+  "no": "No",
+  "@no": {
+    "description": "Shown on the no button."
+  },
+  "route_to_landfill": "Route to Landfill",
+  "@route_to_landfill": {
+    "description": "Shown on the route to landfill."
   }
 }

@@ -65,131 +65,77 @@ class HomeController extends GetxController {
   }
 
   Future<void> getAllSampah() async {
-    if (!await _tokenService.checkToken()) {
-      return;
-    }
+    if (!await _tokenService.checkToken()) return;
+
     try {
       final response = await ApiServices().get(UrlConstants.sampah);
       if (response.statusCode != 200) {
-        // var message = await translate(jsonDecode(response.body)['detail']);
-        var message = jsonDecode(response.body)['detail'];
-
+        final message = jsonDecode(response.body)['detail'];
         showFailedSnackbar(
-            AppLocalizations.of(Get.context!)!.waste_data_error, message);
+          AppLocalizations.of(Get.context!)!.waste_data_error,
+          message,
+        );
         throw ('Sampah error: ${response.body}');
       }
+
       sampahsData.value = parseSampahDetail(response.body);
-      weightedLatLng.value = sampahsData
-          .map(
-            (e) => WeightedLatLng(
-              e.geom!,
-              e.totalSampah!.toDouble(),
-            ),
-          )
-          .toList();
-      markers.value = sampahsData
-          .map(
-            (e) => Marker(
-              width: 40.0,
-              height: 40.0,
-              point: e.geom!,
-              rotate: true,
-              child: GestureDetector(
-                  onTap: () {
-                    selectedMarkerDetail.value = e;
-                  },
-                  child: e.isWastePile!
-                      ? AppIcon.custom(
-                          appIconName: AppIconName.pilePinlocation,
-                          context: Get.context!)
-                      : AppIcon.custom(
-                          appIconName: AppIconName.pcsPinlocation,
-                          context: Get.context!)),
-            ),
-          )
-          .toList();
+      // Update map data using the helper functions.
+      _updateMapData(sampahsData.value);
     } catch (e) {
       debugPrint('${AppLocalizations.of(Get.context!)!.waste_data_error}: $e');
     }
   }
 
   Future<void> getTimeseriesData() async {
-    try {
-      if (!await _tokenService.checkToken()) {
-        return;
-      }
-      alignPositionOnUpdate.value = AlignOnUpdate.always;
-      alignPositionStreamController.value = StreamController<double?>();
-      isLoading.value = true;
+    if (!await _tokenService.checkToken()) return;
 
-      final response = await ApiServices().get(
-          "${UrlConstants.sampah}/timeseries?start_date=${firstDate.value.toIso8601String()}&end_date=${lastDate.value.toIso8601String()}");
+    // Prepare UI for new timeseries data.
+    alignPositionOnUpdate.value = AlignOnUpdate.always;
+    alignPositionStreamController.value = StreamController<double?>();
+    isLoading.value = true;
 
-      if (response.statusCode != 200) {
-        var message = jsonDecode(response.body)['detail'];
-        showFailedSnackbar(
-            AppLocalizations.of(Get.context!)!.waste_time_series_error,
-            message);
-        throw ('Timeseries error: ${response.body}');
-      }
+    final url =
+        "${UrlConstants.sampah}/timeseries?start_date=${firstDate.value.toIso8601String()}&end_date=${lastDate.value.toIso8601String()}";
+    final response = await ApiServices().get(url);
 
-      timeseriesData.value = parseSampahDetail(response.body);
-
-      if (timeseriesData.isEmpty) {
-        showFailedSnackbar(
-          AppLocalizations.of(Get.context!)!.no_data,
-          AppLocalizations.of(Get.context!)!.show_previous_data,
-        );
-      } else {
-        difference.value =
-            lastDate.value.difference(firstDate.value).inDays + 1;
-        weightedLatLng.value = timeseriesData
-            .map(
-              (e) => WeightedLatLng(
-                e.geom!,
-                e.totalSampah!.toDouble(),
-              ),
-            )
-            .toList();
-        markers.value = timeseriesData
-            .map(
-              (e) => Marker(
-                width: 40.0,
-                height: 40.0,
-                point: e.geom!,
-                rotate: true,
-                child: GestureDetector(
-                  onTap: () {
-                    selectedMarkerDetail.value = e;
-                  },
-                  child: e.isWastePile!
-                      ? AppIcon.custom(
-                          appIconName: AppIconName.pilePinlocation,
-                          context: Get.context!)
-                      : AppIcon.custom(
-                          appIconName: AppIconName.pcsPinlocation,
-                          context: Get.context!),
-                ),
-              ),
-            )
-            .toList();
-        sliderChanged(1);
-      }
-
+    if (response.statusCode != 200) {
+      final message = jsonDecode(response.body)['detail'];
+      showFailedSnackbar(
+        AppLocalizations.of(Get.context!)!.waste_time_series_error,
+        message,
+      );
+      // resetTimeSeries();
       isLoading.value = false;
-    } catch (e) {
-      debugPrint(
-          '${AppLocalizations.of(Get.context!)!.waste_time_series_error}: $e');
+      throw ('Timeseries error: ${response.body}');
     }
+
+    timeseriesData.value = parseSampahDetail(response.body);
+
+    if (timeseriesData.isEmpty) {
+      showFailedSnackbar(
+        AppLocalizations.of(Get.context!)!.no_data,
+        AppLocalizations.of(Get.context!)!.show_previous_data,
+      );
+    } else {
+      difference.value = lastDate.value.difference(firstDate.value).inDays + 1;
+      // Call sliderChanged(1) to update the markers and weighted data.
+      sliderChanged(1);
+    }
+
+    isLoading.value = false;
   }
 
+  /// Resets the timeseries filters and shows all data.
   void resetTimeSeries() {
     firstDateController.value.text = "";
     lastDateController.value.text = "";
     selectedDay.value = 1;
     difference.value = 1;
     timeseriesData.clear();
+
+    // Reload all sampah data.
     getAllSampah();
+
     showSuccessSnackbar(
       "Time Series Reset",
       "All data is now displayed without any date filter.",
@@ -197,90 +143,100 @@ class HomeController extends GetxController {
     superclusterController.value.replaceAll(markers.value);
   }
 
+  /// Called when the slider value changes.
+  /// Updates the markers and weighted points based on the selected day and mode.
   void sliderChanged(double value) {
-    selectedDay.value = value.toInt(); // Update selected day
+    selectedDay.value = value.toInt();
 
-    if (switcher.value) {
-      // Cumulative Data Mode
-      // Accumulate data from Day 1 to the selected day
-      final cumulativeWeightedLatLng = timeseriesData
-          .where((element) =>
-              element.captureTime!.difference(firstDate.value).inDays <=
-              selectedDay.value - 1)
-          .map((e) => WeightedLatLng(e.geom!, e.totalSampah!.toDouble()))
-          .toList();
+    // Filter the timeseries data based on whether we are in cumulative or daily mode.
+    final filteredData = timeseriesData.where((element) {
+      final dayDifference =
+          element.captureTime!.difference(firstDate.value).inDays;
+      return switcher.value
+          ? dayDifference <= selectedDay.value - 1 // Cumulative mode
+          : dayDifference == selectedDay.value - 1; // Daily mode
+    }).toList();
 
-      final cumulativeMarkers = timeseriesData
-          .where((element) =>
-              element.captureTime!.difference(firstDate.value).inDays <=
-              selectedDay.value - 1)
-          .map((e) => Marker(
-                width: 40.0,
-                height: 40.0,
-                point: e.geom!,
-                rotate: true,
-                child: GestureDetector(
-                  onTap: () {
-                    selectedMarkerDetail.value = e;
-                  },
-                  child: e.isWastePile!
-                      ? AppIcon.custom(
-                          appIconName: AppIconName.pilePinlocation,
-                          context: Get.context!)
-                      : AppIcon.custom(
-                          appIconName: AppIconName.pcsPinlocation,
-                          context: Get.context!),
-                ),
-              ))
-          .toList();
+    weightedLatLng.value = filteredData.map(_buildWeightedLatLng).toList();
+    markers.value = filteredData.map(_buildMarker).toList();
 
-      // Update cumulative data
-      weightedLatLng.value = [...cumulativeWeightedLatLng];
-      markers.value = [...cumulativeMarkers];
-    } else {
-      // Daily Data Mode
-      // Clear and show only data for the selected day
-      final dailyWeightedLatLng = timeseriesData
-          .where((element) =>
-              element.captureTime!.difference(firstDate.value).inDays ==
-              selectedDay.value - 1)
-          .map((e) => WeightedLatLng(e.geom!, e.totalSampah!.toDouble()))
-          .toList();
-
-      final dailyMarkers = timeseriesData
-          .where((element) =>
-              element.captureTime!.difference(firstDate.value).inDays ==
-              selectedDay.value - 1)
-          .map(
-            (e) => Marker(
-              width: 40.0,
-              height: 40.0,
-              point: e.geom!,
-              rotate: true,
-              child: GestureDetector(
-                  onTap: () {
-                    selectedMarkerDetail.value = e;
-                  },
-                  child: e.isWastePile!
-                      ? AppIcon.custom(
-                          appIconName: AppIconName.pilePinlocation,
-                          context: Get.context!)
-                      : AppIcon.custom(
-                          appIconName: AppIconName.pcsPinlocation,
-                          context: Get.context!)),
-            ),
-          )
-          .toList();
-
-      // Update daily data
-      weightedLatLng.value = [...dailyWeightedLatLng];
-      markers.value = [...dailyMarkers];
-    }
-
+    // Notify listeners and update clustering.
     weightedLatLng.refresh();
     markers.refresh();
     superclusterController.value.replaceAll(markers.value);
     streamController.value.add(null);
+  }
+
+  /// Updates the map data (markers and weighted points) for the given list.
+  void _updateMapData(List<dynamic> data) {
+    weightedLatLng.value = data.map(_buildWeightedLatLng).toList();
+    markers.value = data.map(_buildMarker).toList();
+  }
+
+  /// Returns a WeightedLatLng instance for the given data element.
+  WeightedLatLng _buildWeightedLatLng(dynamic element) {
+    return WeightedLatLng(
+      element.geom!,
+      element.totalSampah!.toDouble(),
+    );
+  }
+
+  /// Returns a Marker widget for the given data element.
+  Marker _buildMarker(dynamic element) {
+    return Marker(
+      width: 40.0,
+      height: 40.0,
+      point: element.geom!,
+      rotate: true,
+      child: GestureDetector(
+        onTap: () {
+          selectedMarkerDetail.value = element;
+        },
+        child: AppIcon.custom(
+          appIconName: element.isWastePile!
+              ? AppIconName.pilePinlocation
+              : AppIconName.pcsPinlocation,
+          context: Get.context!,
+        ),
+      ),
+    );
+  }
+
+  Future<void> markPickupSampah(int id) async {
+    if (!await _tokenService.checkToken()) return;
+
+    try {
+      final response = await ApiServices().put(
+        "${UrlConstants.sampah}/pickup/$id",
+        {},
+      );
+
+      if (response.statusCode != 200) {
+        final message = jsonDecode(response.body)['detail'];
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.mark_pickup_error,
+          message,
+        );
+        throw ('Mark pickup error: ${response.body}');
+      }
+
+      showSuccessSnackbar(
+        AppLocalizations.of(Get.context!)!.mark_pickup_success,
+        AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
+      );
+
+      // Update the sampah data and map markers.
+      await getAllSampah();
+      if (timeseriesData.isNotEmpty) {
+        selectedMarkerDetail.value =
+            timeseriesData.firstWhere((element) => element.id == id);
+      } else {
+        selectedMarkerDetail.value =
+            sampahsData.firstWhere((element) => element.id == id);
+      }
+    } catch (e) {
+      debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
+    }
   }
 
   Color interpolateColor(double value, Map<double, Color> gradient) {

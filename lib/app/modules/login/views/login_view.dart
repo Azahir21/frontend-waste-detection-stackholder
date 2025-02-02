@@ -18,7 +18,6 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     var color = Theme.of(context).appColors;
     var size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -88,7 +87,7 @@ class LoginView extends GetView<LoginController> {
                 : Center(
                     child: Container(
                       width: 500,
-                      height: size.height * 0.4,
+                      height: 378,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(20)),

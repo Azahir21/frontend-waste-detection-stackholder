@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_heatmap/flutter_map_heatmap.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_map_supercluster/flutter_map_supercluster.dart';
+import 'package:frontend_waste_management_stackholder/app/data/models/facility_model.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/sampah_detail_model.dart';
 import 'package:frontend_waste_management_stackholder/app/data/services/api_service.dart';
 import 'package:frontend_waste_management_stackholder/app/data/services/token_chacker.dart';
@@ -40,6 +42,8 @@ class HomeController extends GetxController {
   late final Rx<SuperclusterMutableController> superclusterController;
   final selectedMarkerDetail = Rx<SampahDetail?>(null);
   final isPlaying = false.obs;
+  final facility = <Facility>[].obs;
+  final facilityMarkers = <Marker>[].obs;
   Timer? _sliderTimer;
 
   @override
@@ -53,6 +57,7 @@ class HomeController extends GetxController {
     firstDateController.value.text = "";
     lastDateController.value.text = "";
     await getAllSampah();
+    // await loadFacilityData();
     isLoading.value = false;
   }
 
@@ -62,6 +67,41 @@ class HomeController extends GetxController {
     streamController.value.close();
     superclusterController.value.dispose();
     super.onClose();
+  }
+
+  Future<void> loadFacilityData() async {
+    final data = await rootBundle
+        .loadString('/data/data_fasilitas_pengelolahan_sampah.json');
+    facility.value = (jsonDecode(data) as List)
+        .map((item) => Facility.fromJson(item))
+        .toList();
+    print(facility.length);
+    // create markers from the data
+    facilityMarkers.value = facility.map((item) {
+      return Marker(
+        width: 40.0,
+        height: 40.0,
+        point: LatLng(
+          double.parse(item.latitude!),
+          double.parse(item.longitude!),
+        ),
+        rotate: true,
+        child: item.facilityType == "tps3r"
+            ? AppIcon.custom(
+                appIconName: AppIconName.tps3rPinlocation,
+                context: Get.context!,
+              )
+            : item.facilityType == "tpa"
+                ? AppIcon.custom(
+                    appIconName: AppIconName.tpaPinlocation,
+                    context: Get.context!,
+                  )
+                : AppIcon.custom(
+                    appIconName: AppIconName.wasteBankPinlocation,
+                    context: Get.context!,
+                  ),
+      );
+    }).toList();
   }
 
   Future<void> getAllSampah() async {

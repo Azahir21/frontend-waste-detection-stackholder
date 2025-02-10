@@ -86,6 +86,7 @@ class _HomeViewState extends State<HomeView> {
                             silenceExceptions: true,
                           ),
                         ),
+                        MarkerLayer(markers: controller.facilityMarkers),
                         Obx(
                           () {
                             // Show layer based on the selected mode
@@ -216,6 +217,23 @@ class _HomeViewState extends State<HomeView> {
                 padding: const EdgeInsets.fromLTRB(32, 100, 32, 32),
                 child: Align(
                   alignment: Alignment.topRight,
+                  child: CustomIconButton.primary(
+                      iconName: AppIconName.timeseries,
+                      onTap: () {
+                        Get.dialog(
+                          barrierDismissible: false,
+                          filterDialog(),
+                        );
+                      },
+                      context: context),
+                ),
+              ),
+
+              // centered camera button jangan dihapus
+              Padding(
+                padding: const EdgeInsets.fromLTRB(32, 168, 32, 32),
+                child: Align(
+                  alignment: Alignment.topRight,
                   child: Obx(
                     () => Column(
                       children: [
@@ -243,14 +261,13 @@ class _HomeViewState extends State<HomeView> {
                 ),
               ),
 
-              // centered camera button jangan dihapus
               Padding(
-                padding: const EdgeInsets.fromLTRB(32, 168, 32, 32),
+                padding: const EdgeInsets.fromLTRB(32, 236, 32, 32),
                 child: Align(
                   alignment: Alignment.topRight,
                   child: CustomIconButton.primary(
                     iconSize: 24,
-                    iconName: AppIconName.cursor,
+                    iconName: AppIconName.myLocation,
                     onTap: () {
                       setState(
                         () => controller.alignPositionOnUpdate.value =

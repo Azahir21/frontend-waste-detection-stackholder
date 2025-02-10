@@ -9,6 +9,8 @@ class AppIconName {
   static get add => const AppIconName("${_iconsPath}add.png");
   static get article => const AppIconName("${_iconsPath}article.png");
   static get backButton => const AppIconName("${_iconsPath}back_button.png");
+  static get back => const AppIconName("${_iconsPath}back.png");
+  static get next => const AppIconName("${_iconsPath}next.png");
   static get checkout => const AppIconName("${_iconsPath}checkout.png");
   static get history => const AppIconName("${_iconsPath}history.png");
   static get home => const AppIconName("${_iconsPath}home.png");
@@ -22,7 +24,7 @@ class AppIconName {
   static get score => const AppIconName("${_iconsPath}score.png");
   static get trash => const AppIconName("${_iconsPath}trash.png");
   static get filter => const AppIconName("${_iconsPath}filter.png");
-  static get cursor => const AppIconName("${_iconsPath}cursor.png");
+  static get myLocation => const AppIconName("${_iconsPath}my_location.png");
   static get markermap => const AppIconName("${_iconsPath}markermap.png");
   static get heatmap => const AppIconName("${_iconsPath}heatmap.png");
   static get cluster => const AppIconName("${_iconsPath}cluster.png");
@@ -48,4 +50,6 @@ class AppIconName {
   static get statistic => const AppIconName("${_iconsPath}statistic.png");
   static get logout => const AppIconName("${_iconsPath}logout.png");
   static get drawer => const AppIconName("${_iconsPath}drawer.png");
+  static get timeseries => const AppIconName("${_iconsPath}timeseries.png");
+  static get date => const AppIconName("${_iconsPath}date.png");
 }

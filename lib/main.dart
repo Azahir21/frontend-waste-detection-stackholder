@@ -15,10 +15,11 @@ import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   await GetStorage.init();
   final box = GetStorage();
-  String? savedLanguageCode = box.read('language');
+  // String? savedLanguageCode = box.read('language');
+  String? savedLanguageCode = 'id'; // Default to Indonesian
   Locale appLocale;
   switch (savedLanguageCode) {
     case 'id':

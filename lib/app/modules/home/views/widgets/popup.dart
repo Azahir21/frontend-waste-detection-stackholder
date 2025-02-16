@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/sampah_detail_model.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/controllers/home_controller.dart';
-import 'package:frontend_waste_management_stackholder/app/modules/home/views/item_tiles.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/item_tiles.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button_with_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap.dart';
-import 'package:frontend_waste_management_stackholder/app/modules/home/views/preview_page.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/preview_page.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';

@@ -5,12 +5,18 @@ import 'package:flutter_map_compass/flutter_map_compass.dart';
 import 'package:flutter_map_heatmap/flutter_map_heatmap.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:flutter_map_supercluster/flutter_map_supercluster.dart';
-import 'package:frontend_waste_management_stackholder/app/modules/home/views/popup.dart';
-import 'package:frontend_waste_management_stackholder/app/modules/home/views/sidebar_detail.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/maps_type_dialog.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/popup.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/sidebar_detail.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/timeseries_filter_widget.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/waste_type_filter_widget.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button_with_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/text_button.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 
@@ -30,10 +36,10 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   final HomeController controller = Get.put(HomeController());
 
-  final mapMode = 'marker'.obs;
   List<Map<double, MaterialColor>> gradients = [
     HeatMapOptions.defaultGradient,
   ];
+  bool _isDialogOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +96,7 @@ class _HomeViewState extends State<HomeView> {
                         Obx(
                           () {
                             // Show layer based on the selected mode
-                            if (mapMode.value == 'heatmap') {
+                            if (controller.mapsMode.value == 'heatmap') {
                               return controller.weightedLatLng.isNotEmpty
                                   ? HeatMapLayer(
                                       heatMapDataSource:
@@ -113,7 +119,7 @@ class _HomeViewState extends State<HomeView> {
                                         context: context,
                                       ),
                                     );
-                            } else if (mapMode.value == 'cluster') {
+                            } else if (controller.mapsMode.value == 'cluster') {
                               return controller.markers.isNotEmpty
                                   ? SuperclusterLayer.mutable(
                                       initialMarkers:
@@ -151,7 +157,7 @@ class _HomeViewState extends State<HomeView> {
                                         context: context,
                                       ),
                                     );
-                            } else if (mapMode.value == 'marker') {
+                            } else if (controller.mapsMode.value == 'marker') {
                               return controller.markers.isNotEmpty
                                   ? MarkerLayer(
                                       markers: controller.markers.toList())
@@ -182,18 +188,6 @@ class _HomeViewState extends State<HomeView> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: CustomIconButton.primary(
-                      iconName: AppIconName.backButton,
-                      onTap: () {
-                        Get.back();
-                      },
-                      context: context),
-                ),
-              ),
 
               // filter button jangan dihapus
               Padding(
@@ -203,14 +197,39 @@ class _HomeViewState extends State<HomeView> {
                   child: CustomIconButton.primary(
                       iconName: AppIconName.filter,
                       onTap: () {
-                        Get.dialog(
-                          barrierDismissible: false,
-                          filterDialog(),
-                        );
+                        controller.showFilter.value =
+                            !controller.showFilter.value;
+
+                        if (controller.showFilter.value == true &&
+                            (controller.filterDataType.value !=
+                                    controller.previousFilterDataType ||
+                                controller.filterStatus.value !=
+                                    controller.previousFilterStatus)) {
+                          controller.filterDataType.value =
+                              controller.previousFilterDataType;
+                          controller.filterStatus.value =
+                              controller.previousFilterStatus;
+                          print(controller.filterDataType.value);
+                          print(controller.filterStatus.value);
+                          print(controller.previousFilterDataType);
+                          print(controller.previousFilterStatus);
+                        }
+
+                        if (controller.showTimeSeries.value == true ||
+                            controller.showMapsType.value == true) {
+                          controller.showTimeSeries.value = false;
+                          controller.showMapsType.value = false;
+                        }
+                        // Get.dialog(
+                        //   barrierDismissible: false,
+                        //   timeseriesDialog(),
+                        // );
                       },
                       context: context),
                 ),
               ),
+
+              const WasteTypeFilterWidget(),
 
               // heatmap button jangan dihapus
               Padding(
@@ -220,14 +239,29 @@ class _HomeViewState extends State<HomeView> {
                   child: CustomIconButton.primary(
                       iconName: AppIconName.timeseries,
                       onTap: () {
-                        Get.dialog(
-                          barrierDismissible: false,
-                          filterDialog(),
-                        );
+                        controller.showTimeSeries.value =
+                            !controller.showTimeSeries.value;
+
+                        if (controller.showFilter.value == true ||
+                            controller.showMapsType.value == true) {
+                          controller.showFilter.value = false;
+                          controller.showMapsType.value = false;
+                          controller.filterDataType.value =
+                              controller.previousFilterDataType;
+                          controller.filterStatus.value =
+                              controller.previousFilterStatus;
+                        }
+
+                        // Get.dialog(
+                        //   barrierDismissible: false,
+                        //   filterDialog(),
+                        // );
                       },
                       context: context),
                 ),
               ),
+
+              const TimeSeriesFilterWidget(),
 
               // centered camera button jangan dihapus
               Padding(
@@ -237,25 +271,42 @@ class _HomeViewState extends State<HomeView> {
                   child: Obx(
                     () => Column(
                       children: [
-                        CustomIconButton.primary(
-                          iconName: mapMode.value == 'marker'
+                        CustomIconButton.activeBordered(
+                          iconName: controller.mapsMode.value == 'marker'
                               ? AppIconName.markermap
-                              : mapMode.value == 'cluster'
+                              : controller.mapsMode.value == 'cluster'
                                   ? AppIconName.cluster
                                   : AppIconName.heatmap,
                           onTap: () {
-                            // Toggle map modes
-                            if (mapMode.value == 'marker') {
-                              mapMode.value = 'cluster';
-                            } else if (mapMode.value == 'cluster') {
-                              mapMode.value = 'heatmap';
-                            } else {
-                              mapMode.value = 'marker';
+                            controller.showMapsType.value =
+                                !controller.showMapsType.value;
+
+                            if (controller.showFilter.value == true ||
+                                controller.showTimeSeries.value == true) {
+                              controller.showFilter.value = false;
+                              controller.showTimeSeries.value = false;
+                              controller.filterDataType.value =
+                                  controller.previousFilterDataType;
+                              controller.filterStatus.value =
+                                  controller.previousFilterStatus;
                             }
                           },
                           context: context,
                         ),
                       ],
+                    ),
+                  ),
+                ),
+              ),
+
+              Obx(
+                () => Visibility(
+                  visible: controller.showMapsType.value,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(32, 168, 100, 32),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: MapsTypeDialog(),
                     ),
                   ),
                 ),
@@ -433,100 +484,16 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Widget filterDialog() {
+  Widget wasteTypeDialog() {
     var color = Theme.of(context).appColors;
-    return AlertDialog(
-      title: AppText.labelDefaultEmphasis(
-          AppLocalizations.of(context)!.filter_timeseries,
-          color: color.textSecondary,
-          context: context),
-      content: IntrinsicHeight(
-        child: Column(
-          children: [
-            Obx(
-              () => TextFormField(
-                controller: controller.firstDateController.value,
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.start_date,
-                  suffixIcon: const Icon(Icons.calendar_today),
-                ),
-                readOnly: true,
-                onTap: () async {
-                  DateTime? pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(), // Default to current date
-                    firstDate: DateTime(2024, 5), // Start from May 2024
-                    lastDate: DateTime.now(),
-                  );
-
-                  if (pickedDate != null) {
-                    setState(() {
-                      controller.firstDate.value = pickedDate;
-                      controller.firstDateController.value.text =
-                          pickedDate.toString();
-                    });
-                  }
-                },
-              ),
-            ),
-            Obx(
-              () => TextFormField(
-                controller: controller.lastDateController.value,
-                decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context)!.end_date,
-                  suffixIcon: const Icon(Icons.calendar_today),
-                ),
-                readOnly: true,
-                onTap: () async {
-                  // Open the date picker for the "End Date"
-                  if (controller.firstDateController.value.text.isNotEmpty) {
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate:
-                          controller.firstDate.value, // Start from Start Date
-                      firstDate: controller
-                          .firstDate.value, // End date must be after Start Date
-                      lastDate: DateTime.now(),
-                    );
-
-                    // If a date is picked, update the end date controller
-                    if (pickedDate != null) {
-                      setState(() {
-                        controller.lastDate.value = pickedDate;
-                        controller.lastDateController.value.text =
-                            pickedDate.toString();
-                      });
-                    }
-                  } else {
-                    showFailedSnackbar(
-                      AppLocalizations.of(context)!.failed_to_pick_end_date,
-                      AppLocalizations.of(context)!
-                          .please_input_start_date_first,
-                    );
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
+    return Container(
+      width: 100,
+      height: 100,
+      decoration: BoxDecoration(
+        color: color.iconButtonPrimary,
+        borderRadius: BorderRadius.circular(20),
       ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            controller.firstDateController.value.text = "";
-            controller.lastDateController.value.text = "";
-            Get.back();
-          },
-          child: Text(AppLocalizations.of(context)!.cancel),
-        ),
-        TextButton(
-          onPressed: () {
-            controller.getTimeseriesData();
-            Get.back();
-          },
-          child: Text(AppLocalizations.of(context)!.ok),
-        ),
-      ],
+      child: Text("filter"),
     );
   }
 }

@@ -220,7 +220,11 @@
       }
     }
   },
-  "filter_timeseries": "Filter Time Series",
+  "filter": "Filter",
+  "@filter": {
+    "description": "Shown on the filter."
+  },
+  "filter_timeseries": "Filter Timeseries",
   "@filter_timeseries": {
     "description": "Shown on the filter time series dialog box."
   },
@@ -371,5 +375,33 @@
   "route_to_landfill": "Route to Landfill",
   "@route_to_landfill": {
     "description": "Shown on the route to landfill."
+  },
+  "apply": "Apply",
+  "@apply": {
+    "description": "Shown on the apply button."
+  },
+  "filter_by_type": "Based on the type of waste",
+  "@filter_by_type": {
+    "description": "Shown on the based on the type of waste."
+  },
+  "all_kind_of_waste": "All kind of waste",
+  "@all_kind_of_waste": {
+    "description": "Shown on the all kind of waste."
+  },
+  "filter_by_status": "Based on status",
+  "@filter_by_status": {
+    "description": "Shown on the based on status."
+  },
+  "all_status": "All status",
+  "@all_status": {
+    "description": "Shown on the all status."
+  },
+  "failed_to_apply": "Failed to Apply",
+  "@failed_to_apply": {
+    "description": "Shown on failed snackbar"
+  },
+  "please_input_start_and_end_date": "Please input start and end date",
+  "@please_input_start_and_end_date": {
+    "description": "Shown on failed snackbar"
   }
 }

@@ -220,6 +220,10 @@
       }
     }
   },
+  "filter": "フィルター",
+  "@filter": {
+    "description": "フィルターボタンに表示されます。"
+  },
   "filter_timeseries": "時系列をフィルター",
   "@filter_timeseries": {
     "description": "時系列フィルターダイアログボックスに表示されます。"
@@ -371,5 +375,33 @@
   "route_to_landfill": "埋立地へのルート",
   "@route_to_landfill": {
     "description": "Shown on the route to landfill."
+  },
+  "apply": "適用",
+  "@apply": {
+    "description": "Shown on the apply button."
+  },
+  "filter_by_type": "タイプでフィルター",
+  "@filter_by_type": {
+    "description": "タイプでフィルターボタンに表示されます。"
+  },
+  "all_kind_of_waste": "すべての種類の廃棄物",
+  "@all_kind_of_waste": {
+    "description": "すべての種類の廃棄物を表示するオプションです。"
+  },
+  "filter_by_status": "ステータスでフィルター",
+  "@filter_by_status": {
+    "description": "ステータスでフィルターボタンに表示されます。"
+  },
+  "all_status": "すべてのステータス",
+  "@all_status": {
+    "description": "すべてのステータスを表示するオプションです。"
+  },
+  "failed_to_apply": "適用に失敗しました",
+  "@failed_to_apply": {
+    "description": "フィルターの適用に失敗した場合に表示されます。"
+  },
+  "please_input_start_and_end_date": "開始日と終了日を入力してください",
+  "@please_input_start_and_end_date": {
+    "description": "ユーザーに開始日と終了日を入力するように促すメッセージです。"
   }
 }

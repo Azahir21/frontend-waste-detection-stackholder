@@ -45,6 +45,17 @@ class HomeController extends GetxController {
   final facility = <Facility>[].obs;
   final facilityMarkers = <Marker>[].obs;
   Timer? _sliderTimer;
+  final mapsMode = "marker".obs;
+  final showFilter = false.obs;
+  final showTimeSeries = false.obs;
+  final showMapsType = false.obs;
+  final filterDataType = "all".obs;
+  final filterStatus = "all".obs;
+  String previousFilterDataType = "all";
+  String previousFilterStatus = "all";
+
+  // filter data type: all, garbage_pile, garbage_pcs
+  // filter statur: all, pickup_true, pickup_false
 
   @override
   void onInit() async {
@@ -108,7 +119,8 @@ class HomeController extends GetxController {
     if (!await _tokenService.checkToken()) return;
 
     try {
-      final response = await ApiServices().get(UrlConstants.sampah);
+      final response = await ApiServices().get(
+          "${UrlConstants.sampah}?data_type=${filterDataType.value}&status=${filterStatus.value}");
       if (response.statusCode != 200) {
         final message = jsonDecode(response.body)['detail'];
         showFailedSnackbar(
@@ -135,7 +147,7 @@ class HomeController extends GetxController {
     isLoading.value = true;
 
     final url =
-        "${UrlConstants.sampah}/timeseries?start_date=${firstDate.value.toIso8601String()}&end_date=${lastDate.value.toIso8601String()}";
+        "${UrlConstants.sampah}/timeseries?start_date=${firstDate.value.toIso8601String()}&end_date=${lastDate.value.toIso8601String()}&data_type=${filterDataType.value}&status=${filterStatus.value}";
     final response = await ApiServices().get(url);
 
     if (response.statusCode != 200) {
@@ -211,6 +223,7 @@ class HomeController extends GetxController {
   void _updateMapData(List<dynamic> data) {
     weightedLatLng.value = data.map(_buildWeightedLatLng).toList();
     markers.value = data.map(_buildMarker).toList();
+    superclusterController.value.replaceAll(markers.value);
   }
 
   /// Returns a WeightedLatLng instance for the given data element.

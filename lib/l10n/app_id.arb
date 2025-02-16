@@ -220,6 +220,10 @@
       }
     }
   },
+  "filter": "Filter",
+  "@filter": {
+    "description": "Ditampilkan di tombol filter."
+  },
   "filter_timeseries": "Filter Deret Waktu",
   "@filter_timeseries": {
     "description": "Ditampilkan di kotak dialog filter deret waktu."
@@ -371,5 +375,33 @@
   "route_to_landfill": "Rute ke TPS",
   "@route_to_landfill": {
     "description": "Shown on the route to landfill."
+  },
+  "apply": "Terapkan",
+  "@apply": {
+    "description": "Shown on the apply button."
+  },
+  "filter_by_type": "Filter berdasarkan jenis",
+  "@filter_by_type": {
+    "description": "Ditampilkan di filter berdasarkan jenis."
+  },
+  "all_kind_of_waste": "Semua jenis sampah",
+  "@all_kind_of_waste": {
+    "description": "Ditampilkan di semua jenis sampah."
+  },
+  "filter_by_status": "Filter berdasarkan status",
+  "@filter_by_status": {
+    "description": "Ditampilkan di filter berdasarkan status."
+  },
+  "all_status": "Semua status",
+  "@all_status": {
+    "description": "Ditampilkan di semua status."
+  },
+  "failed_to_apply": "Gagal menerapkan",
+  "@failed_to_apply": {
+    "description": "Ditampilkan saat gagal menerapkan filter."
+  },
+  "please_input_start_and_end_date": "Silakan masukkan tanggal mulai dan tanggal akhir.",
+  "@please_input_start_and_end_date": {
+    "description": "Ditampilkan saat gagal menerapkan filter."
   }
 }

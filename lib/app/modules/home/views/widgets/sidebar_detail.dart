@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/sampah_detail_model.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/controllers/home_controller.dart';
-import 'package:frontend_waste_management_stackholder/app/modules/home/views/Item_tiles.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/item_tiles.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button.dart';
@@ -39,8 +39,8 @@ class SideBarDetail extends GetView<HomeController> {
                   alignment: Alignment.topRight,
                   child: CenteredTextButtonWithIcon.secondary(
                       label: AppLocalizations.of(context)!.back,
-                      rightIcon: AppIconName.backButton,
-                      width: 130,
+                      leftIcon: AppIconName.backButton,
+                      width: 150,
                       height: 35,
                       onTap: () {
                         controller.selectedMarkerDetail.value = null;

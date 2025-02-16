@@ -11,6 +11,7 @@ lib/core/values/const.dart
 .history
 .svn/
 migrate_working_dir/
+/deploy/
 
 # IntelliJ related
 *.iml

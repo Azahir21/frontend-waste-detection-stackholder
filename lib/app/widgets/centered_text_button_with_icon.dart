@@ -93,31 +93,29 @@ class CenteredTextButtonWithIcon extends StatelessWidget {
             ),
           ),
         ),
-        child: Center(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (leftIcon != null)
-                AppIcon.custom(
-                  appIconName: leftIcon!,
-                  context: context,
-                  color: fontColor,
-                  size: 32,
-                ),
-              AppText.labelSmallEmphasis(
-                label,
-                color: fontColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (leftIcon != null)
+              AppIcon.custom(
+                appIconName: leftIcon!,
                 context: context,
+                color: fontColor,
+                size: 32,
               ),
-              if (rightIcon != null)
-                AppIcon.custom(
-                  appIconName: rightIcon!,
-                  context: context,
-                  color: fontColor,
-                  size: 32,
-                ),
-            ],
-          ),
+            AppText.labelSmallEmphasis(
+              label,
+              color: fontColor,
+              context: context,
+            ),
+            if (rightIcon != null)
+              AppIcon.custom(
+                appIconName: rightIcon!,
+                context: context,
+                color: fontColor,
+                size: 32,
+              ),
+          ],
         ),
       ),
     );

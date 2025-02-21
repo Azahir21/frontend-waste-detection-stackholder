@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/home/bindings/home_binding.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/home_view.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/statistic/bindings/statistic_binding.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/statistic_view.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/user_management/bindings/user_management_binding.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/user_management/views/user_management_view.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
@@ -14,15 +17,23 @@ class DrawerNavView extends StatefulWidget {
 }
 
 class _DrawerNavViewState extends State<DrawerNavView> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final PageStorageBucket _bucket = PageStorageBucket();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    HomeBinding().dependencies();
+    StatisticBinding().dependencies();
+    UserManagementBinding().dependencies();
+  }
 
   // List of screens to navigate between
   static final List<Widget> _screens = <Widget>[
     HomeView(),
     StatisticView(),
-    const UserManagementView(),
+    UserManagementView(),
   ];
 
   void _onItemTapped(int index) {

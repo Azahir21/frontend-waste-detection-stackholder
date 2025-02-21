@@ -25,6 +25,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   final LinearGradient greenGradient;
   final LinearGradient redGradient;
   final Color backgroundDefault;
+  final Color backgroundSmoke;
   final Color borderPrimary;
   final Color borderSecondary;
   final Color formFieldBorder;
@@ -56,6 +57,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
     required this.greenGradient,
     required this.redGradient,
     required this.backgroundDefault,
+    required this.backgroundSmoke,
     required this.borderPrimary,
     required this.borderSecondary,
     required this.formFieldBorder,
@@ -95,6 +97,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       greenGradient: _greenGradient,
       redGradient: _redGradient,
       backgroundDefault: Color(0xffFFFFFF),
+      backgroundSmoke: _smoke,
       borderPrimary: _green,
       borderSecondary: _gray,
       formFieldBorder: _gray,
@@ -135,6 +138,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
       greenGradient: _greenGradient,
       redGradient: _redGradient,
       backgroundDefault: Color(0xffFFFFFF),
+      backgroundSmoke: _smoke,
       borderPrimary: _green,
       borderSecondary: _gray,
       formFieldBorder: _gray,

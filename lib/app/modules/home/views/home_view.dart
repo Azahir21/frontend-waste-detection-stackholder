@@ -176,7 +176,7 @@ class _HomeViewState extends State<HomeView> {
                         ),
                         const MapCompass.cupertino(
                             hideIfRotatedNorth: true,
-                            padding: EdgeInsets.fromLTRB(32, 230, 35, 32)),
+                            padding: EdgeInsets.fromLTRB(32, 304, 35, 32)),
                         CurrentLocationLayer(
                           alignPositionStream: controller
                               .alignPositionStreamController.value.stream,
@@ -209,10 +209,6 @@ class _HomeViewState extends State<HomeView> {
                               controller.previousFilterDataType;
                           controller.filterStatus.value =
                               controller.previousFilterStatus;
-                          print(controller.filterDataType.value);
-                          print(controller.filterStatus.value);
-                          print(controller.previousFilterDataType);
-                          print(controller.previousFilterStatus);
                         }
 
                         if (controller.showTimeSeries.value == true ||
@@ -220,10 +216,6 @@ class _HomeViewState extends State<HomeView> {
                           controller.showTimeSeries.value = false;
                           controller.showMapsType.value = false;
                         }
-                        // Get.dialog(
-                        //   barrierDismissible: false,
-                        //   timeseriesDialog(),
-                        // );
                       },
                       context: context),
                 ),
@@ -251,11 +243,6 @@ class _HomeViewState extends State<HomeView> {
                           controller.filterStatus.value =
                               controller.previousFilterStatus;
                         }
-
-                        // Get.dialog(
-                        //   barrierDismissible: false,
-                        //   filterDialog(),
-                        // );
                       },
                       context: context),
                 ),

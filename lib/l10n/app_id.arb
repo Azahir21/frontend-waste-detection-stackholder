@@ -403,5 +403,121 @@
   "please_input_start_and_end_date": "Silakan masukkan tanggal mulai dan tanggal akhir.",
   "@please_input_start_and_end_date": {
     "description": "Ditampilkan saat gagal menerapkan filter."
+  },
+  "total_statistics_data_error": "Gagal memuat data statistik total",
+  "@total_statistics_data_error": {
+    "description": "Ditampilkan saat gagal memuat data statistik total."
+  },
+  "total_waste_collected": "Total Sampah yang Sudah Diambil",
+  "@total_waste_collected": {
+    "description": "Label untuk jumlah sampah yang sudah diambil"
+  },
+  "total_waste_not_collected": "Total Sampah yang Belum Diambil",
+  "@total_waste_not_collected": {
+    "description": "Label untuk jumlah sampah yang belum diambil"
+  },
+  "total_garbage_pile_collected": "Total Timbunan Sampah yang Sudah Diambil",
+  "@total_garbage_pile_collected": {
+    "description": "Label untuk jumlah timbunan sampah yang sudah diambil"
+  },
+  "total_garbage_pile_not_collected": "Total Timbunan Sampah yang Belum Diambil",
+  "@total_garbage_pile_not_collected": {
+    "description": "Label untuk jumlah timbunan sampah yang belum diambil"
+  },
+  "total_illegal_waste_collected": "Total Sampah Ilegal yang Sudah Diambil",
+  "@total_illegal_waste_collected": {
+    "description": "Label untuk jumlah sampah ilegal yang sudah diambil"
+  },
+  "total_illegal_waste_not_collected": "Total Sampah Ilegal yang Belum Diambil",
+  "@total_illegal_waste_not_collected": {
+    "description": "Label untuk jumlah sampah ilegal yang belum diambil"
+  },
+  "failed_to_load_total_statistics_data": "Gagal memuat data statistik total",
+  "@failed_to_load_total_statistics_data": {
+    "description": "Pesan error saat gagal memuat data statistik total"
+  },
+  "failed_to_load_data_statistics": "Gagal memuat data statistik",
+  "@failed_to_load_data_statistics": {
+    "description": "Pesan error saat gagal memuat data statistik"
+  },
+  "statistic_error": "Kesalahan statistik",
+  "@statistic_error": {
+    "description": "Pesan error umum untuk kesalahan statistik"
+  },
+  "full_name": "Nama Lengkap",
+  "@full_name": {
+    "description": "Ditampilkan di informasi akun nama lengkap."
+  },
+  "phone_number": "Nomor Telepon",
+  "@phone_number": {
+    "description": "Ditampilkan di informasi akun nomor telepon."
+  },
+  "gender": "Jenis Kelamin",
+  "@gender": {
+    "description": "Ditampilkan di informasi akun jenis kelamin."
+  },
+  "username": "Nama Pengguna",
+  "@username": {
+    "description": "Ditampilkan di informasi akun nama pengguna."
+  },
+  "address": "Alamat",
+  "@address": {
+    "description": "Ditampilkan di informasi akun alamat."
+  },
+  "male": "Laki-laki",
+  "@male": {
+    "description": "Ditampilkan di teks laki-laki."
+  },
+  "female": "Perempuan",
+  "@female": {
+    "description": "Ditampilkan di teks perempuan."
+  },
+  "register_error": "Gagal mendaftar",
+  "@register_error": {
+    "description": "Ditampilkan pada dialog kesalahan pendaftaran."
+  },
+  "register_error_message": "Gagal mendaftarkan akun Anda, silakan coba lagi",
+  "@register_error_message": {
+    "description": "Ditampilkan pada dialog kesalahan pendaftaran."
+  },
+  "register_success": "Pendaftaran berhasil",
+  "@register_success": {
+    "description": "Ditampilkan pada dialog pendaftaran berhasil."
+  },
+  "register_success_message": "Akun Anda telah berhasil didaftarkan",
+  "@register_success_message": {
+    "description": "Ditampilkan pada dialog pendaftaran berhasil."
+  },
+  "email_not_valid": "Email tidak valid",
+  "@email_not_valid": {
+    "description": "Ditampilkan pada dialog email tidak valid."
+  },
+  "password_has_8_characters": "Kata sandi harus memiliki setidaknya 8 karakter",
+  "@password_has_8_characters": {
+    "description": "Ditampilkan pada dialog kata sandi harus memiliki 8 karakter."
+  },
+  "password_has_uppercase": "Kata sandi harus memiliki setidaknya satu huruf besar",
+  "@password_has_uppercase": {
+    "description": "Ditampilkan pada dialog kata sandi harus memiliki huruf besar."
+  },
+  "password_has_lowercase": "Kata sandi harus memiliki setidaknya satu huruf kecil",
+  "@password_has_lowercase": {
+    "description": "Ditampilkan pada dialog kata sandi harus memiliki huruf kecil."
+  },
+  "password_has_number": "Kata sandi harus memiliki setidaknya satu angka",
+  "@password_has_number": {
+    "description": "Ditampilkan pada dialog kata sandi harus memiliki angka."
+  },
+  "aggrement_checklist_error": "Anda harus menyetujui syarat dan ketentuan serta kebijakan privasi",
+  "@aggrement_checklist_error": {
+    "description": "Ditampilkan pada dialog kesalahan daftar persetujuan."
+  },
+  "attention": "注意",
+  "@attention": {
+    "description": "ユーザーの注意を引くためのスナックバーメッセージのタイトルとして表示されます。"
+  },
+  "all_fields_must_be_filled": "Semua kolom harus diisi",
+  "@all_fields_must_be_filled": {
+    "description": "Pesan yang ditampilkan di snackbar menunjukkan bahwa semua kolom harus diisi."
   }
 }

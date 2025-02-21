@@ -8,7 +8,6 @@ class AppText extends StatelessWidget {
   final TextAlign textAlign;
   final TextOverflow? textOverflow;
   final int? maxLines;
-  final int? size;
 
   const AppText._internal(
     this.text, {
@@ -18,7 +17,6 @@ class AppText extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.textOverflow,
     this.maxLines,
-    this.size,
   });
 
   factory AppText.labelBigEmphasis(
@@ -197,10 +195,11 @@ class AppText extends StatelessWidget {
     Key? key,
     required BuildContext context,
     Color? color,
+    FontWeight fontWeight = FontWeight.normal,
     TextAlign? textAlign,
     TextOverflow? textOverflow,
     int? maxLines,
-    required int size,
+    required double size,
   }) =>
       AppText._internal(
         text,
@@ -208,12 +207,11 @@ class AppText extends StatelessWidget {
         textStyle: Theme.of(context)
             .appTexts
             .textPrimary
-            .copyWith(fontSize: size.toDouble()),
+            .copyWith(fontSize: size, fontWeight: fontWeight),
         color: color ?? Theme.of(context).appColors.textPrimary,
         textAlign: textAlign ?? TextAlign.start,
         textOverflow: textOverflow,
         maxLines: maxLines,
-        size: size,
       );
 
   @override

@@ -403,5 +403,117 @@
   "please_input_start_and_end_date": "Please input start and end date",
   "@please_input_start_and_end_date": {
     "description": "Shown on failed snackbar"
+  },
+  "total_statistics_data_error": "Failed to load total statistics data",
+  "@total_statistics_data_error": {
+    "description": "Shown on the total statistics data error dialog."
+  },
+  "total_waste_collected": "Total Waste Collected",
+  "@total_waste_collected": {
+    "description": "Label for the total amount of waste that has been collected"
+  },
+  "total_waste_not_collected": "Total Waste Not Collected",
+  "@total_waste_not_collected": {
+    "description": "Label for the total amount of waste that has not been collected"
+  },
+  "total_garbage_pile_collected": "Total Garbage Pile Collected",
+  "@total_garbage_pile_collected": {
+    "description": "Label for the total amount of garbage pile that has been collected"
+  },
+  "total_garbage_pile_not_collected": "Total Garbage Pile Not Collected",
+  "@total_garbage_pile_not_collected": {
+    "description": "Label for the total amount of garbage pile that has not been collected"
+  },
+  "total_illegal_waste_collected": "Total Illegal Waste Collected",
+  "@total_illegal_waste_collected": {
+    "description": "Label for the total amount of illegal waste that has been collected"
+  },
+  "total_illegal_waste_not_collected": "Total Illegal Waste Not Collected",
+  "@total_illegal_waste_not_collected": {
+    "description": "Label for the total amount of illegal waste that has not been collected"
+  },
+  "failed_to_load_total_statistics_data": "Failed to load total statistics data",
+  "@failed_to_load_total_statistics_data": {
+    "description": "Error message shown when total statistics data fails to load"
+  },
+  "failed_to_load_data_statistics": "Failed to load data statistics",
+  "@failed_to_load_data_statistics": {
+    "description": "Error message shown when data statistics fails to load"
+  },
+  "statistic_error": "Statistic error",
+  "@statistic_error": {
+    "description": "Generic error message for statistics errors"
+  },
+  "full_name": "Full Name",
+  "@full_name": {
+    "description": "Shown on the account information fullname."
+  },
+  "gender": "Gender",
+  "@gender": {
+    "description": "Shown on the account information gender."
+  },
+  "username": "Username",
+  "@username": {
+    "description": "Shown on the account information username."
+  },
+  "address": "Address",
+  "@address": {
+    "description": "Shown on the account information address."
+  },
+  "male": "Male",
+  "@male": {
+    "description": "Shown on male text."
+  },
+  "female": "Female",
+  "@female": {
+    "description": "Shown on female text."
+  },
+  "register_error": "Failed to register",
+  "@register_error": {
+    "description": "Shown on the register error dialog."
+  },
+  "register_error_message": "Failed to register your account, please try again",
+  "@register_error_message": {
+    "description": "Shown on the register error dialog."
+  },
+  "register_success": "Register success",
+  "@register_success": {
+    "description": "Shown on the register success dialog."
+  },
+  "register_success_message": "Your account has been successfully registered",
+  "@register_success_message": {
+    "description": "Shown on the register success dialog."
+  },
+  "email_not_valid": "Email is not valid",
+  "@email_not_valid": {
+    "description": "Shown on the email not valid dialog."
+  },
+  "password_has_8_characters": "Password must have at least 8 characters",
+  "@password_has_8_characters": {
+    "description": "Shown on the password has 8 characters dialog."
+  },
+  "password_has_uppercase": "Password must have at least one uppercase letter",
+  "@password_has_uppercase": {
+    "description": "Shown on the password has uppercase dialog."
+  },
+  "password_has_lowercase": "Password must have at least one lowercase letter",
+  "@password_has_lowercase": {
+    "description": "Shown on the password has lowercase dialog."
+  },
+  "password_has_number": "Password must have at least one number",
+  "@password_has_number": {
+    "description": "Shown on the password has number dialog."
+  },
+  "aggrement_checklist_error": "You must agree to the terms and conditions and privacy policy",
+  "@aggrement_checklist_error": {
+    "description": "Shown on the aggrement checklist error dialog."
+  },
+  "attention": "Attention",
+  "@attention": {
+    "description": "Shown as the title in a snackbar message to grab the user's attention."
+  },
+  "all_fields_must_be_filled": "All fields must be filled",
+  "@all_fields_must_be_filled": {
+    "description": "Message shown in a snackbar indicating that all fields must be filled."
   }
 }

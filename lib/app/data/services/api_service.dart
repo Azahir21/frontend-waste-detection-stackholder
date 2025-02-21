@@ -33,7 +33,7 @@ class ApiServices {
     return response;
   }
 
-  Future<Response> put(String url, Map<String, dynamic> body) async {
+  Future<Response> put(String url, [Map<String, dynamic>? body]) async {
     Uri uri = Uri.parse(url);
     var response = await client.put(
       uri,
@@ -42,7 +42,7 @@ class ApiServices {
         'Accept': 'application/json',
         'Authorization': 'Bearer ${GetStorage().read('token')}',
       },
-      body: jsonEncode(body),
+      body: body != null ? jsonEncode(body) : null,
     );
     return response;
   }

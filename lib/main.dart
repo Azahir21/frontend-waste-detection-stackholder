@@ -19,7 +19,7 @@ Future<void> main() async {
   await GetStorage.init();
   final box = GetStorage();
   // String? savedLanguageCode = box.read('language');
-  String? savedLanguageCode = 'id'; // Default to Indonesian
+  String? savedLanguageCode = 'en'; // Default to Indonesian
   Locale appLocale;
   switch (savedLanguageCode) {
     case 'id':

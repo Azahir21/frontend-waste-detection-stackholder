@@ -58,7 +58,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.USER_MANAGEMENT,
-      page: () => const UserManagementView(),
+      page: () => UserManagementView(),
       binding: UserManagementBinding(),
       middlewares: [
         ConnectivityMiddleware(),

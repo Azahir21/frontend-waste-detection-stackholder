@@ -403,5 +403,117 @@
   "please_input_start_and_end_date": "開始日と終了日を入力してください",
   "@please_input_start_and_end_date": {
     "description": "ユーザーに開始日と終了日を入力するように促すメッセージです。"
+  },
+  "total_statistics_data_error": "統計データの読み込みに失敗しました",
+  "@total_statistics_data_error": {
+    "description": "統計データエラーダイアログに表示されます。"
+  },
+  "total_waste_collected": "回収済みの廃棄物の合計",
+  "@total_waste_collected": {
+    "description": "回収済みの廃棄物の合計を示すラベル"
+  },
+  "total_waste_not_collected": "未回収の廃棄物の合計",
+  "@total_waste_not_collected": {
+    "description": "未回収の廃棄物の合計を示すラベル"
+  },
+  "total_garbage_pile_collected": "回収済みのゴミ山の合計",
+  "@total_garbage_pile_collected": {
+    "description": "回収済みのゴミ山の合計を示すラベル"
+  },
+  "total_garbage_pile_not_collected": "未回収のゴミ山の合計",
+  "@total_garbage_pile_not_collected": {
+    "description": "未回収のゴミ山の合計を示すラベル"
+  },
+  "total_illegal_waste_collected": "回収済みの不法廃棄物の合計",
+  "@total_illegal_waste_collected": {
+    "description": "回収済みの不法廃棄物の合計を示すラベル"
+  },
+  "total_illegal_waste_not_collected": "未回収の不法廃棄物の合計",
+  "@total_illegal_waste_not_collected": {
+    "description": "未回収の不法廃棄物の合計を示すラベル"
+  },
+  "failed_to_load_total_statistics_data": "総統計データの読み込みに失敗しました",
+  "@failed_to_load_total_statistics_data": {
+    "description": "総統計データの読み込みに失敗した際のエラーメッセージ"
+  },
+  "failed_to_load_data_statistics": "データ統計の読み込みに失敗しました",
+  "@failed_to_load_data_statistics": {
+    "description": "データ統計の読み込みに失敗した際のエラーメッセージ"
+  },
+  "statistic_error": "統計エラー",
+  "@statistic_error": {
+    "description": "統計エラーに対する一般的なエラーメッセージ"
+  },
+  "male": "男性",
+  "@male": {
+    "description": "男性のテキストに表示されます。"
+  },
+  "female": "女性",
+  "@female": {
+    "description": "女性のテキストに表示されます。"
+  },
+  "full_name": "氏名",
+  "@full_name": {
+    "description": "アカウント情報の氏名に表示されます。"
+  },
+  "gender": "性別",
+  "@gender": {
+    "description": "アカウント情報の性別に表示されます。"
+  },
+  "username": "ユーザー名",
+  "@username": {
+    "description": "アカウント情報のユーザー名に表示されます。"
+  },
+  "address": "住所",
+  "@address": {
+    "description": "アカウント情報の住所に表示されます。"
+  },
+  "register_error": "登録に失敗しました",
+  "@register_error": {
+    "description": "登録エラーダイアログに表示されます。"
+  },
+  "register_error_message": "アカウントの登録に失敗しました。もう一度お試しください",
+  "@register_error_message": {
+    "description": "登録エラーダイアログに表示されます。"
+  },
+  "register_success": "登録が成功しました",
+  "@register_success": {
+    "description": "登録成功ダイアログに表示されます。"
+  },
+  "register_success_message": "アカウントが正常に登録されました",
+  "@register_success_message": {
+    "description": "登録成功ダイアログに表示されます。"
+  },
+  "email_not_valid": "メールアドレスが無効です",
+  "@email_not_valid": {
+    "description": "メールアドレス無効ダイアログに表示されます。"
+  },
+  "password_has_8_characters": "パスワードは8文字以上である必要があります",
+  "@password_has_8_characters": {
+    "description": "パスワード文字数エラーダイアログに表示されます。"
+  },
+  "password_has_uppercase": "パスワードには少なくとも1つの大文字が必要です",
+  "@password_has_uppercase": {
+    "description": "パスワード大文字エラーダイアログに表示されます。"
+  },
+  "password_has_lowercase": "パスワードには少なくとも1つの小文字が必要です",
+  "@password_has_lowercase": {
+    "description": "パスワード小文字エラーダイアログに表示されます。"
+  },
+  "password_has_number": "パスワードには少なくとも1つの数字が必要です",
+  "@password_has_number": {
+    "description": "パスワード数字エラーダイアログに表示されます。"
+  },
+  "aggrement_checklist_error": "利用規約とプライバシーポリシーに同意する必要があります",
+  "@aggrement_checklist_error": {
+    "description": "同意チェックリストエラーダイアログに表示されます。"
+  },
+  "attention": "Attention",
+  "@attention": {
+    "description": "Shown as the title in a snackbar message to grab the user's attention."
+  },
+  "all_fields_must_be_filled": "すべての欄に入力してください",
+  "@all_fields_must_be_filled": {
+    "description": "すべての欄が入力されていないことを示すスナックバーメッセージとして表示されます。"
   }
 }

@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
+  String language = GetStorage().read('language') ?? 'en';
   String _email = '';
   String _password = '';
   get email => _email;

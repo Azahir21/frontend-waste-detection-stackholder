@@ -18,8 +18,8 @@ Future<void> main() async {
   await dotenv.load(fileName: "assets/.env");
   await GetStorage.init();
   final box = GetStorage();
-  // String? savedLanguageCode = box.read('language');
-  String? savedLanguageCode = 'en'; // Default to Indonesian
+  String? savedLanguageCode = box.read('language');
+  // String? savedLanguageCode = 'en'; // Default to Indonesian
   Locale appLocale;
   switch (savedLanguageCode) {
     case 'id':

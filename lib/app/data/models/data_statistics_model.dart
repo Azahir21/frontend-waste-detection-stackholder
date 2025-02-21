@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class DataStatistics {
@@ -53,7 +54,7 @@ class DataStatistic {
   DateTime? captureTime;
   int? wasteCount;
   dynamic pickupByUser;
-  bool? pickupStatus;
+  RxBool? pickupStatus;
 
   DataStatistic({
     this.id,
@@ -83,7 +84,9 @@ class DataStatistic {
             : DateTime.parse(json["capture_time"]),
         wasteCount: json["waste_count"],
         pickupByUser: json["pickup_by_user"],
-        pickupStatus: json["pickup_status"],
+        pickupStatus: json["pickup_status"] == null
+            ? null
+            : RxBool(json["pickup_status"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -95,7 +98,7 @@ class DataStatistic {
         "capture_time": captureTime?.toIso8601String(),
         "waste_count": wasteCount,
         "pickup_by_user": pickupByUser,
-        "pickup_status": pickupStatus,
+        "pickup_status": pickupStatus!.value,
       };
 
   // Helper method to convert a WKT POINT string to a LatLng object.

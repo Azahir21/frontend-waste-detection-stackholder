@@ -22,6 +22,8 @@ class StatisticController extends GetxController {
   final indexEndData = 10.obs;
   final dataType = 'all'.obs;
   final status = 'all'.obs;
+  String previousDataType = 'all';
+  String previousStatus = 'all';
   final sortBy = 'capture_time'.obs;
   final search = ''.obs;
   final ascending = true.obs;
@@ -75,6 +77,35 @@ class StatisticController extends GetxController {
       debugPrint('Error fetching dataStats: $e');
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> markPickupSampah(int id) async {
+    try {
+      final response = await ApiServices().put(
+        "${UrlConstants.sampah}/pickup/$id",
+        {},
+      );
+
+      if (response.statusCode != 200) {
+        final message = jsonDecode(response.body)['detail'];
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.mark_pickup_error,
+          message,
+        );
+        throw ('Mark pickup error: ${response.body}');
+      }
+
+      showSuccessSnackbar(
+        AppLocalizations.of(Get.context!)!.mark_pickup_success,
+        AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
+      );
+      await fetchDataStats(
+        page: currentPage.value,
+        pageSize: pageSize.value,
+      );
+    } catch (e) {
+      debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
     }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/data_statistics_model.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/total_statistical_data.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/controllers/statistic_controller.dart';
@@ -13,13 +15,16 @@ import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 
 import 'package:get/get.dart';
-
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
 
 class StatisticView extends GetView<StatisticController> {
   StatisticView({super.key});
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  /// RxBool used for showing the filter overlay in tablet/desktop.
+  final RxBool showFilterBox = false.obs;
 
   /// Builds the header text widget.
   Widget _buildHeader(BuildContext context, bool isMobile) {
@@ -46,7 +51,7 @@ class StatisticView extends GetView<StatisticController> {
     required TotalStatisticalData stats,
   }) {
     if (isMobile) {
-      // Mobile: 3 columns in one row
+      // Mobile: 3 charts in one column
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -66,7 +71,7 @@ class StatisticView extends GetView<StatisticController> {
         ],
       );
     } else if (isTab) {
-      // Tablet: Two PieChartCards in the first column (stacked), LineChartCard in the second column
+      // Tablet: Two pie charts on top, line chart below
       return Column(
         children: [
           Row(
@@ -93,7 +98,7 @@ class StatisticView extends GetView<StatisticController> {
         ],
       );
     } else {
-      // Desktop: 3 widgets in one row
+      // Desktop: All three charts in one row
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -186,12 +191,150 @@ class StatisticView extends GetView<StatisticController> {
             DataCell(AppText.labelSmallDefault(row.pickupByUser ?? '-',
                 color: Theme.of(Get.context!).appColors.textSecondary,
                 context: Get.context!)),
-            DataCell(
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('Action'),
-              ),
-            ),
+            DataCell(Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.map),
+                  iconSize: 30,
+                  color: Theme.of(Get.context!).appColors.iconPrimary,
+                  onPressed: () {
+                    Get.dialog(Dialog(
+                      child: Container(
+                        height: 400,
+                        width: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(100.0),
+                        ),
+                        child: Stack(
+                          children: [
+                            FlutterMap(
+                              options: MapOptions(
+                                initialCenter: row.geom!,
+                                initialZoom: 17,
+                                maxZoom: 18,
+                                minZoom: 3,
+                                cameraConstraint: CameraConstraint.contain(
+                                  bounds: LatLngBounds(
+                                    const LatLng(-90, -180),
+                                    const LatLng(90, 180),
+                                  ),
+                                ),
+                              ),
+                              children: [
+                                TileLayer(
+                                  urlTemplate:
+                                      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                                  tileProvider: CancellableNetworkTileProvider(
+                                    silenceExceptions: true,
+                                  ),
+                                ),
+                                MarkerLayer(
+                                  markers: [
+                                    Marker(
+                                      width: 80.0,
+                                      height: 80.0,
+                                      point: row.geom!,
+                                      child: const Icon(
+                                        Icons.location_on,
+                                        color: Colors.red,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: IconButton(
+                                        onPressed: () {
+                                          Get.back(closeOverlays: true);
+                                        },
+                                        color: Colors.white,
+                                        icon: Icon(Icons.close)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ));
+                  },
+                ),
+                Obx(
+                  () => Visibility(
+                    visible: !row.pickupStatus!.value,
+                    child: Checkbox(
+                        value: row.pickupStatus!.value,
+                        onChanged: (value) {
+                          Get.dialog(Dialog(
+                            child: Padding(
+                              padding: const EdgeInsets.all(32.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  AppText.labelDefaultEmphasis(
+                                    AppLocalizations.of(Get.context!)!
+                                        .pickup_confirmation,
+                                    context: Get.context!,
+                                    textAlign: TextAlign.center,
+                                    color: Theme.of(Get.context!)
+                                        .appColors
+                                        .textSecondary,
+                                  ),
+                                  VerticalGap.formMedium(),
+                                  AppText.labelSmallDefault(
+                                      AppLocalizations.of(Get.context!)!
+                                          .pickup_confirmation_message,
+                                      color: Theme.of(Get.context!)
+                                          .appColors
+                                          .textSecondary,
+                                      textAlign: TextAlign.center,
+                                      context: Get.context!),
+                                  VerticalGap.formBig(),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CenteredTextButtonWithIcon.secondary(
+                                        label:
+                                            AppLocalizations.of(Get.context!)!
+                                                .cancel,
+                                        width: 120,
+                                        height: 35,
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                        context: Get.context!,
+                                      ),
+                                      HorizontalGap.formHuge(),
+                                      CenteredTextButtonWithIcon.primary(
+                                        label:
+                                            AppLocalizations.of(Get.context!)!
+                                                .already,
+                                        width: 120,
+                                        height: 35,
+                                        onTap: () {
+                                          controller.markPickupSampah(row.id!);
+                                          Get.back();
+                                        },
+                                        context: Get.context!,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ));
+                        }),
+                  ),
+                ),
+              ],
+            )),
           ],
         );
       }).toList();
@@ -206,7 +349,6 @@ class StatisticView extends GetView<StatisticController> {
           children: [
             _buildTableHeader(Get.context!, isMobile),
             VerticalGap.formMedium(),
-
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: ConstrainedBox(
@@ -362,7 +504,6 @@ class StatisticView extends GetView<StatisticController> {
               ),
             ),
             const SizedBox(height: 16),
-            // Build the page navigation buttons.
             _buildPageNavigation(dataStats, isMobile),
           ],
         ),
@@ -374,7 +515,6 @@ class StatisticView extends GetView<StatisticController> {
     final currentPage = dataStats.page ?? 1;
     final totalPages = dataStats.totalPages ?? 1;
 
-    // Optionally, you could also add "Previous" and "Next" buttons.
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -431,83 +571,6 @@ class StatisticView extends GetView<StatisticController> {
     );
   }
 
-  Widget _buildTableHeader(BuildContext context, bool isMobile) {
-    return isMobile
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildShowEntriesDropdown(),
-              VerticalGap.formMedium(),
-              _buildSearchAndFilter(context),
-            ],
-          )
-        : Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _buildShowEntriesDropdown(),
-              HorizontalGap.formBig(),
-              SizedBox(
-                width: 250,
-                height: 50,
-                child: TextFormField(
-                  initialValue: controller.search.value,
-                  decoration: InputDecoration(
-                    hintText: 'Search...',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  ),
-                  onChanged: (value) {
-                    controller.search.value = value;
-                  },
-                  onFieldSubmitted: (value) {
-                    controller.fetchDataStats(
-                        page: controller.currentPage.value,
-                        pageSize: controller.pageSize.value);
-                  },
-                ),
-              ),
-              const Spacer(),
-              CustomIconButton.primary(
-                  height: 50,
-                  width: 50,
-                  iconName: AppIconName.filter,
-                  onTap: () {},
-                  context: context)
-            ],
-          );
-  }
-
-  Widget _buildSearchAndFilter(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        SizedBox(
-          width: 225,
-          height: 50,
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search...',
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
-            ),
-            onChanged: (value) {},
-          ),
-        ),
-        const Spacer(),
-        CustomIconButton.primary(
-            height: 50,
-            width: 50,
-            iconName: AppIconName.filter,
-            onTap: () {},
-            context: context)
-      ],
-    );
-  }
-
   Widget _buildShowEntriesDropdown() {
     return Obx(() {
       return Row(
@@ -552,6 +615,304 @@ class StatisticView extends GetView<StatisticController> {
     });
   }
 
+  Widget _buildTableHeader(BuildContext context, bool isMobile) {
+    return isMobile
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildShowEntriesDropdown(),
+              VerticalGap.formMedium(),
+              _buildSearchAndFilter(context, isMobile),
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              _buildShowEntriesDropdown(),
+              HorizontalGap.formBig(),
+              SizedBox(
+                width: 250,
+                height: 50,
+                child: TextFormField(
+                  initialValue: controller.search.value,
+                  decoration: InputDecoration(
+                    hintText: 'Search...',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  ),
+                  onChanged: (value) {
+                    controller.search.value = value;
+                  },
+                  onFieldSubmitted: (value) {
+                    controller.fetchDataStats(
+                        page: controller.currentPage.value,
+                        pageSize: controller.pageSize.value);
+                  },
+                ),
+              ),
+              const Spacer(),
+              CustomIconButton.primary(
+                  height: 50,
+                  width: 50,
+                  iconName: AppIconName.filter,
+                  onTap: () {
+                    if (isMobile) {
+                      // Mobile: open filter in a dialog.
+                      Get.dialog(
+                        _filterDialog(context),
+                      );
+                    } else {
+                      // Tablet/Desktop: toggle the filter overlay.
+                      showFilterBox.value = !showFilterBox.value;
+                    }
+                  },
+                  context: context)
+            ],
+          );
+  }
+
+  Widget _buildSearchAndFilter(BuildContext context, bool isMobile) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 225,
+          height: 50,
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
+            ),
+            onChanged: (value) {},
+          ),
+        ),
+        const Spacer(),
+        CustomIconButton.primary(
+            height: 50,
+            width: 50,
+            iconName: AppIconName.filter,
+            onTap: () {
+              if (isMobile) {
+                Get.dialog(
+                  _filterDialog(context),
+                );
+              } else {
+                showFilterBox.value = !showFilterBox.value;
+              }
+            },
+            context: context),
+      ],
+    );
+  }
+
+  Widget _buildCheckboxRow({
+    required String label,
+    required bool isChecked,
+    required VoidCallback onChanged,
+  }) {
+    return Row(
+      children: [
+        Checkbox(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+          ),
+          value: isChecked,
+          onChanged: (_) => onChanged(),
+        ),
+        HorizontalGap.formSmall(),
+        AppText.labelSmallDefault(
+          label,
+          color: Theme.of(Get.context!).appColors.textSecondary,
+          context: Get.context!,
+        ),
+      ],
+    );
+  }
+
+  /// This method builds the filter content that is used in both the dialog (mobile)
+  /// and the overlay (tablet/desktop).
+  Widget _buildFilterContent(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText.labelSmallEmphasis(
+                  AppLocalizations.of(context)!.filter_by_type,
+                  color: Theme.of(context).appColors.textSecondary,
+                  context: context,
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.all_kind_of_waste,
+                  isChecked: controller.dataType.value == "all",
+                  onChanged: () {
+                    controller.previousDataType = controller.dataType.value;
+                    controller.dataType.value = "all";
+                  },
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.illegal_trash,
+                  isChecked: controller.dataType.value == "garbage_pcs",
+                  onChanged: () {
+                    controller.previousDataType = controller.dataType.value;
+                    controller.dataType.value = "garbage_pcs";
+                  },
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.illegal_dumping_site,
+                  isChecked: controller.dataType.value == "garbage_pile",
+                  onChanged: () {
+                    controller.previousDataType = controller.dataType.value;
+                    controller.dataType.value = "garbage_pile";
+                  },
+                ),
+              ],
+            ),
+          ),
+          VerticalGap.formMedium(),
+          Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText.labelSmallEmphasis(
+                  AppLocalizations.of(context)!.filter_by_status,
+                  color: Theme.of(context).appColors.textSecondary,
+                  context: context,
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.all_status,
+                  isChecked: controller.status.value == "all",
+                  onChanged: () {
+                    controller.previousStatus = controller.status.value;
+                    controller.status.value = "all";
+                  },
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.pickup_true,
+                  isChecked: controller.status.value == "collected",
+                  onChanged: () {
+                    controller.previousStatus = controller.status.value;
+                    controller.status.value = "collected";
+                  },
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.pickup_false,
+                  isChecked: controller.status.value == "not_collected",
+                  onChanged: () {
+                    controller.previousStatus = controller.status.value;
+                    controller.status.value = "not_collected";
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// For mobile, the filter is shown in a dialog.
+  AlertDialog _filterDialog(BuildContext context) {
+    return AlertDialog(
+      title: AppText.labelDefaultEmphasis(
+        AppLocalizations.of(context)!.filter,
+        context: context,
+      ),
+      content: _buildFilterContent(context),
+      actions: [
+        TextButton(
+          onPressed: () {
+            controller.dataType.value = controller.previousDataType;
+            controller.status.value = controller.previousStatus;
+            Get.back();
+          },
+          child: Text(AppLocalizations.of(context)!.cancel),
+        ),
+        TextButton(
+          onPressed: () {
+            controller.fetchDataStats(
+                page: controller.currentPage.value,
+                pageSize: controller.pageSize.value);
+            controller.previousDataType = controller.dataType.value;
+            controller.previousStatus = controller.status.value;
+            Get.back();
+          },
+          child: Text(AppLocalizations.of(context)!.ok),
+        ),
+      ],
+    );
+  }
+
+  /// For tablet/desktop, the filter overlay is shown on top of the table.
+  Widget _buildFilterOverlay(BuildContext context) {
+    return Positioned(
+      top: 0,
+      right: 100,
+      child: Card(
+        elevation: 4,
+        child: Container(
+          width: 300,
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Header row with title and close button.
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText.labelDefaultEmphasis(
+                    AppLocalizations.of(context)!.filter,
+                    context: context,
+                  ),
+                ],
+              ),
+              _buildFilterContent(context),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      controller.dataType.value = controller.previousDataType;
+                      controller.status.value = controller.previousStatus;
+                      showFilterBox.value = false;
+                    },
+                    child: Text(AppLocalizations.of(context)!.cancel),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      controller.fetchDataStats(
+                          page: controller.currentPage.value,
+                          pageSize: controller.pageSize.value);
+                      controller.previousDataType = controller.dataType.value;
+                      controller.previousStatus = controller.status.value;
+                      showFilterBox.value = false;
+                    },
+                    child: Text(AppLocalizations.of(context)!.ok),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).appColors;
@@ -590,7 +951,18 @@ class StatisticView extends GetView<StatisticController> {
                         stats: stats,
                       ),
                       VerticalGap.formHuge(),
-                      _buildDataTableWithPagination(isMobile),
+                      // For mobile, show table normally;
+                      // For tablet/desktop, wrap table in a Stack so that the filter overlay can appear.
+                      isMobile
+                          ? _buildDataTableWithPagination(isMobile)
+                          : Stack(
+                              children: [
+                                _buildDataTableWithPagination(isMobile),
+                                Obx(() => showFilterBox.value
+                                    ? _buildFilterOverlay(context)
+                                    : const SizedBox.shrink()),
+                              ],
+                            ),
                       VerticalGap.formHuge(),
                     ],
                   );

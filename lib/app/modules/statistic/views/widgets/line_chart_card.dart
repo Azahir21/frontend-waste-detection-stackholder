@@ -1,126 +1,203 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:frontend_waste_management_stackholder/app/data/models/total_statistical_data.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/widgets/chart_color.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 
 class _LineChart extends StatelessWidget {
-  const _LineChart();
+  final List<HistoricalData> historicalData;
+  const _LineChart({Key? key, required this.historicalData}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return LineChart(
-      sampleData1,
-      duration: const Duration(milliseconds: 250),
+  // 1. Convert historical data into spots.
+  List<FlSpot> get historicalSpots {
+    if (historicalData.isEmpty) return [];
+    final sortedData = List<HistoricalData>.from(historicalData)
+      ..sort((a, b) => (a.weekIndex ?? 0).compareTo(b.weekIndex ?? 0));
+    return sortedData.map((data) {
+      final x = (data.weekIndex ?? 0).toDouble();
+      final y = (data.totalTransported ?? 0).toDouble();
+      return FlSpot(x, y);
+    }).toList();
+  }
+
+  // 2. Determine axis bounds.
+  double get minX => historicalSpots.isEmpty ? 0 : historicalSpots.first.x;
+  double get maxX => historicalSpots.isEmpty ? 14 : historicalSpots.last.x;
+  double get maxY {
+    if (historicalSpots.isEmpty) return 4;
+    final maxYValue = historicalSpots.map((s) => s.y).reduce(max);
+    return maxYValue + 1; // add some padding
+  }
+
+  // 3. Group historical data by monthName and determine the center week.
+  Map<int, String> get monthCenterMapping {
+    // Map each month (using its long version) to its week indices.
+    final Map<String, List<int>> monthToWeeks = {};
+    for (final h in historicalData) {
+      if (h.monthName == null || h.weekIndex == null) continue;
+      monthToWeeks[h.monthName!] ??= [];
+      monthToWeeks[h.monthName!]!.add(h.weekIndex!);
+    }
+    // Build mapping: center week -> short month name.
+    final Map<int, String> mapping = {};
+    // Sort months by their earliest week index.
+    final monthsInOrder = monthToWeeks.keys.toList()
+      ..sort((a, b) {
+        final aMin = monthToWeeks[a]!.reduce(min);
+        final bMin = monthToWeeks[b]!.reduce(min);
+        return aMin.compareTo(bMin);
+      });
+    for (final month in monthsInOrder) {
+      final weeks = monthToWeeks[month]!..sort();
+      final startWeek = weeks.first;
+      final endWeek = weeks.last;
+      // Compute center week (rounding to the nearest integer).
+      final centerWeek = ((startWeek + endWeek) / 2).round();
+      mapping[centerWeek] = _getShortMonth(month);
+    }
+    return mapping;
+  }
+
+  // 4. Convert a long month name to a short version.
+  String _getShortMonth(String longMonth) {
+    // Adjust the mapping as needed (here "December" becomes "Des").
+    switch (longMonth.toLowerCase()) {
+      case 'january':
+        return 'Jan';
+      case 'february':
+        return 'Feb';
+      case 'march':
+        return 'Mar';
+      case 'april':
+        return 'Apr';
+      case 'may':
+        return 'May';
+      case 'june':
+        return 'Jun';
+      case 'july':
+        return 'Jul';
+      case 'august':
+        return 'Aug';
+      case 'september':
+        return 'Sep';
+      case 'october':
+        return 'Oct';
+      case 'november':
+        return 'Nov';
+      case 'december':
+        return 'Des';
+      default:
+        return longMonth.substring(0, 3);
+    }
+  }
+
+  // 5. Build the chart data.
+  LineChartData get chartData {
+    return LineChartData(
+      lineTouchData: lineTouchData,
+      gridData: gridData,
+      titlesData: titlesData,
+      borderData: borderData,
+      lineBarsData: [lineChartBarData],
+      minX: minX,
+      maxX: maxX,
+      minY: 0,
+      maxY: maxY,
     );
   }
 
-  LineChartData get sampleData1 => LineChartData(
-        lineTouchData: lineTouchData1,
-        gridData: gridData,
-        titlesData: titlesData1,
-        borderData: borderData,
-        lineBarsData: lineBarsData1,
-        minX: 0,
-        maxX: 14,
-        maxY: 4,
-        minY: 0,
-      );
-
-  LineTouchData get lineTouchData1 => LineTouchData(
+  LineTouchData get lineTouchData => LineTouchData(
         handleBuiltInTouches: true,
         touchTooltipData: LineTouchTooltipData(
-          getTooltipColor: (touchedSpot) => Colors.blueGrey.withOpacity(0.8),
+          getTooltipItems: (List<LineBarSpot> touchedSpots) {
+            return touchedSpots.map((spot) {
+              final weekIndex = spot.x.toInt();
+              // Find the HistoricalData object corresponding to this week index.
+              final data = historicalData.firstWhere(
+                (h) => h.weekIndex == weekIndex,
+                orElse: () => HistoricalData(),
+              );
+              // Use weekInMonth from data, or fallback to weekIndex if null.
+              final weekInMonth = data.weekInMonth ?? weekIndex;
+              final monthShortName = _getShortMonth(data.monthName ?? "");
+              final transported = data.totalTransported ?? 0;
+              // Format the tooltip text as requested.
+              final text =
+                  'Week $weekInMonth ($monthShortName)\n$transported item';
+              return LineTooltipItem(
+                text,
+                const TextStyle(color: Colors.white),
+              );
+            }).toList();
+          },
+          getTooltipColor: (_) => Colors.blueGrey.withOpacity(0.8),
         ),
       );
 
-  FlTitlesData get titlesData1 => FlTitlesData(
-        bottomTitles: AxisTitles(
-          sideTitles: bottomTitles,
-        ),
-        rightTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        leftTitles: AxisTitles(
-          sideTitles: leftTitles(),
-        ),
+  // 6. Configure titles for the axes.
+  FlTitlesData get titlesData => FlTitlesData(
+        bottomTitles: AxisTitles(sideTitles: bottomTitles),
+        rightTitles:
+            const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+        leftTitles: AxisTitles(sideTitles: leftTitles()),
       );
 
-  List<LineChartBarData> get lineBarsData1 => [
-        lineChartBarData1_1,
-        lineChartBarData1_2,
-      ];
-
-  Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '1m';
-        break;
-      case 2:
-        text = '2m';
-        break;
-      case 3:
-        text = '3m';
-        break;
-      case 4:
-        text = '5m';
-        break;
-      case 5:
-        text = '6m';
-        break;
-      default:
-        return Container();
-    }
-
-    return Text(text, style: style, textAlign: TextAlign.center);
-  }
-
+  // Left axis: simple numeric labels.
   SideTitles leftTitles() => SideTitles(
-        getTitlesWidget: leftTitleWidgets,
         showTitles: true,
         interval: 1,
         reservedSize: 40,
+        getTitlesWidget: (value, meta) {
+          return Text(
+            value.toInt().toString(),
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          );
+        },
       );
 
+  // 7. Bottom axis: display week numbers on top and, if applicable, the month abbreviation below.
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
+    final int xVal = value.toInt();
+    const weekStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 16,
+      fontSize: 12,
     );
-    Widget text;
-    switch (value.toInt()) {
-      case 2:
-        text = const Text('SEPT', style: style);
-        break;
-      case 7:
-        text = const Text('OCT', style: style);
-        break;
-      case 12:
-        text = const Text('DEC', style: style);
-        break;
-      default:
-        text = const Text('');
-        break;
-    }
+    const monthStyle = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 10,
+      color: Colors.blueGrey,
+    );
 
+    // Build a column: always show the week number.
+    // Also, if this x is the center of a month group, show the short month name.
     return SideTitleWidget(
       axisSide: meta.axisSide,
-      space: 10,
-      child: text,
+      space: 4,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(xVal.toString(), style: weekStyle),
+          const SizedBox(height: 2),
+          // Only display the month if xVal is a center.
+          Text(
+            monthCenterMapping[xVal] ?? "",
+            style: monthStyle,
+          ),
+        ],
+      ),
     );
   }
 
   SideTitles get bottomTitles => SideTitles(
         showTitles: true,
-        reservedSize: 32,
+        reservedSize: 40,
         interval: 1,
         getTitlesWidget: bottomTitleWidgets,
       );
@@ -132,64 +209,44 @@ class _LineChart extends StatelessWidget {
         border: Border(
           bottom:
               BorderSide(color: AppColors.primary.withOpacity(0.2), width: 4),
-          left: const BorderSide(color: Colors.transparent),
-          right: const BorderSide(color: Colors.transparent),
-          top: const BorderSide(color: Colors.transparent),
+          left: BorderSide.none,
+          right: BorderSide.none,
+          top: BorderSide.none,
         ),
       );
 
-  LineChartBarData get lineChartBarData1_1 => LineChartBarData(
+  LineChartBarData get lineChartBarData => LineChartBarData(
         isCurved: true,
         color: AppColors.contentColorGreen,
         barWidth: 8,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
         belowBarData: BarAreaData(show: false),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 1.5),
-          FlSpot(5, 1.4),
-          FlSpot(7, 3.4),
-          FlSpot(10, 2),
-          FlSpot(12, 2.2),
-          FlSpot(13, 1.8),
-        ],
+        spots: historicalSpots,
       );
 
-  LineChartBarData get lineChartBarData1_2 => LineChartBarData(
-        isCurved: true,
-        color: AppColors.contentColorPink,
-        barWidth: 8,
-        isStrokeCapRound: true,
-        dotData: const FlDotData(show: false),
-        belowBarData: BarAreaData(
-          show: false,
-          color: AppColors.contentColorPink.withOpacity(0),
-        ),
-        spots: const [
-          FlSpot(1, 1),
-          FlSpot(3, 2.8),
-          FlSpot(7, 1.2),
-          FlSpot(10, 2.8),
-          FlSpot(12, 2.6),
-          FlSpot(13, 3.9),
-        ],
-      );
+  @override
+  Widget build(BuildContext context) {
+    return LineChart(
+      chartData,
+      duration: const Duration(milliseconds: 250),
+    );
+  }
 }
 
 class LineChartCard extends StatefulWidget {
-  const LineChartCard({super.key});
+  final List<HistoricalData> historicalData;
+
+  const LineChartCard({
+    Key? key,
+    required this.historicalData,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => LineChartCardState();
 }
 
 class LineChartCardState extends State<LineChartCard> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     var color = Theme.of(context).appColors;
@@ -204,28 +261,22 @@ class LineChartCardState extends State<LineChartCard> {
           width: 2,
         ),
       ),
-      child: Stack(
+      child: Column(
         children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Center(
-                child: AppText.labelDefaultEmphasis("Collection Rate",
-                    color: color.textSecondary, context: context),
-              ),
-              const SizedBox(
-                height: 37,
-              ),
-              const Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16, left: 6),
-                  child: _LineChart(),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
+          Center(
+            child: AppText.labelDefaultEmphasis(
+              "Collection Rate",
+              color: color.textSecondary,
+              context: context,
+            ),
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16, left: 6),
+              // Pass your historicalData to the chart
+              child: _LineChart(historicalData: widget.historicalData),
+            ),
           ),
         ],
       ),

@@ -29,6 +29,7 @@ class StatisticController extends GetxController {
   final ascending = true.obs;
   final columnIndex = 0.obs;
   final sortOrder = 'desc'.obs;
+  final RxBool showFilterBox = false.obs;
 
   @override
   void onInit() async {

@@ -515,5 +515,13 @@
   "all_fields_must_be_filled": "All fields must be filled",
   "@all_fields_must_be_filled": {
     "description": "Message shown in a snackbar indicating that all fields must be filled."
+  },
+  "next": "Next",
+  "@next": {
+    "description": "Shown on the next button."
+  },
+  "previous": "Previous",
+  "@previous": {
+    "description": "Shown on the previous button."
   }
 }

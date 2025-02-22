@@ -519,5 +519,13 @@
   "all_fields_must_be_filled": "Semua kolom harus diisi",
   "@all_fields_must_be_filled": {
     "description": "Pesan yang ditampilkan di snackbar menunjukkan bahwa semua kolom harus diisi."
+  },
+  "next": "Selanjutnya",
+  "@next": {
+    "description": "Ditampilkan di tombol selanjutnya."
+  },
+  "previous": "Sebelumnya",
+  "@previous": {
+    "description": "Ditampilkan di tombol sebelumnya."
   }
 }

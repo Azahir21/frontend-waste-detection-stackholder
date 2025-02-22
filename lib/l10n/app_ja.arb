@@ -515,5 +515,13 @@
   "all_fields_must_be_filled": "すべての欄に入力してください",
   "@all_fields_must_be_filled": {
     "description": "すべての欄が入力されていないことを示すスナックバーメッセージとして表示されます。"
+  },
+  "next": "次へ",
+  "@next": {
+    "description": "次へボタンに表示されます。"
+  },
+  "previous": "前へ",
+  "@previous": {
+    "description": "前へボタンに表示されます。"
   }
 }

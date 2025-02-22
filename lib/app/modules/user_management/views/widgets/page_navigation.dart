@@ -5,6 +5,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_
 import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PageNavigation extends StatelessWidget {
   final UsersData dataUsers;
@@ -35,7 +36,7 @@ class PageNavigation extends StatelessWidget {
                   context: context,
                 )
               : CenteredTextButtonWithIcon.secondary(
-                  label: "Sebelumnya",
+                  label: AppLocalizations.of(context)!.previous,
                   leftIcon: AppIconName.back,
                   height: 36,
                   width: 186,
@@ -50,7 +51,7 @@ class PageNavigation extends StatelessWidget {
               ? const SizedBox(height: 50, width: 50)
               : const SizedBox(height: 36, width: 186),
         HorizontalGap.formSmall(),
-        Text('Page $currentPage of $totalPages'),
+        Text(AppLocalizations.of(context)!.page_of(currentPage, totalPages)),
         HorizontalGap.formSmall(),
         if (currentPage < totalPages)
           isMobile
@@ -63,7 +64,7 @@ class PageNavigation extends StatelessWidget {
                   context: context,
                 )
               : CenteredTextButtonWithIcon.primary(
-                  label: "Berikutnya",
+                  label: AppLocalizations.of(context)!.next,
                   rightIcon: AppIconName.next,
                   height: 36,
                   width: 186,

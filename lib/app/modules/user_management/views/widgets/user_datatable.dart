@@ -7,6 +7,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackba
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserDataTable extends StatelessWidget {
   final bool isMobile;
@@ -21,7 +22,10 @@ class UserDataTable extends StatelessWidget {
       final dataUsers = controller.dataUsers.value;
       if (dataUsers.users == null || dataUsers.users!.isEmpty) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          showFailedSnackbar("No data found", "Search another data");
+          showFailedSnackbar(
+              AppLocalizations.of(context)!.no_data_found,
+              AppLocalizations.of(context)!
+                  .showing_all_data_widhtout_search_filter);
           controller.search.value = '';
           controller.fetchDataUser(
             page: controller.currentPage.value,
@@ -44,7 +48,9 @@ class UserDataTable extends StatelessWidget {
               context: context,
             )),
             DataCell(AppText.labelSmallDefault(
-              row.gender ?? '-',
+              row.gender == "Laki-laki" || row.gender == "Male"
+                  ? AppLocalizations.of(context)!.male
+                  : AppLocalizations.of(context)!.female,
               color: Theme.of(context).appColors.textSecondary,
               context: context,
             )),
@@ -64,7 +70,9 @@ class UserDataTable extends StatelessWidget {
               context: context,
             )),
             DataCell(AppText.labelSmallDefault(
-              row.status!.value ? "active" : "deactivate",
+              row.status!.value
+                  ? AppLocalizations.of(context)!.active
+                  : AppLocalizations.of(context)!.inactive,
               color: Theme.of(context).appColors.textSecondary,
               context: context,
             )),
@@ -78,7 +86,7 @@ class UserDataTable extends StatelessWidget {
                           title: Row(
                             children: [
                               AppText.labelDefaultEmphasis(
-                                "Change Status",
+                                AppLocalizations.of(context)!.change_status,
                                 context: context,
                                 color:
                                     Theme.of(context).appColors.textSecondary,
@@ -94,7 +102,11 @@ class UserDataTable extends StatelessWidget {
                             ],
                           ),
                           content: AppText.labelSmallDefault(
-                            "Are you sure want to ${row.status!.value ? "deactivate" : "activate"} ${row.username} ?",
+                            AppLocalizations.of(context)!.activate_confirmation(
+                                row.status!.value
+                                    ? AppLocalizations.of(context)!.active
+                                    : AppLocalizations.of(context)!.inactive,
+                                row.username!),
                             context: context,
                             color: Theme.of(context).appColors.textSecondary,
                           ),
@@ -102,7 +114,7 @@ class UserDataTable extends StatelessWidget {
                             TextButton(
                               onPressed: () => Get.back(closeOverlays: true),
                               child: AppText.labelSmallDefault(
-                                "Cancel",
+                                AppLocalizations.of(context)!.cancel,
                                 context: context,
                                 color:
                                     Theme.of(context).appColors.textSecondary,
@@ -117,7 +129,7 @@ class UserDataTable extends StatelessWidget {
                                 Get.back(closeOverlays: true);
                               },
                               child: AppText.labelSmallDefault(
-                                "Yes",
+                                AppLocalizations.of(context)!.ok,
                                 context: context,
                                 color:
                                     Theme.of(context).appColors.textSecondary,
@@ -153,16 +165,23 @@ class UserDataTable extends StatelessWidget {
                   sortAscending: controller.ascending.value,
                   sortColumnIndex: controller.columnIndex.value,
                   columns: [
-                    _buildSortableColumn(context, "ID", 'id', 0),
-                    _buildSortableColumn(context, "Full Name", 'fullname', 1),
-                    _buildSortableColumn(context, "Gender", 'gender', 2),
-                    _buildSortableColumn(context, "Username", 'username', 3),
-                    _buildSortableColumn(context, "Email", 'email', 4),
-                    _buildSortableColumn(context, "Role", 'role', 5),
-                    _buildSortableColumn(context, "Status", 'status', 6),
+                    _buildSortableColumn(
+                        context, AppLocalizations.of(context)!.id, 'id', 0),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.full_name, 'fullname', 1),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.gender, 'gender', 2),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.username, 'username', 3),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.email, 'email', 4),
+                    _buildSortableColumn(
+                        context, AppLocalizations.of(context)!.role, 'role', 5),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.status, 'status', 6),
                     DataColumn(
                       label: AppText.labelSmallEmphasis(
-                        'Action',
+                        AppLocalizations.of(context)!.action,
                         color: Theme.of(context).appColors.textSecondary,
                         context: context,
                       ),

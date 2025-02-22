@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/user_management/controllers/user_management_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final UserManagementController controller;
@@ -16,7 +17,7 @@ class CustomSearchBar extends StatelessWidget {
       child: TextFormField(
         initialValue: controller.search.value,
         decoration: InputDecoration(
-          hintText: 'Search...',
+          hintText: "${AppLocalizations.of(context)!.search}...",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),

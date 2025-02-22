@@ -518,10 +518,116 @@
   },
   "next": "次へ",
   "@next": {
-    "description": "次へボタンに表示されます。"
+    "description": "Shown on the next button."
   },
   "previous": "前へ",
   "@previous": {
-    "description": "前へボタンに表示されます。"
+    "description": "Shown on the previous button."
+  },
+  "add_user": "ユーザーを追加",
+  "@add_user": {
+    "description": "Shown on the add user button."
+  },
+  "page_of": "ページ {current} / {total}",
+  "@page_of": {
+    "description": "Shown on the page of.",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "search": "検索",
+  "@search": {
+    "description": "Shown on the search."
+  },
+  "show": "表示",
+  "@show": {
+    "description": "Shown on the show."
+  },
+  "entries": "件",
+  "@entries": {
+    "description": "Shown on the entries."
+  },
+  "showing_all_data_widhtout_search_filter": "検索フィルターなしですべてのデータを表示中",
+  "@showing_all_data_widhtout_search_filter": {
+    "description": "Shown on the showing all data without search filter."
+  },
+  "active": "有効",
+  "@active": {
+    "description": "Shown on the active."
+  },
+  "inactive": "無効",
+  "@inactive": {
+    "description": "Shown on the inactive."
+  },
+  "change_status": "ステータス変更",
+  "@change_status": {
+    "description": "Shown on the change status."
+  },
+  "activate_confirmation": "{name}を{action}してもよろしいですか？",
+  "@activate_confirmation": {
+    "description": "Shown on the activate confirmation.",
+    "placeholders": {
+      "action": {
+        "type": "String",
+        "example": "activate"
+      },
+      "name": {
+        "type": "String",
+        "example": "name"
+      }
+    }
+  },
+  "id": "ID",
+  "@id": {
+    "description": "Shown on the id."
+  },
+  "action": "アクション",
+  "@action": {
+    "description": "Shown on the action."
+  },
+  "role": "役割",
+  "@role": {
+    "description": "Shown on the role."
+  },
+  "success_change_status": "{username}のステータス変更に成功しました",
+  "@success_change_status": {
+    "description": "Shown when successfully changing user status",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "status_changed": "{username}のステータスが変更されました",
+  "@status_changed": {
+    "description": "Shown after status has been changed",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "failed_change_status": "{username}のステータス変更に失敗しました",
+  "@failed_change_status": {
+    "description": "Shown when failed to change user status",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "failed_load_user": "ユーザーデータの読み込みに失敗しました",
+  "@failed_load_user": {
+    "description": "Shown when failed to load user data"
   }
 }

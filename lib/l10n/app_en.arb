@@ -468,6 +468,10 @@
   "@female": {
     "description": "Shown on female text."
   },
+  "role": "Role",
+  "@role": {
+    "description": "Shown on the account information role."
+  },
   "register_error": "Failed to register",
   "@register_error": {
     "description": "Shown on the register error dialog."
@@ -523,5 +527,107 @@
   "previous": "Previous",
   "@previous": {
     "description": "Shown on the previous button."
+  },
+  "add_user": "Add User",
+  "@add_user": {
+    "description": "Shown on the add user button."
+  },
+  "page_of": "Page {current} of {total}",
+  "@page_of": {
+    "description": "Shown on the page of.",
+    "placeholders": {
+      "current": {
+        "type": "int",
+        "example": "1"
+      },
+      "total": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Shown on the search."
+  },
+  "show": "Show",
+  "@show": {
+    "description": "Shown on the show."
+  },
+  "entries": "entries",
+  "@entries": {
+    "description": "Shown on the entries."
+  },
+  "showing_all_data_widhtout_search_filter": "Showing all data without search filter",
+  "@showing_all_data_widhtout_search_filter": {
+    "description": "Shown on the showing all data without search filter."
+  },
+  "active": "Active",
+  "@active": {
+    "description": "Shown on the active."
+  },
+  "inactive": "Inactive",
+  "@inactive": {
+    "description": "Shown on the inactive."
+  },
+  "change_status": "Change Status",
+  "@change_status": {
+    "description": "Shown on the change status."
+  },
+  "activate_confirmation": "Are you sure you want to {action} {name}?",
+  "@activate_confirmation": {
+    "description": "Shown on the activate confirmation.",
+    "placeholders": {
+      "action": {
+        "type": "String",
+        "example": "activate"
+      },
+      "name": {
+        "type": "String",
+        "example": "name"
+      }
+    }
+  },
+  "id": "ID",
+  "@id": {
+    "description": "Shown on the id."
+  },
+  "action": "Action",
+  "@action": {
+    "description": "Shown on the action."
+  },
+  "success_change_status": "Success changing status of {username}",
+  "@success_change_status": {
+    "description": "Shown when successfully changing user status",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "status_changed": "Status of {username} has been changed",
+  "@status_changed": {
+    "description": "Shown after status has been changed",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "failed_change_status": "Failed to change status of {username}",
+  "@failed_change_status": {
+    "description": "Shown when failed to change user status",
+    "placeholders": {
+      "username": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
+  "failed_load_user": "Failed to load data user",
+  "@failed_load_user": {
+    "description": "Shown when failed to load user data"
   }
 }

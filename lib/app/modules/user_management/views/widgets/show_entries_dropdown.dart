@@ -4,6 +4,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart'
 import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShowEntriesDropdown extends StatelessWidget {
   final UserManagementController controller;
@@ -17,7 +18,7 @@ class ShowEntriesDropdown extends StatelessWidget {
       return Row(
         children: [
           AppText.labelSmallEmphasis(
-            "Show : ",
+            "${AppLocalizations.of(context)!.show} : ",
             context: context,
             color: color.textSecondary,
           ),
@@ -49,7 +50,7 @@ class ShowEntriesDropdown extends StatelessWidget {
           ),
           HorizontalGap.formSmall(),
           AppText.labelSmallDefault(
-            "entries",
+            AppLocalizations.of(context)!.entries,
             context: context,
             color: color.textSecondary,
           ),

@@ -5,6 +5,8 @@ import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class AddUserButton extends StatelessWidget {
   final bool isMobile;
   final UserManagementController controller;
@@ -28,7 +30,7 @@ class AddUserButton extends StatelessWidget {
             context: context,
           )
         : CenteredTextButtonWithIcon.primary(
-            label: "Add User",
+            label: AppLocalizations.of(context)!.add_user,
             rightIcon: AppIconName.add,
             height: 50,
             width: 186,

@@ -217,7 +217,7 @@ class _LineChart extends StatelessWidget {
 
   LineChartBarData get lineChartBarData => LineChartBarData(
         isCurved: true,
-        color: AppColors.contentColorGreen,
+        color: AppColors.contentColorCyan,
         barWidth: 8,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),

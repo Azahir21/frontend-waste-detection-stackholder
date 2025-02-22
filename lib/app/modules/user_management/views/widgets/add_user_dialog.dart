@@ -27,7 +27,7 @@ class AddUserDialog extends StatelessWidget {
             Row(
               children: [
                 AppText.labelDefaultEmphasis(
-                  "Add User",
+                  AppLocalizations.of(context)!.add_user,
                   context: context,
                   color: color.textSecondary,
                 ),
@@ -84,7 +84,7 @@ class AddUserDialog extends StatelessWidget {
             }),
             VerticalGap.formMedium(),
             CenteredTextButton.primary(
-              label: "Add User",
+              label: AppLocalizations.of(context)!.add_user,
               context: context,
               onTap: () {
                 if (!controller.validateEmail(controller.email)) return;

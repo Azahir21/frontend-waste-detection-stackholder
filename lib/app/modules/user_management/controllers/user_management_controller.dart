@@ -47,7 +47,8 @@ class UserManagementController extends GetxController {
         final message = response.body.isNotEmpty
             ? jsonDecode(response.body)['detail']
             : 'Unknown error';
-        showFailedSnackbar("Failed to load data statistics", message);
+        showFailedSnackbar(
+            AppLocalizations.of(Get.context!)!.failed_load_user, message);
         throw ('Error: ${response.body}');
       }
       final data = UsersData.fromRawJson(response.body);
@@ -70,15 +71,16 @@ class UserManagementController extends GetxController {
       if (response.statusCode != 200) {
         final message = jsonDecode(response.body)['detail'];
         showFailedSnackbar(
-          "Failed to change status of $username",
+          AppLocalizations.of(Get.context!)!.failed_change_status(username),
           message,
         );
         throw ('Error: ${response.body}');
       }
       showSuccessSnackbar(
-        "Success changing status of $username",
-        "Status of $username has been changed",
-      );
+          AppLocalizations.of(Get.context!)!.success_change_status(username),
+          AppLocalizations.of(Get.context!)!.status_changed(
+            username,
+          ));
       fetchDataUser();
     } catch (e) {
       debugPrint('Error changing status: $e');

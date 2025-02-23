@@ -57,6 +57,8 @@ class LoginView extends GetView<LoginController> {
   }
 
   @override
+  // In your LoginView build method:
+
   Widget build(BuildContext context) {
     var color = Theme.of(context).appColors;
     return Scaffold(
@@ -91,17 +93,40 @@ class LoginView extends GetView<LoginController> {
                   ],
                 ),
                 isMobile ? VerticalGap.formHuge() : VerticalGap.formMedium(),
-                CustomForm.email(
-                  labelText: AppLocalizations.of(context)!.email,
-                  onChanged: (value) {
-                    controller.email = value;
-                  },
-                ),
-                CustomForm.password(
-                  labelText: AppLocalizations.of(context)!.password,
-                  onChanged: (value) {
-                    controller.password = value;
-                  },
+                // Wrap your email and password fields in an AutofillGroup:
+                AutofillGroup(
+                  child: Column(
+                    children: [
+                      CustomForm.email(
+                        labelText: AppLocalizations.of(context)!.email,
+                        onChanged: (value) {
+                          controller.email = value;
+                        },
+                        // Optionally, if your CustomForm supports it, set:
+                        // textInputAction: TextInputAction.next,
+                      ),
+                      CustomForm.password(
+                        labelText: AppLocalizations.of(context)!.password,
+                        onChanged: (value) {
+                          controller.password = value;
+                        },
+                        // Optionally, if your CustomForm supports it, set:
+                        // textInputAction: TextInputAction.done,
+                        onFieldSubmitted: (value) {
+                          if (controller.email.isEmpty ||
+                              controller.password.isEmpty) {
+                            showFailedSnackbar(
+                              AppLocalizations.of(context)!.input_error,
+                              AppLocalizations.of(context)!
+                                  .email_pass_cant_empty,
+                            );
+                            return;
+                          }
+                          controller.login();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 CenteredTextButton.tertiary(
                   label: AppLocalizations.of(context)!.login,
@@ -119,13 +144,11 @@ class LoginView extends GetView<LoginController> {
                   context: context,
                 ),
                 isMobile ? Spacer() : VerticalGap.formHuge(),
-                // Mobile: display dropdown at bottom.
                 if (isMobile) SizedBox(width: 350, child: _languageDropdown()),
                 isMobile ? VerticalGap.formHuge() : SizedBox.shrink(),
               ],
             );
 
-            // For mobile, wrap content in padding and safe area.
             if (isMobile) {
               return Padding(
                 padding:
@@ -133,14 +156,13 @@ class LoginView extends GetView<LoginController> {
                 child: SafeArea(child: content),
               );
             } else {
-              // Desktop: use a Stack to position the language dropdown at the top right.
               return Stack(
                 children: [
                   Positioned(
                     top: 35,
                     right: 35,
                     child: SizedBox(
-                      width: 200, // provide a finite width here
+                      width: 200,
                       child: _languageDropdown(),
                     ),
                   ),

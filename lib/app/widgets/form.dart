@@ -11,6 +11,8 @@ class CustomForm extends StatefulWidget {
     required this.keyboardType,
     required this.width,
     required this.height,
+    this.autofillHints,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   final String labelText;
@@ -20,6 +22,8 @@ class CustomForm extends StatefulWidget {
   final TextInputType keyboardType;
   final double width;
   final double height;
+  final List<String>? autofillHints;
+  final ValueChanged<String>? onFieldSubmitted;
 
   factory CustomForm.text({
     Key? key,
@@ -97,6 +101,7 @@ class CustomForm extends StatefulWidget {
       keyboardType: TextInputType.emailAddress,
       width: width,
       height: height,
+      autofillHints: const [AutofillHints.email],
     );
   }
 
@@ -107,6 +112,7 @@ class CustomForm extends StatefulWidget {
     bool obscureText = true,
     double width = 350,
     double height = 70,
+    ValueChanged<String>? onFieldSubmitted,
   }) {
     return CustomForm(
       key: key,
@@ -117,6 +123,8 @@ class CustomForm extends StatefulWidget {
       keyboardType: TextInputType.text,
       width: width,
       height: height,
+      autofillHints: const [AutofillHints.password],
+      onFieldSubmitted: onFieldSubmitted,
     );
   }
 
@@ -150,6 +158,8 @@ class _CustomFormState extends State<CustomForm> {
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
+          autofillHints: widget.autofillHints,
+          onFieldSubmitted: widget.onFieldSubmitted,
           decoration: InputDecoration(
             fillColor: color.formFieldBorder,
             labelText: widget.labelText,

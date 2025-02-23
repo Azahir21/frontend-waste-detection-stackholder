@@ -93,7 +93,8 @@ class HomeController extends GetxController {
 
   Future<void> loadTPAData() async {
     final data = await rootBundle
-        .loadString('/data/data_fasilitas_pengelolahan_sampah.json');
+        .loadString('data/data_fasilitas_pengelolahan_sampah.json');
+    // .loadString('assets/data/data_fasilitas_pengelolahan_sampah.json'); // for web build
     final List<dynamic> jsonData = jsonDecode(data);
 
     tpaFacilities = jsonData
@@ -138,7 +139,7 @@ class HomeController extends GetxController {
 
   Future<void> loadFacilityData() async {
     final data = await rootBundle
-        .loadString('/data/data_fasilitas_pengelolahan_sampah.json');
+        .loadString('data/data_fasilitas_pengelolahan_sampah.json');
     facility.value = (jsonDecode(data) as List)
         .map((item) => Facility.fromJson(item))
         .toList();

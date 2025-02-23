@@ -64,8 +64,8 @@ class DataTableWithPagination extends StatelessWidget {
                 ),
                 child: AppText.labelSmallDefault(
                   row.pickupStatus!.value == true
-                      ? "Collected"
-                      : "Not Collected",
+                      ? AppLocalizations.of(context)!.collected
+                      : AppLocalizations.of(context)!.uncollected,
                   color: Colors.white,
                   context: context,
                 ),
@@ -86,6 +86,37 @@ class DataTableWithPagination extends StatelessWidget {
             )),
             DataCell(Row(
               children: [
+                IconButton(
+                  icon: const Icon(Icons.image),
+                  iconSize: 30,
+                  color: Theme.of(context).appColors.iconPrimary,
+                  onPressed: () {
+                    Get.dialog(
+                      Dialog(
+                        child: Stack(
+                          children: [
+                            InteractiveViewer(
+                              child: Image.network(row.imageUrl!),
+                            ),
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.back();
+                                },
+                                child: const Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
                 IconButton(
                   icon: const Icon(Icons.map),
                   iconSize: 30,
@@ -134,15 +165,34 @@ class DataTableWithPagination extends StatelessWidget {
                   sortColumnIndex: controller.columnIndex.value,
                   columns: [
                     _buildSortableColumn(
-                        context, "Capture Time", 'capture_time', 0),
+                        context,
+                        AppLocalizations.of(context)!.capture_time,
+                        'capture_time',
+                        0),
                     _buildSortableColumn(
-                        context, "Waste Count", 'waste_count', 1),
-                    _buildSortableColumn(context, "Type", 'is_waste_pile', 2),
-                    _buildSortableColumn(context, "Address", 'address', 3),
-                    _buildSortableColumn(context, "Status", 'pickup_status', 4),
-                    _buildSortableColumn(context, "Pickup At", 'pickup_at', 5),
+                        context,
+                        AppLocalizations.of(context)!.waste_count,
+                        'waste_count',
+                        1),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.type, 'is_waste_pile', 2),
+                    _buildSortableColumn(context,
+                        AppLocalizations.of(context)!.address, 'address', 3),
                     _buildSortableColumn(
-                        context, "Pickup By", 'pickup_by_user', 6),
+                        context,
+                        AppLocalizations.of(context)!.status,
+                        'pickup_status',
+                        4),
+                    _buildSortableColumn(
+                        context,
+                        AppLocalizations.of(context)!.pickup_at,
+                        'pickup_at',
+                        5),
+                    _buildSortableColumn(
+                        context,
+                        AppLocalizations.of(context)!.pickup_by,
+                        'pickup_by_user',
+                        6),
                     DataColumn(
                       label: AppText.labelSmallEmphasis(
                         'Action',

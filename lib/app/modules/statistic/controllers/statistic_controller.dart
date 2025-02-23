@@ -69,7 +69,10 @@ class StatisticController extends GetxController {
 
       if (response.statusCode != 200) {
         final message = jsonDecode(response.body)['detail'];
-        showFailedSnackbar("Failed to load data statistics", message);
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.failed_to_load_data_statistics,
+          message,
+        );
         throw ('Error: ${response.body}');
       }
       final data = DataStatistics.fromRawJson(response.body);

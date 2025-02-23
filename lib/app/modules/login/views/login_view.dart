@@ -137,8 +137,8 @@ class LoginView extends GetView<LoginController> {
               return Stack(
                 children: [
                   Positioned(
-                    top: 50,
-                    right: 50,
+                    top: 35,
+                    right: 35,
                     child: SizedBox(
                       width: 200, // provide a finite width here
                       child: _languageDropdown(),

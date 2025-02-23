@@ -248,7 +248,7 @@
   "@please_input_start_date_first": {
     "description": "Shown when prompting the user to select a start date first."
   },
-  "capture_time": "Capture Time:",
+  "capture_time": "Capture Time",
   "@capture_time": {
     "description": "Label for capture time information."
   },
@@ -629,5 +629,55 @@
   "failed_load_user": "Failed to load data user",
   "@failed_load_user": {
     "description": "Shown when failed to load user data"
+  },
+  "failed_load_statistics": "Failed to load data statistics",
+  "@failed_load_statistics": {
+    "description": "Shown when failed to load statistics data"
+  },
+  "week_stats": "Week {weekInMonth} ({monthShortName})\n{transported} item",
+  "@week_stats": {
+    "description": "Shows week number and month with transported items",
+    "placeholders": {
+      "weekInMonth": {
+        "type": "int",
+        "example": "1"
+      },
+      "monthShortName": {
+        "type": "String",
+        "example": "Jan"
+      },
+      "transported": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "collection_rate_weekly": "Weekly Collection Rate",
+  "@collection_rate_weekly": {
+    "description": "Title for weekly collection rate"
+  },
+  "collected_garbage": "Collected Garbage",
+  "@collected_garbage": {
+    "description": "Label for collected garbage"
+  },
+  "uncollected_garbage": "Uncollected Garbage",
+  "@uncollected_garbage": {
+    "description": "Label for uncollected garbage"
+  },
+  "collected": "Collected",
+  "@collected": {
+    "description": "Short label for collected items"
+  },
+  "uncollected": "Uncollected",
+  "@uncollected": {
+    "description": "Short label for uncollected items"
+  },
+  "waste_count": "Waste Count",
+  "@waste_count": {
+    "description": "Label for waste count"
+  },
+  "type": "Type",
+  "@type": {
+    "description": "Label for type"
   }
 }

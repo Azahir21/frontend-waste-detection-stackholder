@@ -6,6 +6,8 @@ import 'package:frontend_waste_management_stackholder/app/data/models/total_stat
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/widgets/chart_color.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 
 class _LineChart extends StatelessWidget {
   final List<HistoricalData> historicalData;
@@ -66,29 +68,29 @@ class _LineChart extends StatelessWidget {
     // Adjust the mapping as needed (here "December" becomes "Des").
     switch (longMonth.toLowerCase()) {
       case 'january':
-        return 'Jan';
+        return AppLocalizations.of(Get.context!)!.january;
       case 'february':
-        return 'Feb';
+        return AppLocalizations.of(Get.context!)!.february;
       case 'march':
-        return 'Mar';
+        return AppLocalizations.of(Get.context!)!.march;
       case 'april':
-        return 'Apr';
+        return AppLocalizations.of(Get.context!)!.april;
       case 'may':
-        return 'May';
+        return AppLocalizations.of(Get.context!)!.may;
       case 'june':
-        return 'Jun';
+        return AppLocalizations.of(Get.context!)!.june;
       case 'july':
-        return 'Jul';
+        return AppLocalizations.of(Get.context!)!.july;
       case 'august':
-        return 'Aug';
+        return AppLocalizations.of(Get.context!)!.august;
       case 'september':
-        return 'Sep';
+        return AppLocalizations.of(Get.context!)!.september;
       case 'october':
-        return 'Oct';
+        return AppLocalizations.of(Get.context!)!.october;
       case 'november':
-        return 'Nov';
+        return AppLocalizations.of(Get.context!)!.november;
       case 'december':
-        return 'Des';
+        return AppLocalizations.of(Get.context!)!.december;
       default:
         return longMonth.substring(0, 3);
     }
@@ -125,8 +127,8 @@ class _LineChart extends StatelessWidget {
               final monthShortName = _getShortMonth(data.monthName ?? "");
               final transported = data.totalTransported ?? 0;
               // Format the tooltip text as requested.
-              final text =
-                  'Week $weekInMonth ($monthShortName)\n$transported item';
+              final text = AppLocalizations.of(Get.context!)!
+                  .week_stats(weekInMonth, monthShortName, transported);
               return LineTooltipItem(
                 text,
                 const TextStyle(color: Colors.white),
@@ -265,7 +267,7 @@ class LineChartCardState extends State<LineChartCard> {
         children: <Widget>[
           Center(
             child: AppText.labelDefaultEmphasis(
-              "Collection Rate",
+              AppLocalizations.of(context)!.collection_rate_weekly,
               color: color.textSecondary,
               context: context,
             ),

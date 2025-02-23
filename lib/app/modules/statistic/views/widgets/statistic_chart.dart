@@ -3,6 +3,7 @@ import 'package:frontend_waste_management_stackholder/app/data/models/total_stat
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/widgets/line_chart_card.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/widgets/pie_chart_card.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatisticCharts extends StatelessWidget {
   final bool isMobile;
@@ -22,13 +23,13 @@ class StatisticCharts extends StatelessWidget {
       return Column(
         children: [
           PieChartCard(
-            title: "Collected Garbage",
+            title: AppLocalizations.of(context)!.collected_garbage,
             garbagePile: stats.collectedGarbagePile!,
             illegalTrash: stats.collectedGarbagePcs!,
           ),
           VerticalGap.formMedium(),
           PieChartCard(
-            title: "Uncollected Garbage",
+            title: AppLocalizations.of(context)!.uncollected_garbage,
             garbagePile: stats.notCollectedGarbagePile!,
             illegalTrash: stats.notCollectedGarbagePcs!,
           ),
@@ -44,7 +45,7 @@ class StatisticCharts extends StatelessWidget {
             children: [
               Expanded(
                 child: PieChartCard(
-                  title: "Collected Garbage",
+                  title: AppLocalizations.of(context)!.collected_garbage,
                   garbagePile: stats.collectedGarbagePile!,
                   illegalTrash: stats.collectedGarbagePcs!,
                 ),
@@ -52,7 +53,7 @@ class StatisticCharts extends StatelessWidget {
               const SizedBox(width: 32),
               Expanded(
                 child: PieChartCard(
-                  title: "Uncollected Garbage",
+                  title: AppLocalizations.of(context)!.uncollected_garbage,
                   garbagePile: stats.notCollectedGarbagePile!,
                   illegalTrash: stats.notCollectedGarbagePcs!,
                 ),
@@ -70,7 +71,7 @@ class StatisticCharts extends StatelessWidget {
         children: [
           Expanded(
             child: PieChartCard(
-              title: "Collected Garbage",
+              title: AppLocalizations.of(context)!.collected_garbage,
               garbagePile: stats.collectedGarbagePile!,
               illegalTrash: stats.collectedGarbagePcs!,
             ),
@@ -78,7 +79,7 @@ class StatisticCharts extends StatelessWidget {
           const SizedBox(width: 30),
           Expanded(
             child: PieChartCard(
-              title: "Uncollected Garbage",
+              title: AppLocalizations.of(context)!.uncollected_garbage,
               garbagePile: stats.notCollectedGarbagePile!,
               illegalTrash: stats.notCollectedGarbagePcs!,
             ),

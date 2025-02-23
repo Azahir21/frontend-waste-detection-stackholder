@@ -55,6 +55,7 @@ class DataStatistic {
   int? wasteCount;
   dynamic pickupByUser;
   RxBool? pickupStatus;
+  String? imageUrl;
 
   DataStatistic({
     this.id,
@@ -66,6 +67,7 @@ class DataStatistic {
     this.wasteCount,
     this.pickupByUser,
     this.pickupStatus,
+    this.imageUrl,
   });
 
   factory DataStatistic.fromRawJson(String str) =>
@@ -87,6 +89,7 @@ class DataStatistic {
         pickupStatus: json["pickup_status"] == null
             ? null
             : RxBool(json["pickup_status"]),
+        imageUrl: json["image_url"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -99,6 +102,7 @@ class DataStatistic {
         "waste_count": wasteCount,
         "pickup_by_user": pickupByUser,
         "pickup_status": pickupStatus!.value,
+        "image_url": imageUrl,
       };
 
   // Helper method to convert a WKT POINT string to a LatLng object.

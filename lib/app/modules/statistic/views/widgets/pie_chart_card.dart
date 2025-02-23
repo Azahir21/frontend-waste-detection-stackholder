@@ -87,30 +87,22 @@ class PieChartCardState extends State<PieChartCard> {
                       text: AppLocalizations.of(context)!.illegal_dumping_site,
                       isSquare: true,
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
+                    const SizedBox(height: 4),
                     Indicator(
                       color: AppColors.contentColorGreen,
                       text: AppLocalizations.of(context)!.illegal_trash,
                       isSquare: true,
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
+                    const SizedBox(height: 4),
                     AppText.labelSmallDefault(
                       "Total: ${widget.garbagePile + widget.illegalTrash}",
                       color: color.textSecondary,
                       context: context,
                     ),
-                    SizedBox(
-                      height: 18,
-                    )
+                    const SizedBox(height: 18)
                   ],
                 ),
-                const SizedBox(
-                  width: 28,
-                ),
+                const SizedBox(width: 28),
               ],
             ),
           ),

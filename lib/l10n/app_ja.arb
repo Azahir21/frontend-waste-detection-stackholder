@@ -248,7 +248,7 @@
   "@please_input_start_date_first": {
     "description": "ユーザーに最初に開始日を選択するように促すときに表示されます。"
   },
-  "capture_time": "キャプチャ時間:",
+  "capture_time": "キャプチャ時間",
   "@capture_time": {
     "description": "キャプチャ時間情報のラベル。"
   },
@@ -629,5 +629,55 @@
   "failed_load_user": "ユーザーデータの読み込みに失敗しました",
   "@failed_load_user": {
     "description": "Shown when failed to load user data"
+  },
+  "failed_load_statistics": "統計データの読み込みに失敗しました",
+  "@failed_load_statistics": {
+    "description": "Shown when failed to load statistics data"
+  },
+  "week_stats": "第{weekInMonth}週 ({monthShortName})\n{transported}件",
+  "@week_stats": {
+    "description": "Shows week number and month with transported items",
+    "placeholders": {
+      "weekInMonth": {
+        "type": "int",
+        "example": "1"
+      },
+      "monthShortName": {
+        "type": "String",
+        "example": "1月"
+      },
+      "transported": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "collection_rate_weekly": "週間収集率",
+  "@collection_rate_weekly": {
+    "description": "Title for weekly collection rate"
+  },
+  "collected_garbage": "収集済みゴミ",
+  "@collected_garbage": {
+    "description": "Label for collected garbage"
+  },
+  "uncollected_garbage": "未収集ゴミ",
+  "@uncollected_garbage": {
+    "description": "Label for uncollected garbage"
+  },
+  "collected": "収集済",
+  "@collected": {
+    "description": "Short label for collected items"
+  },
+  "uncollected": "未収集",
+  "@uncollected": {
+    "description": "Short label for uncollected items"
+  },
+  "waste_count": "ゴミ数",
+  "@waste_count": {
+    "description": "Label for waste count"
+  },
+  "type": "種類",
+  "@type": {
+    "description": "Label for type"
   }
 }

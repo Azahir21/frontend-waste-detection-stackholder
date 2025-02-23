@@ -4,6 +4,7 @@ import 'package:frontend_waste_management_stackholder/app/modules/statistic/view
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchAndFilterRow extends StatelessWidget {
   final bool isMobile;
@@ -19,7 +20,7 @@ class SearchAndFilterRow extends StatelessWidget {
           height: 50,
           child: TextField(
             decoration: InputDecoration(
-              hintText: 'Search...',
+              hintText: "${AppLocalizations.of(context)!.search}...",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),

@@ -98,7 +98,7 @@ class FilterContent extends StatelessWidget {
                   ),
                   VerticalGap.formSmall(),
                   _buildCheckboxRow(
-                    label: AppLocalizations.of(context)!.pickup_true,
+                    label: AppLocalizations.of(context)!.collected,
                     isChecked: controller.status.value == "collected",
                     onChanged: () {
                       controller.previousStatus = controller.status.value;
@@ -107,7 +107,7 @@ class FilterContent extends StatelessWidget {
                   ),
                   VerticalGap.formSmall(),
                   _buildCheckboxRow(
-                    label: AppLocalizations.of(context)!.pickup_false,
+                    label: AppLocalizations.of(context)!.uncollected,
                     isChecked: controller.status.value == "not_collected",
                     onChanged: () {
                       controller.previousStatus = controller.status.value;

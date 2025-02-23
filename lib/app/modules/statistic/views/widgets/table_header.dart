@@ -8,6 +8,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.da
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 import 'package:get/get.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TableHeader extends StatelessWidget {
   final bool isMobile;
@@ -36,7 +37,7 @@ class TableHeader extends StatelessWidget {
                 child: TextFormField(
                   initialValue: controller.search.value,
                   decoration: InputDecoration(
-                    hintText: 'Search...',
+                    hintText: "${AppLocalizations.of(context)!.search}...",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),

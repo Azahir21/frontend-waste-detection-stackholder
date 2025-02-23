@@ -248,7 +248,7 @@
   "@please_input_start_date_first": {
     "description": "Ditampilkan saat meminta pengguna untuk memilih tanggal mulai terlebih dahulu."
   },
-  "capture_time": "Waktu Penangkapan:",
+  "capture_time": "Waktu Penangkapan",
   "@capture_time": {
     "description": "Label untuk informasi waktu penangkapan."
   },
@@ -633,5 +633,55 @@
   "failed_load_user": "Gagal memuat data pengguna",
   "@failed_load_user": {
     "description": "Shown when failed to load user data"
+  },
+  "failed_load_statistics": "Gagal memuat data statistik",
+  "@failed_load_statistics": {
+    "description": "Shown when failed to load statistics data"
+  },
+  "week_stats": "Minggu {weekInMonth} ({monthShortName})\n{transported} item",
+  "@week_stats": {
+    "description": "Shows week number and month with transported items",
+    "placeholders": {
+      "weekInMonth": {
+        "type": "int",
+        "example": "1"
+      },
+      "monthShortName": {
+        "type": "String",
+        "example": "Jan"
+      },
+      "transported": {
+        "type": "int",
+        "example": "10"
+      }
+    }
+  },
+  "collection_rate_weekly": "Tingkat Pengumpulan Mingguan",
+  "@collection_rate_weekly": {
+    "description": "Title for weekly collection rate"
+  },
+  "collected_garbage": "Sampah Terkumpul",
+  "@collected_garbage": {
+    "description": "Label for collected garbage"
+  },
+  "uncollected_garbage": "Sampah Belum Terkumpul",
+  "@uncollected_garbage": {
+    "description": "Label for uncollected garbage"
+  },
+  "collected": "Terkumpul",
+  "@collected": {
+    "description": "Short label for collected items"
+  },
+  "uncollected": "Belum Terkumpul",
+  "@uncollected": {
+    "description": "Short label for uncollected items"
+  },
+  "waste_count": "Jumlah Sampah",
+  "@waste_count": {
+    "description": "Label for waste count"
+  },
+  "type": "Jenis",
+  "@type": {
+    "description": "Label for type"
   }
 }

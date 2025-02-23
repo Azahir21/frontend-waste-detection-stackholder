@@ -346,7 +346,7 @@ class HomeController extends GetxController {
     return gradient[keys.last]!;
   }
 
-  Map<double, Color> defaultGradient = {
+  Map<double, MaterialColor> defaultGradient = {
     0.25: Colors.blue,
     0.55: Colors.green,
     0.85: Colors.yellow,

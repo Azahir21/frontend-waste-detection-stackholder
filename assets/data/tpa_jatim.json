@@ -1,0 +1,551 @@
+[
+  {
+    "name": "TPA DADAPAN SOLOKURO",
+    "latitude": "-6.9204829",
+    "longitude": "112.2961038",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "1424",
+    "address": "TPA DADAPAN SOLOKURO (TPA Pemda (Non Regional)) DESA DADAPAN, KECAMATAN SOLOKURO Kab. Lamongan, Jawa Timur"
+  },
+  {
+    "name": "TPA Bunajih",
+    "latitude": "-7.1451110",
+    "longitude": "112.8178580",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "1320",
+    "address": "TPA BUNAJIH (TPA Pemda (Non Regional)) Desa Bunajih Kab. Bangkalan, Jawa Timur"
+  },
+  {
+    "name": "TPA SEGAWE",
+    "latitude": "-8.0090924",
+    "longitude": "111.8300296",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "1316",
+    "address": "TPA SEGAWE (TPA Pemda (Non Regional)) SUWARU, SEGAWE, PAGERWOJO, KAB. TULUNGAGUNG Kab. Tulungagung, Jawa Timur"
+  },
+  {
+    "name": "TPA Karangdiyeng Ibukota Kabupaten",
+    "latitude": "-7.5494018",
+    "longitude": "112.5096093",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "1230",
+    "address": "TPA KARANGDIYENG IBUKOTA KABUPATEN (TPA Pemda (Non Regional)) Desa Karangdiyeng, Kecamatan Kutorejo Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPA Bandungrejo",
+    "latitude": "-7.2480318",
+    "longitude": "111.7675831",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "1017",
+    "address": "TPA BANDUNGREJO (TPA Pemda (Non Regional)) ngasem Kab. Bojonegoro, Jawa Timur"
+  },
+  {
+    "name": "TPA Dadapan Kendal",
+    "latitude": "-7.5402792",
+    "longitude": "111.2886688",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "986",
+    "address": "TPA DADAPAN KENDAL (TPA Pemda (Non Regional)) Ds.Dadapan Kec. Kendal Kab. Ngawi, Jawa Timur"
+  },
+  {
+    "name": "TPA  KLOTOK KOTA KEDIRI",
+    "latitude": "-7.8194970",
+    "longitude": "111.9742290",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "921",
+    "address": "TPA  KLOTOK KOTA KEDIRI KEL.POJOK Kota Kediri, Jawa Timur"
+  },
+  {
+    "name": "TPA KLOTOK KOTA KEDIRI",
+    "latitude": "-7.8170760",
+    "longitude": "111.9737250",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "919",
+    "address": "TPA KLOTOK KOTA KEDIRI KEL.POJOK Kota Kediri, Jawa Timur"
+  },
+  {
+    "name": "TPA Karangdiyeng",
+    "latitude": "-7.5494018",
+    "longitude": "112.5096093",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "896",
+    "address": "TPA KARANGDIYENG (TPA Pemda (Non Regional)) Desa Karangdiyeng, Kecamatan Kutorejo Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPA TAMBAKRIGADUNG",
+    "latitude": "-7.1407003",
+    "longitude": "112.4278851",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "808",
+    "address": "TPA TAMBAKRIGADUNG (TPA Pemda (Non Regional)) DESA TAMBAKRIGADUNG, KECAMATAN TIKUNG Kab. Lamongan, Jawa Timur"
+  },
+  {
+    "name": "TPST Pasar Raya Mojosari",
+    "latitude": "-7.5147050",
+    "longitude": "112.5577870",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "684",
+    "address": "TPST PASAR RAYA MOJOSARI (TPA Pemda (Non Regional)) Jl. Gajah Mada RW. 003 Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPST Seduri",
+    "latitude": "-7.5102800",
+    "longitude": "112.5602110",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "683",
+    "address": "TPST SEDURI (TPA Pemda (Non Regional)) Jl. M. Hatta RW.001 Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPST Adisono",
+    "latitude": "-7.5292950",
+    "longitude": "112.5608270",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "682",
+    "address": "TPST ADISONO (TPA Pemda (Non Regional)) Jl. Diponegoro Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPST Kauman",
+    "latitude": "-7.5248170",
+    "longitude": "112.5585630",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "681",
+    "address": "TPST KAUMAN (TPA Pemda (Non Regional)) Ds. Kauman Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPA Belahan Tengah",
+    "latitude": "-7.5336119",
+    "longitude": "112.2653084",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "678",
+    "address": "TPA BELAHAN TENGAH (TPA Pemda (Non Regional)) Ds. Belahan Tengah Kab. Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPA Tanggul",
+    "latitude": "-8.1485340",
+    "longitude": "113.4681500",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "603",
+    "address": "TPA TANGGUL (TPA Pemda (Non Regional)) Ds.Manggisan Kec.Tanggul Kab. Jember, Jawa Timur"
+  },
+  {
+    "name": "TPA Kencong",
+    "latitude": "-8.3112280",
+    "longitude": "113.3660230",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "602",
+    "address": "TPA KENCONG (TPA Pemda (Non Regional)) Ds. Kraton, Kec.Kencong Kab. Jember, Jawa Timur"
+  },
+  {
+    "name": "TPA Ambulu",
+    "latitude": "-8.3475194",
+    "longitude": "113.6056604",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "601",
+    "address": "TPA AMBULU (TPA Pemda (Non Regional)) Ds Langon, Kec.Ambulu Kab. Jember, Jawa Timur"
+  },
+  {
+    "name": "TPA PAKUSARI",
+    "latitude": "-8.1696710",
+    "longitude": "113.7603970",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "599",
+    "address": "TPA PAKUSARI (TPA Pemda (Non Regional)) DUSUN LAMPARAN Kab. Jember, Jawa Timur"
+  },
+  {
+    "name": "TPA Mrican",
+    "latitude": "-7.8619237",
+    "longitude": "111.5240633",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "500",
+    "address": "TPA MRICAN MRICAN Kab. Ponorogo, Jawa Timur"
+  },
+  {
+    "name": "TPA RANDEGAN",
+    "latitude": "-7.4648180",
+    "longitude": "112.4678160",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "491",
+    "address": "TPA RANDEGAN (TPA Pemda (Non Regional)) Randegan Kota Mojokerto, Jawa Timur"
+  },
+  {
+    "name": "TPA Banjardowo",
+    "latitude": "-7.5388460",
+    "longitude": "112.1950480",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "485",
+    "address": "TPA BANJARDOWO (TPA Pemda (Non Regional)) Desa Banjardowo Kab. Jombang, Jawa Timur"
+  },
+  {
+    "name": "Milangasri",
+    "latitude": "-7.6287449",
+    "longitude": "111.3510144",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "396",
+    "address": "MILANGASRI (TPA Pemda (Non Regional)) Waru Wetan Kab. Magetan, Jawa Timur"
+  },
+  {
+    "name": "TPA Benowo",
+    "latitude": "-7.2200125",
+    "longitude": "112.6295481",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "384",
+    "address": "TPA BENOWO (TPA Pemda (Non Regional)) Romokalisari - Benowo Kota Surabaya, Jawa Timur"
+  },
+  {
+    "name": "TPA BLANDONGAN",
+    "latitude": "-7.6549605",
+    "longitude": "112.9381236",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "327",
+    "address": "TPA BLANDONGAN (TPA Pemda (Non Regional)) Jl. Jelakrejo, Tambak, Blandongan, Kec. Bugulkidul, Kota Pasuruan, Jawa Timur 67128 Kota Pasuruan, Jawa Timur"
+  },
+  {
+    "name": "TPST Sakunar",
+    "latitude": "-7.7085210",
+    "longitude": "114.0245870",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "320",
+    "address": "TPST SAKUNAR Perumahan Panji Permai Kab. Situbondo, Jawa Timur"
+  },
+  {
+    "name": "SEGAWE",
+    "latitude": "-8.0090924",
+    "longitude": "111.8300296",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "283",
+    "address": "SEGAWE (TPA Pemda (Non Regional)) SUWARU, SEGAWE, PAGERWOJO, KAB. TULUNGAGUNG Kab. Tulungagung, Jawa Timur"
+  },
+  {
+    "name": "Tpa Ngipik",
+    "latitude": "-7.1527630",
+    "longitude": "112.6319940",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "186",
+    "address": "TPA NGIPIK (TPA Pemda (Non Regional)) Jl. Prof. Dr. Moh Yamin No. 17 - Kab. Gresik, Jawa Timur"
+  },
+  {
+    "name": "TPA Tlekung",
+    "latitude": "-7.9183528",
+    "longitude": "112.5394091",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "185",
+    "address": "TPA TLEKUNG (TPA Pemda (Non Regional)) Jl. Raya Pang. Sudirman no 3 01-/03 Kota Batu, Jawa Timur"
+  },
+  {
+    "name": "TPA Srabah",
+    "latitude": "-8.1824112",
+    "longitude": "111.6183755",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "184",
+    "address": "TPA SRABAH (TPA Pemda (Non Regional)) KAB. TRENGGALEK Kab. Trenggalek, Jawa Timur"
+  },
+  {
+    "name": "TPA Griyo Mulyo",
+    "latitude": "-7.5477206",
+    "longitude": "112.7639994",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "183",
+    "address": "TPA GRIYO MULYO (TPA Pemda (Non Regional)) Jl. Raya Kalisogo RT 03 / RW 02 Kab. Sidoarjo, Jawa Timur"
+  },
+  {
+    "name": "TPA Gunung Maddah",
+    "latitude": "-7.1929710",
+    "longitude": "113.2624048",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "182",
+    "address": "TPA GUNUNG MADDAH (TPA Pemda (Non Regional)) desa Gunung Maddah Kab. Sampang, Jawa Timur"
+  },
+  {
+    "name": "TPA KETAPANG",
+    "latitude": "-6.8898508",
+    "longitude": "113.3230982",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "181",
+    "address": "TPA KETAPANG (TPA Pemda (Non Regional)) Jl. Raya Ketapang Kab. Sampang, Jawa Timur"
+  },
+  {
+    "name": "TPA Seboroh Krejengan",
+    "latitude": "-7.4926800",
+    "longitude": "113.2569000",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "180",
+    "address": "TPA SEBOROH KREJENGAN (TPA Pemda (Non Regional)) Seboro Kab. Probolinggo, Jawa Timur"
+  },
+  {
+    "name": "TPA Mrican",
+    "latitude": "-7.8564041",
+    "longitude": "111.5319249",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "179",
+    "address": "TPA MRICAN (TPA Pemda (Non Regional)) Mrican Kab. Ponorogo, Jawa Timur"
+  },
+  {
+    "name": "TPA Kenep",
+    "latitude": "-7.6182455",
+    "longitude": "112.7554346",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "178",
+    "address": "TPA KENEP (TPA Regional) Desa Kenep Kab. Pasuruan, Jawa Timur"
+  },
+  {
+    "name": "TPA DADAPAN",
+    "latitude": "-8.2398510",
+    "longitude": "111.0725050",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "177",
+    "address": "TPA DADAPAN (TPA Pemda (Non Regional)) Jl. Solo - Pacitan RT.04 RW.06 Kab. Pacitan, Jawa Timur"
+  },
+  {
+    "name": "TPA Mantingan",
+    "latitude": "-7.3190142",
+    "longitude": "111.1682495",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "167",
+    "address": "TPA MANTINGAN (TPA Pemda (Non Regional)) Jatimulyo Kab. Ngawi, Jawa Timur"
+  },
+  {
+    "name": "TPA Pandantoyo",
+    "latitude": "-7.5851300",
+    "longitude": "112.0972600",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "158",
+    "address": "TPA PANDANTOYO (TPA Pemda (Non Regional)) Jl. Pandantoyo Kab. Nganjuk, Jawa Timur"
+  },
+  {
+    "name": "TPA Bendil",
+    "latitude": "-7.6556550",
+    "longitude": "111.8491140",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "157",
+    "address": "TPA BENDIL (TPA Pemda (Non Regional)) Jl. Bendil Kab. Nganjuk, Jawa Timur"
+  },
+  {
+    "name": "TPA Kedungdowo",
+    "latitude": "-7.5728814",
+    "longitude": "111.9028323",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "156",
+    "address": "TPA KEDUNGDOWO (TPA Pemda (Non Regional)) Jl. Kedungdowo Kab. Nganjuk, Jawa Timur"
+  },
+  {
+    "name": "TPA Karangjati",
+    "latitude": "-7.4620983",
+    "longitude": "111.6173792",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "154",
+    "address": "TPA KARANGJATI (TPA Pemda (Non Regional)) Legundi Kab. Ngawi, Jawa Timur"
+  },
+  {
+    "name": "TPA Selopuro",
+    "latitude": "-7.3790499",
+    "longitude": "111.4537551",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "153",
+    "address": "TPA SELOPURO (TPA Pemda (Non Regional)) Ds. Selopuro Kec. Pitu Kab. Ngawi Kab. Ngawi, Jawa Timur"
+  },
+  {
+    "name": "TPA REJOSARI",
+    "latitude": "-8.2724045",
+    "longitude": "112.6015066",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "152",
+    "address": "TPA REJOSARI (TPA Pemda (Non Regional)) Jl  Rejosari Kab. Malang, Jawa Timur"
+  },
+  {
+    "name": "TPA Kaliabu",
+    "latitude": "-7.5664490",
+    "longitude": "111.6619780",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "142",
+    "address": "TPA KALIABU (TPA Pemda (Non Regional)) Jl. Melati Kab. Madiun, Jawa Timur"
+  },
+  {
+    "name": "TPA PARAS PONCOKUSUMO",
+    "latitude": "-8.0550792",
+    "longitude": "112.7720233",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "141",
+    "address": "TPA PARAS PONCOKUSUMO (TPA Pemda (Non Regional)) Jln. Raya Paras RT 23 RW 05 Kab. Malang, Jawa Timur"
+  },
+  {
+    "name": "TPA Randuagung",
+    "latitude": "-7.8596047",
+    "longitude": "112.6792960",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "140",
+    "address": "TPA RANDUAGUNG (TPA Pemda (Non Regional)) Jln. Gondang RT 02 RW 04 Kab. Malang, Jawa Timur"
+  },
+  {
+    "name": "TPA SAMPAH WISATA EDUKASI TALANGAGUNG KEPANJEN",
+    "latitude": "-8.1922679",
+    "longitude": "112.6526416",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "139",
+    "address": "TPA SAMPAH WISATA EDUKASI TALANGAGUNG KEPANJEN (TPA Pemda (Non Regional)) Jln. Dusun Kasin RT 01 RW 03 Kab. Malang, Jawa Timur"
+  },
+  {
+    "name": "TPAS SEKOTO",
+    "latitude": "-7.8156418",
+    "longitude": "112.0198802",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "116",
+    "address": "TPAS SEKOTO (TPA Pemda (Non Regional)) dsn Genukwatu Kab. Kediri, Jawa Timur"
+  },
+  {
+    "name": "TPA Paguan",
+    "latitude": "-7.8866500",
+    "longitude": "113.8780300",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "115",
+    "address": "TPA PAGUAN (TPA Pemda (Non Regional)) Jl. Paguan Kab. Bondowoso, Jawa Timur"
+  },
+  {
+    "name": "TPA Banjarsari",
+    "latitude": "-7.1033881",
+    "longitude": "111.8565706",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "114",
+    "address": "TPA BANJARSARI (TPA Pemda (Non Regional)) jl tugu Kab. Bojonegoro, Jawa Timur"
+  },
+  {
+    "name": "TPA TEGALASRI",
+    "latitude": "-8.0944177",
+    "longitude": "112.1744710",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "111",
+    "address": "TPA TEGALASRI (TPA Pemda (Non Regional)) Jalan Kab. Blitar, Jawa Timur"
+  },
+  {
+    "name": "TPA Bestari",
+    "latitude": "-7.4443200",
+    "longitude": "113.1214300",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "40",
+    "address": "TPA BESTARI (TPA Pemda (Non Regional)) Jl. Anggrek No 15 Kota Probolinggo, Jawa Timur"
+  },
+  {
+    "name": "TPA SUPITURANG",
+    "latitude": "-7.9838430",
+    "longitude": "112.5810730",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "38",
+    "address": "TPA SUPITURANG (TPA Pemda (Non Regional)) JL. TERUSAN RAWISARI NO. 01 RT 10 W 5 Kota Malang, Jawa Timur"
+  },
+  {
+    "name": "TPA Winongo",
+    "latitude": "-7.6135500",
+    "longitude": "111.5024900",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "37",
+    "address": "TPA WINONGO (TPA Pemda (Non Regional)) Ring road barat Kota Madiun, Jawa Timur"
+  },
+  {
+    "name": "TPA  KLOTOK KOTA KEDIRI",
+    "latitude": "-7.8178520",
+    "longitude": "111.9750210",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "36",
+    "address": "TPA  KLOTOK KOTA KEDIRI (TPA Pemda (Non Regional)) POJOK Kota Kediri, Jawa Timur"
+  },
+  {
+    "name": "TPA Gunung Panggung",
+    "latitude": "-6.9215890",
+    "longitude": "112.0729440",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "35",
+    "address": "TPA GUNUNG PANGGUNG (TPA Pemda (Non Regional)) Jl. Kebersihan Kab. Tuban, Jawa Timur"
+  },
+  {
+    "name": "TPA Angsanah",
+    "latitude": "-7.1236560",
+    "longitude": "113.4589200",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "34",
+    "address": "TPA ANGSANAH (TPA Pemda (Non Regional)) Jl. Angsanah Kab. Pamekasan, Jawa Timur"
+  },
+  {
+    "name": "TPA Batuan",
+    "latitude": "-7.0055400",
+    "longitude": "113.8138550",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "30",
+    "address": "TPA BATUAN (TPA Pemda (Non Regional)) Dusun Tanonggul Kab. Sumenep, Jawa Timur"
+  },
+  {
+    "name": "TPA NGEGONG",
+    "latitude": "-8.0918930",
+    "longitude": "112.1975230",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "17",
+    "address": "TPA NGEGONG (TPA Pemda (Non Regional)) Jl. Teratai RT 3 RW 2 Kota Blitar, Jawa Timur"
+  },
+  {
+    "name": "TPA Sliwung",
+    "latitude": "-7.7359410",
+    "longitude": "114.0226970",
+    "icon_url": "https://sipsn.menlhk.go.id/sipsn/assets/img/blk-circle.png",
+    "facility_type": "tpa",
+    "id": "12",
+    "address": "TPA SLIWUNG (TPA Pemda (Non Regional)) Sliwung RT 6 RW 3 Kab. Situbondo, Jawa Timur"
+  }
+]

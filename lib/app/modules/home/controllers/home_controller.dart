@@ -16,6 +16,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackba
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 import 'package:frontend_waste_management_stackholder/core/values/const.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -55,9 +56,16 @@ class HomeController extends GetxController {
   String previousFilterStatus = "all";
   final MapController mapController = MapController();
   TickerProvider? tickerProvider;
-
-  // filter data type: all, garbage_pile, garbage_pcs
-  // filter statur: all, pickup_true, pickup_false
+  List<Facility> tpaFacilities = [];
+  RxList<LatLng> points = <LatLng>[].obs;
+  final RxBool routeToTPA = false.obs;
+  final tpaName = ''.obs;
+  final tpaAddress = ''.obs;
+  final minutes = 0.obs;
+  final hours = 0.obs;
+  final RxBool routeError = false.obs;
+  final RxDouble distance = 0.0.obs;
+  final tpaLocation = Rxn<LatLng>();
 
   @override
   void onInit() async {
@@ -69,6 +77,7 @@ class HomeController extends GetxController {
     streamController.value = StreamController.broadcast();
     firstDateController.value.text = "";
     lastDateController.value.text = "";
+    await loadTPAData();
     await getAllSampah();
     // await loadFacilityData();
     isLoading.value = false;
@@ -80,6 +89,51 @@ class HomeController extends GetxController {
     streamController.value.close();
     superclusterController.value.dispose();
     super.onClose();
+  }
+
+  Future<void> loadTPAData() async {
+    final data = await rootBundle
+        .loadString('/data/data_fasilitas_pengelolahan_sampah.json');
+    final List<dynamic> jsonData = jsonDecode(data);
+
+    tpaFacilities = jsonData
+        .map((item) => Facility.fromJson(item))
+        .where((facility) => facility.facilityType == 'tpa')
+        .toList();
+  }
+
+  Future calculateShortestRouteToTPA(LatLng inputLocation) async {
+    if (tpaFacilities.isEmpty) {
+      print('No TPA data loaded.');
+      return;
+    }
+
+    Facility? nearestTPA;
+    double shortestDistance = double.infinity;
+
+    for (var facility in tpaFacilities) {
+      final facilityLocation = LatLng(
+        double.parse(facility.latitude!),
+        double.parse(facility.longitude!),
+      );
+      final distance =
+          Distance().as(LengthUnit.Kilometer, inputLocation, facilityLocation);
+
+      if (distance < shortestDistance) {
+        shortestDistance = distance;
+        nearestTPA = facility;
+      }
+    }
+    return {
+      'inputLocation': inputLocation,
+      'nearestTPA': nearestTPA != null
+          ? LatLng(double.parse(nearestTPA.latitude!),
+              double.parse(nearestTPA.longitude!))
+          : null,
+      'tpaName': nearestTPA != null ? nearestTPA.name : null,
+      'tpaAddress': nearestTPA != null ? nearestTPA.address : null,
+      'distance': shortestDistance.toStringAsFixed(2),
+    };
   }
 
   Future<void> loadFacilityData() async {
@@ -115,6 +169,93 @@ class HomeController extends GetxController {
                   ),
       );
     }).toList();
+  }
+
+  void resetRouteToTPA() {
+    routeToTPA.value = false;
+    tpaLocation.value = null;
+    tpaName.value = '';
+    tpaAddress.value = '';
+    distance.value = 0.0;
+    hours.value = 0;
+    minutes.value = 0;
+    routeError.value = false;
+    points.clear();
+  }
+
+  Future getRouteToTPA(LatLng inpuPosition) async {
+    try {
+      final data = await calculateShortestRouteToTPA(inpuPosition);
+      if (data['nearestTPA'] == null) {
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.nearest_landfill_not_found,
+          AppLocalizations.of(Get.context!)!.landfill_data_not_loaded,
+        );
+        return;
+      }
+
+      tpaLocation.value = data['nearestTPA'];
+      tpaName.value = data['tpaName'];
+      tpaAddress.value = data['tpaAddress'];
+      distance.value = double.parse(data['distance']);
+      routeToTPA.value = true;
+
+      String url =
+          "https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf6248c9802618f73945dd8d87b26318ce49df&start=${data['inputLocation'].longitude},${data['inputLocation'].latitude}&end=${data['nearestTPA']!.longitude},${data['nearestTPA']!.latitude}";
+      debugPrint('Requesting route with URL: $url');
+
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode != 200) {
+        final responseBody = jsonDecode(response.body);
+        routeError.value = true;
+        if (responseBody['error']?['code'] == 2010) {
+          showFailedSnackbar(
+              AppLocalizations.of(Get.context!)!.no_routable_road,
+              AppLocalizations.of(Get.context!)!.nearest_landfill_info(
+                  tpaName.value,
+                  tpaAddress.value,
+                  distance.value.toStringAsFixed(2)));
+          return;
+        }
+        final message = responseBody['detail'] ??
+            AppLocalizations.of(Get.context!)!.unknown_error;
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.cannot_get_route,
+          message,
+        );
+        resetRouteToTPA();
+        throw ('Route error: ${response.body}');
+      }
+
+      var responseBody = jsonDecode(response.body);
+      var listOfPoints = responseBody['features'][0]['geometry']['coordinates'];
+      if (listOfPoints.isEmpty) {
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.cannot_get_route,
+          AppLocalizations.of(Get.context!)!.no_route_found,
+        );
+        return;
+      }
+      points.value = listOfPoints
+          .map((point) => LatLng(point[1], point[0]))
+          .toList()
+          .cast<LatLng>();
+      var duration =
+          responseBody['features'][0]['properties']['segments'][0]['duration'];
+
+      // Convert duration to hours and minutes
+      var durationInMinutes = (duration / 60).floor();
+      hours.value = (durationInMinutes / 60).floor();
+      minutes.value = durationInMinutes % 60;
+
+      distance.value = (responseBody['features'][0]['properties']['segments'][0]
+              ['distance'] /
+          1000);
+    } catch (e) {
+      routeToTPA.value = false;
+      debugPrint('Route error: $e');
+    }
   }
 
   Future<void> getAllSampah() async {
@@ -191,8 +332,8 @@ class HomeController extends GetxController {
     getAllSampah();
 
     showSuccessSnackbar(
-      "Time Series Reset",
-      "All data is now displayed without any date filter.",
+      AppLocalizations.of(Get.context!)!.timeseries_reset,
+      AppLocalizations.of(Get.context!)!.all_data_displayed,
     );
     superclusterController.value.replaceAll(markers.value);
   }
@@ -245,8 +386,10 @@ class HomeController extends GetxController {
       rotate: true,
       child: GestureDetector(
         onTap: () {
+          resetRouteToTPA();
           selectedMarkerDetail.value = element;
-          animateMapMove(element.geom!, mapController.zoom);
+          animateMapMove(element.geom!,
+              mapController.camera.zoom <= 12 ? 12 : mapController.camera.zoom);
         },
         child: AppIcon.custom(
           appIconName: element.isWastePile!

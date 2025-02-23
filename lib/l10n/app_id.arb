@@ -683,5 +683,95 @@
   "type": "Jenis",
   "@type": {
     "description": "Label for type"
+  },
+  "no_route": "Rute tidak tersedia",
+  "@no_route": {
+    "description": "Shown when no route is available"
+  },
+  "nearest_landfill": "TPA Terdekat",
+  "@nearest_landfill": {
+    "description": "Title for nearest landfill"
+  },
+  "landfill_info": "Informasi TPA",
+  "@landfill_info": {
+    "description": "Title for landfill information"
+  },
+  "travel_time": "{hours} jam {minutes} menit",
+  "@travel_time": {
+    "description": "Shows estimated travel time",
+    "placeholders": {
+      "hours": {
+        "type": "String",
+        "example": "2"
+      },
+      "minutes": {
+        "type": "String",
+        "example": "30"
+      }
+    }
+  },
+  "distance": "Jarak: {distance} km",
+  "@distance": {
+    "description": "Shows distance to destination",
+    "placeholders": {
+      "distance": {
+        "type": "String",
+        "example": "5.2"
+      }
+    }
+  },
+  "close_route": "Tutup rute",
+  "@close_route": {
+    "description": "Button to close route view"
+  },
+  "nearest_landfill_not_found": "TPA terdekat tidak ditemukan",
+  "@nearest_landfill_not_found": {
+    "description": "Error message when nearest TPA cannot be found"
+  },
+  "landfill_data_not_loaded": "Data TPA tidak dimuat",
+  "@landfill_data_not_loaded": {
+    "description": "Error message when TPA data fails to load"
+  },
+  "no_routable_road": "Tidak dapat menemukan jalan yang dapat dilalui di dekat lokasi yang dipilih",
+  "@no_routable_road": {
+    "description": "Error message when no routable road is found"
+  },
+  "nearest_landfill_info": "TPA terdekat adalah {tpaName} yang berlokasi di {tpaAddress}. \nJaraknya adalah {distance} km",
+  "@nearest_landfill_info": {
+    "description": "Information about nearest TPA",
+    "placeholders": {
+      "tpaName": {
+        "type": "String",
+        "example": "TPA Bantar Gebang"
+      },
+      "tpaAddress": {
+        "type": "String",
+        "example": "Bekasi"
+      },
+      "distance": {
+        "type": "String",
+        "example": "5.2"
+      }
+    }
+  },
+  "cannot_get_route": "Tidak dapat mendapatkan Rute",
+  "@cannot_get_route": {
+    "description": "Error message when route cannot be retrieved"
+  },
+  "unknown_error": "Terjadi kesalahan yang tidak diketahui",
+  "@unknown_error": {
+    "description": "Generic error message"
+  },
+  "no_route_found": "Rute tidak ditemukan.",
+  "@no_route_found": {
+    "description": "Error message when no route is found"
+  },
+  "timeseries_reset": "Reset Data Waktu",
+  "@timeseries_reset": {
+    "description": "Title for timeseries reset notification"
+  },
+  "all_data_displayed": "Semua data sekarang ditampilkan tanpa filter tanggal",
+  "@all_data_displayed": {
+    "description": "Message indicating all data is being displayed"
   }
 }

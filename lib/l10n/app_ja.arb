@@ -679,5 +679,95 @@
   "type": "種類",
   "@type": {
     "description": "Label for type"
+  },
+  "no_route": "経路が利用できません",
+  "@no_route": {
+    "description": "Shown when no route is available"
+  },
+  "nearest_landfill": "最寄りの処分場",
+  "@nearest_landfill": {
+    "description": "Title for nearest landfill"
+  },
+  "landfill_info": "処分場情報",
+  "@landfill_info": {
+    "description": "Title for landfill information"
+  },
+  "travel_time": "{hours}時間{minutes}分",
+  "@travel_time": {
+    "description": "Shows estimated travel time",
+    "placeholders": {
+      "hours": {
+        "type": "String",
+        "example": "2"
+      },
+      "minutes": {
+        "type": "String",
+        "example": "30"
+      }
+    }
+  },
+  "distance": "距離: {distance}km",
+  "@distance": {
+    "description": "Shows distance to destination",
+    "placeholders": {
+      "distance": {
+        "type": "String",
+        "example": "5.2"
+      }
+    }
+  },
+  "close_route": "経路を閉じる",
+  "@close_route": {
+    "description": "Button to close route view"
+  },
+  "nearest_landfill_not_found": "最寄りの処分場が見つかりません",
+  "@nearest_landfill_not_found": {
+    "description": "Error message when nearest landfill cannot be found"
+  },
+  "landfill_data_not_loaded": "処分場データが読み込まれていません",
+  "@landfill_data_not_loaded": {
+    "description": "Error message when landfill data fails to load"
+  },
+  "no_routable_road": "選択された場所の近くに経路設定可能な道路が見つかりません",
+  "@no_routable_road": {
+    "description": "Error message when no routable road is found"
+  },
+  "nearest_landfill_info": "最寄りの処分場は{tpaName}で、{tpaAddress}にあります。\n距離は{distance}kmです",
+  "@nearest_landfill_info": {
+    "description": "Information about nearest landfill",
+    "placeholders": {
+      "tpaName": {
+        "type": "String",
+        "example": "Bantar Gebang"
+      },
+      "tpaAddress": {
+        "type": "String",
+        "example": "Bekasi"
+      },
+      "distance": {
+        "type": "String",
+        "example": "5.2"
+      }
+    }
+  },
+  "cannot_get_route": "経路を取得できません",
+  "@cannot_get_route": {
+    "description": "Error message when route cannot be retrieved"
+  },
+  "unknown_error": "不明なエラーが発生しました",
+  "@unknown_error": {
+    "description": "Generic error message"
+  },
+  "no_route_found": "経路が見つかりません",
+  "@no_route_found": {
+    "description": "Error message when no route is found"
+  },
+  "timeseries_reset": "時系列データのリセット",
+  "@timeseries_reset": {
+    "description": "Title for timeseries reset notification"
+  },
+  "all_data_displayed": "日付フィルターなしですべてのデータが表示されています",
+  "@all_data_displayed": {
+    "description": "Message indicating all data is being displayed"
   }
 }

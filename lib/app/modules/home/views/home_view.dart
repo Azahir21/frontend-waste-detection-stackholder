@@ -10,6 +10,7 @@ import 'package:frontend_waste_management_stackholder/app/modules/home/views/wid
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/sidebar_detail.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/timeseries_filter_widget.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/waste_type_filter_widget.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/text_button.dart';
@@ -83,7 +84,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 initialCenter: controller.curruntPosition.value,
                                 initialZoom: 12,
                                 maxZoom: 18,
-                                minZoom: 3,
+                                minZoom: 5,
                                 cameraConstraint: CameraConstraint.contain(
                                   bounds: LatLngBounds(
                                     const LatLng(-90, -180),
@@ -111,103 +112,154 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                     silenceExceptions: true,
                                   ),
                                 ),
-                                // Facility Markers.
-                                MarkerLayer(
-                                    markers: controller.facilityMarkers),
-                                // Dynamic layer for heatmap, clusters, or markers.
-                                Obx(
-                                  () {
-                                    if (controller.mapsMode.value ==
-                                        'heatmap') {
-                                      return controller
-                                              .weightedLatLng.isNotEmpty
-                                          ? HeatMapLayer(
-                                              heatMapDataSource:
-                                                  InMemoryHeatMapDataSource(
-                                                data: controller.weightedLatLng
-                                                    .toList(),
-                                              ),
-                                              heatMapOptions: HeatMapOptions(
-                                                gradient:
-                                                    controller.defaultGradient,
-                                                minOpacity: 0.1,
-                                              ),
-                                              reset: controller.streamController
-                                                  .value.stream,
-                                            )
-                                          : Center(
-                                              child: AppText.labelSmallDefault(
-                                                AppLocalizations.of(context)!
-                                                    .no_data_found,
-                                                color: color.textSecondary,
-                                                context: context,
-                                              ),
-                                            );
-                                    } else if (controller.mapsMode.value ==
-                                        'cluster') {
-                                      return controller.markers.isNotEmpty
-                                          ? SuperclusterLayer.mutable(
-                                              initialMarkers:
-                                                  controller.markers.toList(),
-                                              controller: controller
-                                                  .superclusterController.value,
-                                              clusterWidgetSize:
-                                                  const Size(40, 40),
-                                              indexBuilder:
-                                                  IndexBuilders.rootIsolate,
-                                              builder: (context,
-                                                  position,
-                                                  markerCount,
-                                                  extraClusterData) {
-                                                return Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20.0),
-                                                    color: controller
-                                                        .interpolateColor(
-                                                      markerCount / 20,
-                                                      controller
-                                                          .defaultGradient,
+
+                                Visibility(
+                                  visible: controller.routeToTPA.value,
+                                  child: PolylineLayer(
+                                    polylines: [
+                                      Polyline(
+                                        points: controller.points,
+                                        strokeWidth: 5.0,
+                                        color: Colors.cyan,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                controller.routeToTPA.value
+                                    ? MarkerLayer(markers: [
+                                        Marker(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          point: controller.tpaLocation.value!,
+                                          child: AppIcon.custom(
+                                            appIconName:
+                                                AppIconName.tpaPinlocation,
+                                            context: Get.context!,
+                                          ),
+                                        ),
+                                        Marker(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          point: controller.selectedMarkerDetail
+                                              .value!.geom!,
+                                          child: AppIcon.custom(
+                                            appIconName: controller
+                                                    .selectedMarkerDetail
+                                                    .value!
+                                                    .isWastePile!
+                                                ? AppIconName.pilePinlocation
+                                                : AppIconName.pcsPinlocation,
+                                            context: Get.context!,
+                                          ),
+                                        ),
+                                      ])
+                                    : Container(),
+
+                                Visibility(
+                                  visible: !controller.routeToTPA.value,
+                                  child: Obx(
+                                    () {
+                                      if (controller.mapsMode.value ==
+                                          'heatmap') {
+                                        return controller
+                                                .weightedLatLng.isNotEmpty
+                                            ? HeatMapLayer(
+                                                heatMapDataSource:
+                                                    InMemoryHeatMapDataSource(
+                                                  data: controller
+                                                      .weightedLatLng
+                                                      .toList(),
+                                                ),
+                                                heatMapOptions: HeatMapOptions(
+                                                  gradient: controller
+                                                      .defaultGradient,
+                                                  minOpacity: 0.1,
+                                                ),
+                                                reset: controller
+                                                    .streamController
+                                                    .value
+                                                    .stream,
+                                              )
+                                            : Center(
+                                                child:
+                                                    AppText.labelSmallDefault(
+                                                  AppLocalizations.of(context)!
+                                                      .no_data_found,
+                                                  color: color.textSecondary,
+                                                  context: context,
+                                                ),
+                                              );
+                                      } else if (controller.mapsMode.value ==
+                                          'cluster') {
+                                        return controller.markers.isNotEmpty
+                                            ? SuperclusterLayer.mutable(
+                                                initialMarkers:
+                                                    controller.markers.toList(),
+                                                controller: controller
+                                                    .superclusterController
+                                                    .value,
+                                                clusterWidgetSize:
+                                                    const Size(40, 40),
+                                                indexBuilder:
+                                                    IndexBuilders.rootIsolate,
+                                                builder: (context,
+                                                    position,
+                                                    markerCount,
+                                                    extraClusterData) {
+                                                  return Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.0),
+                                                      color: controller
+                                                          .interpolateColor(
+                                                        markerCount / 20,
+                                                        controller
+                                                            .defaultGradient,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  child: Center(
-                                                    child: Text(
-                                                      markerCount.toString(),
-                                                      style: const TextStyle(
-                                                          color: Colors.white),
+                                                    child: Center(
+                                                      child: Text(
+                                                        markerCount.toString(),
+                                                        style: const TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              },
-                                            )
-                                          : Center(
-                                              child: AppText.labelSmallDefault(
-                                                AppLocalizations.of(context)!
-                                                    .no_data_found,
-                                                color: color.textSecondary,
-                                                context: context,
-                                              ),
-                                            );
-                                    } else if (controller.mapsMode.value ==
-                                        'marker') {
-                                      return controller.markers.isNotEmpty
-                                          ? MarkerLayer(
-                                              markers:
-                                                  controller.markers.toList(),
-                                            )
-                                          : Center(
-                                              child: AppText.labelSmallDefault(
-                                                AppLocalizations.of(context)!
-                                                    .no_data_found,
-                                                color: color.textSecondary,
-                                                context: context,
-                                              ),
-                                            );
-                                    } else {
-                                      return Container();
-                                    }
-                                  },
+                                                  );
+                                                },
+                                              )
+                                            : Center(
+                                                child:
+                                                    AppText.labelSmallDefault(
+                                                  AppLocalizations.of(context)!
+                                                      .no_data_found,
+                                                  color: color.textSecondary,
+                                                  context: context,
+                                                ),
+                                              );
+                                      } else if (controller.mapsMode.value ==
+                                          'marker') {
+                                        return controller.markers.isNotEmpty
+                                            ? MarkerLayer(
+                                                markers:
+                                                    controller.markers.toList(),
+                                              )
+                                            : Center(
+                                                child:
+                                                    AppText.labelSmallDefault(
+                                                  AppLocalizations.of(context)!
+                                                      .no_data_found,
+                                                  color: color.textSecondary,
+                                                  context: context,
+                                                ),
+                                              );
+                                      } else {
+                                        return Container();
+                                      }
+                                    },
+                                  ),
                                 ),
                                 // Map Compass.
                                 const MapCompass.cupertino(
@@ -228,8 +280,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                           ),
                         ),
                       ),
-                      // Floating utility buttons and timeseries slider are placed inside the map's Stack.
-                      _buildFloatingButtons(context, color),
                       Positioned(
                         top: 32,
                         right: 32,

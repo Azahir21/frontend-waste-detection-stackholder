@@ -31,6 +31,7 @@ class Popup extends GetView<HomeController> {
         return NotificationListener<DraggableScrollableNotification>(
           onNotification: (notification) {
             if (notification.extent == notification.minExtent) {
+              controller.resetRouteToTPA();
               controller.selectedMarkerDetail.value = null;
             }
             return true;
@@ -327,11 +328,134 @@ class Popup extends GetView<HomeController> {
                     ),
                   ),
                   VerticalGap.formBig(),
-                  CenteredTextButton.quaternary(
-                    width: double.infinity,
-                    label: AppLocalizations.of(context)!.route_to_landfill,
-                    onTap: () {},
-                    context: context,
+                  Obx(
+                    () => Visibility(
+                      visible: !detail.isPickup!,
+                      child: Visibility(
+                        visible: controller.routeToTPA.value,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            VerticalGap.formBig(),
+                            Visibility(
+                              visible: controller.routeError.value,
+                              child: Column(
+                                children: [
+                                  AppText.labelDefaultEmphasis(
+                                    AppLocalizations.of(context)!.no_route,
+                                    color: color.textRed,
+                                    context: context,
+                                  ),
+                                  VerticalGap.formMedium(),
+                                ],
+                              ),
+                            ),
+                            AppText.labelDefaultEmphasis(
+                              controller.routeError.value
+                                  ? AppLocalizations.of(context)!
+                                      .nearest_landfill
+                                  : AppLocalizations.of(context)!.landfill_info,
+                              color: controller.routeError.value
+                                  ? color.textRed
+                                  : color.textSecondary,
+                              context: context,
+                            ),
+                            VerticalGap.formMedium(),
+                            Row(
+                              children: [
+                                AppIcon.custom(
+                                    size: 20,
+                                    appIconName: AppIconName.locationv2,
+                                    context: context),
+                                HorizontalGap.formSmall(),
+                                AppText.labelSmallEmphasis(
+                                  AppLocalizations.of(context)!.location,
+                                  color: color.textSecondary,
+                                  context: context,
+                                ),
+                              ],
+                            ),
+                            VerticalGap.formMedium(),
+                            Obx(
+                              () => AppText.labelSmallDefault(
+                                controller.tpaAddress.value ?? "N/A",
+                                textOverflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                                color: color.textSecondary,
+                                context: context,
+                              ),
+                            ),
+                            VerticalGap.formMedium(),
+                            Obx(
+                              () => Visibility(
+                                visible: !controller.routeError.value,
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      Icons.access_time,
+                                      size: 20,
+                                      color: color.textSecondary,
+                                    ),
+                                    HorizontalGap.formSmall(),
+                                    AppText.labelSmallEmphasis(
+                                      AppLocalizations.of(context)!.travel_time(
+                                          controller.hours.value.toString(),
+                                          controller.minutes.value.toString()),
+                                      color: color.textSecondary,
+                                      context: context,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            VerticalGap.formMedium(),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.route,
+                                  size: 20,
+                                  color: color.textSecondary,
+                                ),
+                                HorizontalGap.formSmall(),
+                                AppText.labelSmallEmphasis(
+                                  AppLocalizations.of(context)!.distance(
+                                      controller.distance.value
+                                          .toStringAsFixed(2)),
+                                  color: color.textSecondary,
+                                  context: context,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  VerticalGap.formBig(),
+                  Obx(
+                    () => Visibility(
+                      visible: !detail.isPickup!,
+                      child: Visibility(
+                        visible: !controller.routeToTPA.value,
+                        replacement: CenteredTextButton.tertiary(
+                            width: double.infinity,
+                            label: AppLocalizations.of(context)!.close_route,
+                            onTap: () {
+                              controller.resetRouteToTPA();
+                            },
+                            context: context),
+                        child: CenteredTextButton.quaternary(
+                          width: double.infinity,
+                          label:
+                              AppLocalizations.of(context)!.route_to_landfill,
+                          onTap: () {
+                            controller.getRouteToTPA(detail.geom!);
+                          },
+                          context: context,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

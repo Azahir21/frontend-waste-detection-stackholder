@@ -679,5 +679,95 @@
   "type": "Type",
   "@type": {
     "description": "Label for type"
+  },
+  "no_route": "No route available",
+  "@no_route": {
+    "description": "Shown when no route is available"
+  },
+  "nearest_landfill": "Nearest Landfill",
+  "@nearest_landfill": {
+    "description": "Title for nearest landfill"
+  },
+  "landfill_info": "Landfill Information",
+  "@landfill_info": {
+    "description": "Title for landfill information"
+  },
+  "travel_time": "{hours} hours {minutes} minutes",
+  "@travel_time": {
+    "description": "Shows estimated travel time",
+    "placeholders": {
+      "hours": {
+        "type": "String",
+        "example": "2"
+      },
+      "minutes": {
+        "type": "String",
+        "example": "30"
+      }
+    }
+  },
+  "distance": "Distance: {distance} km",
+  "@distance": {
+    "description": "Shows distance to destination",
+    "placeholders": {
+      "distance": {
+        "type": "String",
+        "example": "5.2"
+      }
+    }
+  },
+  "close_route": "Close route",
+  "@close_route": {
+    "description": "Button to close route view"
+  },
+  "nearest_landfill_not_found": "Nearest landfill not found",
+  "@nearest_landfill_not_found": {
+    "description": "Error message when nearest landfill cannot be found"
+  },
+  "landfill_data_not_loaded": "Landfill data not loaded",
+  "@landfill_data_not_loaded": {
+    "description": "Error message when landfill data fails to load"
+  },
+  "no_routable_road": "Cannot find a routable road near the selected location",
+  "@no_routable_road": {
+    "description": "Error message when no routable road is found"
+  },
+  "nearest_landfill_info": "The nearest possible landfill is at {tpaName} located at {tpaAddress}. \nThe distance is {distance} km",
+  "@nearest_landfill_info": {
+    "description": "Information about nearest landfill",
+    "placeholders": {
+      "tpaName": {
+        "type": "String",
+        "example": "Bantar Gebang"
+      },
+      "tpaAddress": {
+        "type": "String",
+        "example": "Bekasi"
+      },
+      "distance": {
+        "type": "String",
+        "example": "5.2"
+      }
+    }
+  },
+  "cannot_get_route": "Cannot get Route",
+  "@cannot_get_route": {
+    "description": "Error message when route cannot be retrieved"
+  },
+  "unknown_error": "Unknown error occurred",
+  "@unknown_error": {
+    "description": "Generic error message"
+  },
+  "no_route_found": "No route found.",
+  "@no_route_found": {
+    "description": "Error message when no route is found"
+  },
+  "timeseries_reset": "Timeseries Reset",
+  "@timeseries_reset": {
+    "description": "Title for timeseries reset notification"
+  },
+  "all_data_displayed": "All data is now displayed without any date filter",
+  "@all_data_displayed": {
+    "description": "Message indicating all data is being displayed"
   }
 }

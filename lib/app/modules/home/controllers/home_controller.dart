@@ -53,6 +53,8 @@ class HomeController extends GetxController {
   final filterStatus = "all".obs;
   String previousFilterDataType = "all";
   String previousFilterStatus = "all";
+  final MapController mapController = MapController();
+  TickerProvider? tickerProvider;
 
   // filter data type: all, garbage_pile, garbage_pcs
   // filter statur: all, pickup_true, pickup_false
@@ -244,6 +246,7 @@ class HomeController extends GetxController {
       child: GestureDetector(
         onTap: () {
           selectedMarkerDetail.value = element;
+          animateMapMove(element.geom!, mapController.zoom);
         },
         child: AppIcon.custom(
           appIconName: element.isWastePile!
@@ -290,6 +293,41 @@ class HomeController extends GetxController {
     } catch (e) {
       debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
     }
+  }
+
+  void animateMapMove(LatLng destLocation, double destZoom) {
+    final latTween = Tween<double>(
+      begin: mapController.camera.center.latitude,
+      end: destLocation.latitude,
+    );
+    final lngTween = Tween<double>(
+      begin: mapController.camera.center.longitude,
+      end: destLocation.longitude,
+    );
+    final zoomTween = Tween<double>(
+      begin: mapController.camera.zoom,
+      end: destZoom,
+    );
+
+    var controllerAnim = AnimationController(
+        duration: const Duration(milliseconds: 500), vsync: tickerProvider!);
+    Animation<double> animation =
+        CurvedAnimation(parent: controllerAnim, curve: Curves.fastOutSlowIn);
+
+    controllerAnim.addListener(() {
+      mapController.move(
+        LatLng(latTween.evaluate(animation), lngTween.evaluate(animation)),
+        zoomTween.evaluate(animation),
+      );
+    });
+
+    controllerAnim.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controllerAnim.dispose();
+      }
+    });
+
+    controllerAnim.forward();
   }
 
   Color interpolateColor(double value, Map<double, Color> gradient) {

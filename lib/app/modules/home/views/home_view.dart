@@ -11,12 +11,8 @@ import 'package:frontend_waste_management_stackholder/app/modules/home/views/wid
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/timeseries_filter_widget.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/waste_type_filter_widget.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
-import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button.dart';
-import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_button_with_icon.dart';
-import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/icon_button.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/text_button.dart';
-import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 
@@ -33,8 +29,14 @@ class HomeView extends StatefulWidget {
   State<HomeView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   final HomeController controller = Get.put(HomeController());
+
+  @override
+  void initState() {
+    super.initState();
+    controller.tickerProvider = this; // Provide 'this' as the TickerProvider
+  }
 
   List<Map<double, MaterialColor>> gradients = [
     HeatMapOptions.defaultGradient,
@@ -58,6 +60,7 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   child: Obx(
                     () => FlutterMap(
+                      mapController: controller.mapController,
                       options: MapOptions(
                         initialCenter: controller.curruntPosition.value,
                         initialZoom: 12,

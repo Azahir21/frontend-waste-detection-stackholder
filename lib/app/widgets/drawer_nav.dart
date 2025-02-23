@@ -17,7 +17,7 @@ class DrawerNavView extends StatefulWidget {
 }
 
 class _DrawerNavViewState extends State<DrawerNavView> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   final PageStorageBucket _bucket = PageStorageBucket();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 

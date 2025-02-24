@@ -134,6 +134,7 @@ class DataTableWithPagination extends StatelessWidget {
                             rowId: row.id!,
                             onConfirm: () =>
                                 controller.markPickupSampah(row.id!),
+                            isMobile: isMobile,
                           ));
                         },
                       ),

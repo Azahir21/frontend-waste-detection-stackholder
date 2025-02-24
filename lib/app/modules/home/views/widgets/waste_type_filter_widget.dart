@@ -74,53 +74,55 @@ class _WasteTypeFilterWidgetState extends State<WasteTypeFilterWidget> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(32.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            AppText.labelDefaultEmphasis(
-              AppLocalizations.of(context)!.filter,
-              context: context,
-            ),
-            VerticalGap.formMedium(),
-            _buildFilterOptionsContent(),
-            VerticalGap.formMedium(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CenteredTextButton.secondary(
-                  width: 125,
-                  label: AppLocalizations.of(context)!.cancel,
-                  onTap: () {
-                    controller.showFilter.value = false;
-                    controller.filterDataType.value =
-                        controller.previousFilterDataType;
-                    controller.filterStatus.value =
-                        controller.previousFilterStatus;
-                  },
-                  context: context,
-                ),
-                CenteredTextButton.primary(
-                  width: 125,
-                  label: AppLocalizations.of(context)!.apply,
-                  onTap: () {
-                    if (controller.firstDateController.value.text.isEmpty ||
-                        controller.lastDateController.value.text.isEmpty) {
-                      controller.getAllSampah();
-                    } else {
-                      controller.getTimeseriesData();
-                    }
-                    controller.previousFilterDataType =
-                        controller.filterDataType.value;
-                    controller.previousFilterStatus =
-                        controller.filterStatus.value;
-                    controller.showFilter.value = false;
-                  },
-                  context: context,
-                ),
-              ],
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AppText.labelDefaultEmphasis(
+                AppLocalizations.of(context)!.filter,
+                context: context,
+              ),
+              VerticalGap.formMedium(),
+              _buildFilterOptionsContent(),
+              VerticalGap.formMedium(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CenteredTextButton.secondary(
+                    width: 125,
+                    label: AppLocalizations.of(context)!.cancel,
+                    onTap: () {
+                      controller.showFilter.value = false;
+                      controller.filterDataType.value =
+                          controller.previousFilterDataType;
+                      controller.filterStatus.value =
+                          controller.previousFilterStatus;
+                    },
+                    context: context,
+                  ),
+                  CenteredTextButton.primary(
+                    width: 125,
+                    label: AppLocalizations.of(context)!.apply,
+                    onTap: () {
+                      if (controller.firstDateController.value.text.isEmpty ||
+                          controller.lastDateController.value.text.isEmpty) {
+                        controller.getAllSampah();
+                      } else {
+                        controller.getTimeseriesData();
+                      }
+                      controller.previousFilterDataType =
+                          controller.filterDataType.value;
+                      controller.previousFilterStatus =
+                          controller.filterStatus.value;
+                      controller.showFilter.value = false;
+                    },
+                    context: context,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -34,8 +34,17 @@ class TableHeader extends StatelessWidget {
             children: [
               ShowEntriesDropdown(controller: controller),
               HorizontalGap.formBig(),
-              CustomSearchBar(controller: controller, isMobile: isMobile),
-              const Spacer(),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 300),
+                    child: CustomSearchBar(
+                        controller: controller, isMobile: isMobile),
+                  ),
+                ),
+              ),
+              HorizontalGap.formBig(),
               AddUserButton(isMobile: isMobile, controller: controller),
             ],
           );

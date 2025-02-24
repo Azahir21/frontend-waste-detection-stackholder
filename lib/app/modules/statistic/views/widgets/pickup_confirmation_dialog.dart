@@ -10,8 +10,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class PickupConfirmationDialog extends StatelessWidget {
   final int rowId;
   final VoidCallback onConfirm;
+  final bool isMobile;
   const PickupConfirmationDialog(
-      {Key? key, required this.rowId, required this.onConfirm})
+      {Key? key,
+      required this.rowId,
+      required this.onConfirm,
+      required this.isMobile})
       : super(key: key);
 
   @override
@@ -36,29 +40,57 @@ class PickupConfirmationDialog extends StatelessWidget {
               context: context,
             ),
             VerticalGap.formBig(),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CenteredTextButtonWithIcon.secondary(
-                  label: AppLocalizations.of(context)!.cancel,
-                  width: 120,
-                  height: 35,
-                  onTap: () => Get.back(),
-                  context: context,
-                ),
-                HorizontalGap.formHuge(),
-                CenteredTextButtonWithIcon.primary(
-                  label: AppLocalizations.of(context)!.already,
-                  width: 120,
-                  height: 35,
-                  onTap: () {
-                    onConfirm();
-                    Get.back();
-                  },
-                  context: context,
-                ),
-              ],
-            ),
+            isMobile
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () => Get.back(),
+                        child: AppText.labelSmallDefault(
+                          AppLocalizations.of(context)!.cancel,
+                          color: Theme.of(context).appColors.textSecondary,
+                          context: context,
+                        ),
+                      ),
+                      HorizontalGap.formHuge(),
+                      TextButton(
+                        onPressed: () {
+                          onConfirm();
+                          Get.back();
+                        },
+                        child: AppText.labelSmallDefault(
+                          AppLocalizations.of(context)!.already,
+                          color: Theme.of(context).appColors.textPrimary,
+                          context: context,
+                        ),
+                      ),
+                    ],
+                  )
+                : Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CenteredTextButtonWithIcon.secondary(
+                        label: AppLocalizations.of(context)!.cancel,
+                        width: 120,
+                        height: 35,
+                        onTap: () => Get.back(),
+                        context: context,
+                      ),
+                      HorizontalGap.formHuge(),
+                      CenteredTextButtonWithIcon.primary(
+                        label: AppLocalizations.of(context)!.already,
+                        width: 120,
+                        height: 35,
+                        onTap: () {
+                          onConfirm();
+                          Get.back();
+                        },
+                        context: context,
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),

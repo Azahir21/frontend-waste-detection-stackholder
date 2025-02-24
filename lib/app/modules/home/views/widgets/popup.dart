@@ -239,30 +239,30 @@ class Popup extends GetView<HomeController> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        CenteredTextButtonWithIcon.secondary(
-                                          label: AppLocalizations.of(context)!
-                                              .cancel,
-                                          width: 120,
-                                          height: 35,
-                                          onTap: () {
-                                            // controller.updatePickupStatus(
-                                            //     detail.id!, true);
+                                        TextButton(
+                                          onPressed: () {
                                             Get.back();
                                           },
-                                          context: context,
+                                          child: AppText.labelSmallDefault(
+                                            AppLocalizations.of(context)!
+                                                .cancel,
+                                            color: color.textSecondary,
+                                            context: context,
+                                          ),
                                         ),
                                         HorizontalGap.formHuge(),
-                                        CenteredTextButtonWithIcon.primary(
-                                          label: AppLocalizations.of(context)!
-                                              .already,
-                                          width: 120,
-                                          height: 35,
-                                          onTap: () {
+                                        TextButton(
+                                          onPressed: () {
                                             controller
                                                 .markPickupSampah(detail.id!);
                                             Get.back();
                                           },
-                                          context: context,
+                                          child: AppText.labelSmallDefault(
+                                            AppLocalizations.of(context)!
+                                                .already,
+                                            color: color.textPrimary,
+                                            context: context,
+                                          ),
                                         ),
                                       ],
                                     ),

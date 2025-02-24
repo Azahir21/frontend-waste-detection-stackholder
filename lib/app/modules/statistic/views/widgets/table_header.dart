@@ -18,55 +18,75 @@ class TableHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return isMobile
-        ? Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ShowEntriesDropdown(),
-              VerticalGap.formMedium(),
-              SearchAndFilterRow(isMobile: isMobile),
-            ],
-          )
-        : Row(
-            children: [
-              ShowEntriesDropdown(),
-              HorizontalGap.formBig(),
-              SizedBox(
-                width: 250,
-                height: 50,
-                child: TextFormField(
-                  initialValue: controller.search.value,
-                  decoration: InputDecoration(
-                    hintText: "${AppLocalizations.of(context)!.search}...",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.0),
+    if (isMobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ShowEntriesDropdown(),
+          VerticalGap.formMedium(),
+          SearchAndFilterRow(isMobile: isMobile),
+        ],
+      );
+    }
+    return Container(
+      width: double.infinity,
+      child: Row(
+        children: [
+          ShowEntriesDropdown(),
+          HorizontalGap.formBig(),
+          // Expanded makes this area take all available space.
+          Expanded(
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                // Determine if there is at least 250 pixels available.
+                final fieldWidth =
+                    constraints.maxWidth >= 250 ? 250.0 : constraints.maxWidth;
+                return Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    width: fieldWidth,
+                    height: 50,
+                    child: TextFormField(
+                      initialValue: controller.search.value,
+                      decoration: InputDecoration(
+                        hintText: "${AppLocalizations.of(context)!.search}...",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 8.0),
+                      ),
+                      onChanged: (value) => controller.search.value = value,
+                      onFieldSubmitted: (value) {
+                        controller.fetchDataStats(
+                          page: controller.currentPage.value,
+                          pageSize: controller.pageSize.value,
+                        );
+                      },
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
                   ),
-                  onChanged: (value) => controller.search.value = value,
-                  onFieldSubmitted: (value) {
-                    controller.fetchDataStats(
-                        page: controller.currentPage.value,
-                        pageSize: controller.pageSize.value);
-                  },
-                ),
-              ),
-              const Spacer(),
-              CustomIconButton.primary(
-                height: 50,
-                width: 50,
-                iconName: AppIconName.filter,
-                onTap: () {
-                  if (isMobile) {
-                    Get.dialog(FilterDialog());
-                  } else {
-                    controller.showFilterBox.value =
-                        !controller.showFilterBox.value;
-                  }
-                },
-                context: context,
-              ),
-            ],
-          );
+                );
+              },
+            ),
+          ),
+          // A small gap if needed between the search field and filter button.
+          HorizontalGap.formBig(),
+          CustomIconButton.primary(
+            height: 50,
+            width: 50,
+            iconName: AppIconName.filter,
+            onTap: () {
+              if (isMobile) {
+                Get.dialog(FilterDialog());
+              } else {
+                controller.showFilterBox.value =
+                    !controller.showFilterBox.value;
+              }
+            },
+            context: context,
+          ),
+        ],
+      ),
+    );
   }
 }

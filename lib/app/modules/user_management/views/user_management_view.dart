@@ -18,7 +18,7 @@ class UserManagementView extends GetView<UserManagementController> {
       backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          final bool isMobile = constraints.maxWidth < 600;
+          final bool isMobile = constraints.maxWidth < 700;
           return SafeArea(
             child: SingleChildScrollView(
               child: Padding(

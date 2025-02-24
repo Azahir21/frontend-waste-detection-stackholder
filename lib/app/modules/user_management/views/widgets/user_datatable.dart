@@ -83,23 +83,12 @@ class UserDataTable extends StatelessWidget {
                     onChanged: (value) {
                       Get.dialog(
                         AlertDialog(
-                          title: Row(
-                            children: [
-                              AppText.labelDefaultEmphasis(
-                                AppLocalizations.of(context)!.change_status,
-                                context: context,
-                                color:
-                                    Theme.of(context).appColors.textSecondary,
-                              ),
-                              const Spacer(),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  onPressed: () => Get.back(),
-                                  icon: const Icon(Icons.cancel_outlined),
-                                ),
-                              ),
-                            ],
+                          title: Center(
+                            child: AppText.labelDefaultEmphasis(
+                              AppLocalizations.of(context)!.change_status,
+                              context: context,
+                              color: Theme.of(context).appColors.textSecondary,
+                            ),
                           ),
                           content: AppText.labelSmallDefault(
                             AppLocalizations.of(context)!.activate_confirmation(

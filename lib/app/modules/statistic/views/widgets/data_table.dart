@@ -48,7 +48,10 @@ class DataTableWithPagination extends StatelessWidget {
               context: context,
             )),
             DataCell(AppText.labelSmallDefault(
-              row.address ?? '-',
+              row.address != null && row.address!.length > 50
+                  ? row.address!.replaceAllMapped(RegExp(r'(.{1,50})(\s|,|$)'),
+                      (match) => '${match.group(1)}\n')
+                  : row.address ?? '-',
               color: Theme.of(context).appColors.textSecondary,
               context: context,
             )),
@@ -161,7 +164,7 @@ class DataTableWithPagination extends StatelessWidget {
                   minWidth: MediaQuery.of(context).size.width - 128,
                 ),
                 child: DataTable(
-                  dividerThickness: 0.00000000001,
+                  // dividerThickness: 1,
                   sortAscending: controller.ascending.value,
                   sortColumnIndex: controller.columnIndex.value,
                   columns: [

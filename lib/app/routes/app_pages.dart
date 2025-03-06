@@ -51,6 +51,23 @@ class AppPages {
     GetPage(
       name: _Paths.APP,
       page: () => const DrawerNavView(),
+      children: [
+        GetPage(
+          name: '/home',
+          page: () => HomeView(),
+          binding: HomeBinding(),
+        ),
+        GetPage(
+          name: '/statistic',
+          page: () => StatisticView(),
+          binding: StatisticBinding(),
+        ),
+        GetPage(
+          name: '/user-management',
+          page: () => UserManagementView(),
+          binding: UserManagementBinding(),
+        ),
+      ],
       middlewares: [
         ConnectivityMiddleware(),
         AuthMiddleware(),

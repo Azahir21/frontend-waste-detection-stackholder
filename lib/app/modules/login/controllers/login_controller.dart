@@ -26,25 +26,33 @@ class LoginController extends GetxController {
   Future<void> login() async {
     try {
       final response = await ApiServices().post(
-          UrlConstants.login,
-          {
-            'username': _email,
-            'password': _password,
-          },
-          contentType: 'application/x-www-form-urlencoded');
-      if (response.statusCode != 200) {
-        // var message = await translate(jsonDecode(response.body)['detail']);
-        var message = jsonDecode(response.body)['detail'];
+        UrlConstants.login,
+        {
+          'username': _email,
+          'password': _password,
+        },
+        contentType: 'application/x-www-form-urlencoded',
+      );
 
+      if (response.statusCode != 200) {
+        var message = jsonDecode(response.body)['detail'];
         showFailedSnackbar(
-            AppLocalizations.of(Get.context!)!.login_error, message);
+          AppLocalizations.of(Get.context!)!.login_error,
+          message,
+        );
         throw ('Login error: ${response.body}');
       }
+
       Login loginData = Login.fromRawJson(response.body);
       GetStorage().write('token', loginData.accessToken);
       GetStorage().write('username', loginData.username);
       GetStorage().write('role', loginData.role);
-      Get.offAllNamed("/app");
+
+      // Retrieve last visited route, default to '/app/home'
+      String lastRoute = GetStorage().read('last_route') ?? '/app/home';
+
+      // Redirect to last visited route inside DrawerNavView
+      Get.offAllNamed('/app', arguments: {'route': lastRoute});
     } catch (e) {
       print('Login error: $e');
     }

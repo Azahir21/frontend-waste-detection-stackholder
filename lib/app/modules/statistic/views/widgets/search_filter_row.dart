@@ -18,7 +18,7 @@ class SearchAndFilterRow extends StatelessWidget {
         SizedBox(
           width: 225,
           height: 50,
-          child: TextField(
+          child: TextFormField(
             decoration: InputDecoration(
               hintText: "${AppLocalizations.of(context)!.search}...",
               border: OutlineInputBorder(
@@ -26,7 +26,13 @@ class SearchAndFilterRow extends StatelessWidget {
               ),
               contentPadding: const EdgeInsets.symmetric(horizontal: 8.0),
             ),
-            onChanged: (value) {},
+            onChanged: (value) => controller.search.value = value,
+            onFieldSubmitted: (value) {
+              controller.fetchDataStats(
+                page: controller.currentPage.value,
+                pageSize: controller.pageSize.value,
+              );
+            },
           ),
         ),
         const Spacer(),

@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "frontend_waste_management_stackholder",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--dart-define=PORT=5000"]
+    },
+    {
+      "name": "frontend_waste_management_stackholder (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "args": ["--dart-define=PORT=5000"]
+    },
+    {
+      "name": "frontend_waste_management_stackholder (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "args": ["--dart-define=PORT=5000"]
+    }
+  ]
+}

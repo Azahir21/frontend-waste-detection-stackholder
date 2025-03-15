@@ -26,9 +26,9 @@ class TotalStatisticalData {
         collectedGarbagePcs: json["collected_garbage_pcs"],
         notCollectedGarbagePile: json["not_collected_garbage_pile"],
         notCollectedGarbagePcs: json["not_collected_garbage_pcs"],
-        historicalData: json["historical_data"] == null
+        historicalData: json["all_historical_data"] == null
             ? []
-            : List<HistoricalData>.from(json["historical_data"]!
+            : List<HistoricalData>.from(json["all_historical_data"]!
                 .map((x) => HistoricalData.fromJson(x))),
       );
 

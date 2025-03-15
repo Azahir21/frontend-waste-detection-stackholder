@@ -52,4 +52,5 @@ class AppIconName {
   static get drawer => const AppIconName("${_iconsPath}drawer.png");
   static get timeseries => const AppIconName("${_iconsPath}timeseries.png");
   static get date => const AppIconName("${_iconsPath}date.png");
+  static get download => const AppIconName("${_iconsPath}download.png");
 }

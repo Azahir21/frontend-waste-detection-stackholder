@@ -79,43 +79,45 @@ class FilterContent extends StatelessWidget {
                 ],
               )),
           VerticalGap.formMedium(),
-          Obx(() => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppText.labelSmallEmphasis(
-                    AppLocalizations.of(context)!.filter_by_status,
-                    color: Theme.of(context).appColors.textSecondary,
-                    context: context,
-                  ),
-                  VerticalGap.formSmall(),
-                  _buildCheckboxRow(
-                    label: AppLocalizations.of(context)!.all_status,
-                    isChecked: controller.status.value == "all",
-                    onChanged: () {
-                      controller.previousStatus = controller.status.value;
-                      controller.status.value = "all";
-                    },
-                  ),
-                  VerticalGap.formSmall(),
-                  _buildCheckboxRow(
-                    label: AppLocalizations.of(context)!.collected,
-                    isChecked: controller.status.value == "collected",
-                    onChanged: () {
-                      controller.previousStatus = controller.status.value;
-                      controller.status.value = "collected";
-                    },
-                  ),
-                  VerticalGap.formSmall(),
-                  _buildCheckboxRow(
-                    label: AppLocalizations.of(context)!.uncollected,
-                    isChecked: controller.status.value == "not_collected",
-                    onChanged: () {
-                      controller.previousStatus = controller.status.value;
-                      controller.status.value = "not_collected";
-                    },
-                  ),
-                ],
-              )),
+          Obx(
+            () => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText.labelSmallEmphasis(
+                  AppLocalizations.of(context)!.filter_by_status,
+                  color: Theme.of(context).appColors.textSecondary,
+                  context: context,
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.all_status,
+                  isChecked: controller.status.value == "all",
+                  onChanged: () {
+                    controller.previousStatus = controller.status.value;
+                    controller.status.value = "all";
+                  },
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.collected,
+                  isChecked: controller.status.value == "collected",
+                  onChanged: () {
+                    controller.previousStatus = controller.status.value;
+                    controller.status.value = "collected";
+                  },
+                ),
+                VerticalGap.formSmall(),
+                _buildCheckboxRow(
+                  label: AppLocalizations.of(context)!.uncollected,
+                  isChecked: controller.status.value == "not_collected",
+                  onChanged: () {
+                    controller.previousStatus = controller.status.value;
+                    controller.status.value = "not_collected";
+                  },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

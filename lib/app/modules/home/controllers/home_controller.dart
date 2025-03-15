@@ -92,9 +92,10 @@ class HomeController extends GetxController {
   }
 
   Future<void> loadTPAData() async {
-    final data = await rootBundle
-        .loadString('data/data_fasilitas_pengelolahan_sampah.json');
-    // .loadString('/assets/data/data_fasilitas_pengelolahan_sampah.json'); // for web build
+    final data =
+        await rootBundle.loadString('data/response_1741244894706.json');
+    // .loadString(
+    //     '/assets/data/response_1741244894706.json'); // for web build
     final List<dynamic> jsonData = jsonDecode(data);
 
     tpaFacilities = jsonData

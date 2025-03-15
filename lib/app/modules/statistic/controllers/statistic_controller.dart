@@ -8,6 +8,9 @@ import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackba
 import 'package:frontend_waste_management_stackholder/core/values/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:universal_html/html.dart' as html;
 
 class StatisticController extends GetxController {
   //TODO: Implement StatisticController
@@ -30,6 +33,15 @@ class StatisticController extends GetxController {
   final columnIndex = 0.obs;
   final sortOrder = 'desc'.obs;
   final RxBool showFilterBox = false.obs;
+  final dataTypeDownload = 'all'.obs;
+  final statusDownload = 'all'.obs;
+  final searchDownload = ''.obs;
+  String previousDataTypeDownload = 'all';
+  String previousStatusDownload = 'all';
+  final firstDate = DateTime.now().obs;
+  final lastDate = DateTime.now().obs;
+  final firstDateController = TextEditingController().obs;
+  final lastDateController = TextEditingController().obs;
 
   @override
   void onInit() async {
@@ -110,6 +122,85 @@ class StatisticController extends GetxController {
       );
     } catch (e) {
       debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
+    }
+  }
+
+  void resetDownloadFilter() {
+    dataTypeDownload.value = 'all';
+    statusDownload.value = 'all';
+    searchDownload.value = '';
+    firstDate.value = DateTime.now();
+    lastDate.value = DateTime.now();
+    firstDateController.value.text = '';
+    lastDateController.value.text = '';
+  }
+
+  Future<void> downloadStatisticsExcel() async {
+    try {
+      final queryParameters = {
+        'data_type': dataTypeDownload.value,
+        'status': statusDownload.value,
+        'search': searchDownload.value,
+      };
+
+      if (firstDateController.value.text.isNotEmpty) {
+        queryParameters['start_date'] = firstDate.value.toString();
+      }
+
+      if (lastDateController.value.text.isNotEmpty) {
+        queryParameters['end_date'] = lastDate.value.toString();
+      }
+
+      final Uri url = Uri.parse(
+              'https://backend.laraan.id/api/v1/stackholder/data_statistic_sheet')
+          .replace(queryParameters: queryParameters);
+
+      // 2. Make API request with authentication
+      final response = await http.get(
+        url,
+        headers: {
+          'Authorization': 'Bearer ${GetStorage().read('token')}',
+          'Accept':
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // 3. Create a blob from response
+        final blob = html.Blob([response.bodyBytes]);
+
+        // 4. Create download URL
+        final url = html.Url.createObjectUrlFromBlob(blob);
+
+        // 5. Create filename from headers or use default
+        String filename = 'statistics_report_${DateTime.now()}.xlsx';
+        if (response.headers['content-disposition'] != null) {
+          final contentDisposition = response.headers['content-disposition']!;
+          final filenameMatch =
+              RegExp(r'filename=([^;]+)').firstMatch(contentDisposition);
+          if (filenameMatch != null) {
+            filename = filenameMatch.group(1) ?? filename;
+          }
+        }
+
+        // 6. Create anchor element and trigger download
+        final anchor = html.AnchorElement(href: url)
+          ..setAttribute('download', filename)
+          ..style.display = 'none';
+
+        html.document.body!.children.add(anchor);
+        anchor.click();
+
+        // 7. Clean up
+        html.document.body!.children.remove(anchor);
+        html.Url.revokeObjectUrl(url);
+      } else {
+        showFailedSnackbar("Failed to download file", response.body);
+        throw Exception('Failed to download file: ${response.body}');
+      }
+    } catch (e) {
+      print('Error downloading file: $e');
+      rethrow;
     }
   }
 }

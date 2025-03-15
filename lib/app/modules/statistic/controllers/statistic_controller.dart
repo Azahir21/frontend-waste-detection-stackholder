@@ -96,34 +96,35 @@ class StatisticController extends GetxController {
     }
   }
 
-  Future<void> markPickupSampah(int id) async {
-    try {
-      final response = await ApiServices().put(
-        "${UrlConstants.sampah}/pickup/$id",
-        {},
-      );
+  // Future<void> markPickupSampah(int id) async {
+  //   try {
+  //     final response = await ApiServices().put(
+  //       "${UrlConstants.sampah}/pickup/$id",
+  //       {},
+  //     );
 
-      if (response.statusCode != 200) {
-        final message = jsonDecode(response.body)['detail'];
-        showFailedSnackbar(
-          AppLocalizations.of(Get.context!)!.mark_pickup_error,
-          message,
-        );
-        throw ('Mark pickup error: ${response.body}');
-      }
+  //     if (response.statusCode != 200) {
+  //       final message = jsonDecode(response.body)['detail'];
+  //       showFailedSnackbar(
+  //         AppLocalizations.of(Get.context!)!.mark_pickup_error,
+  //         message,
+  //       );
+  //       throw ('Mark pickup error: ${response.body}');
+  //     }
 
-      showSuccessSnackbar(
-        AppLocalizations.of(Get.context!)!.mark_pickup_success,
-        AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
-      );
-      await fetchDataStats(
-        page: currentPage.value,
-        pageSize: pageSize.value,
-      );
-    } catch (e) {
-      debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
-    }
-  }
+  //     showSuccessSnackbar(
+  //       AppLocalizations.of(Get.context!)!.mark_pickup_success,
+  //       AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
+  //     );
+  //     await fetchTotalStatisticalData();
+  //     await fetchDataStats(
+  //       page: currentPage.value,
+  //       pageSize: pageSize.value,
+  //     );
+  //   } catch (e) {
+  //     debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
+  //   }
+  // }
 
   void resetDownloadFilter() {
     dataTypeDownload.value = 'all';

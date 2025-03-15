@@ -66,6 +66,7 @@ class HomeController extends GetxController {
   final RxBool routeError = false.obs;
   final RxDouble distance = 0.0.obs;
   final tpaLocation = Rxn<LatLng>();
+  final capturedImageUrl = ''.obs;
 
   @override
   void onInit() async {
@@ -405,12 +406,34 @@ class HomeController extends GetxController {
 
   Future<void> markPickupSampah(int id) async {
     if (!await _tokenService.checkToken()) return;
+    if (capturedImageUrl.value.isEmpty) {
+      showFailedSnackbar(
+        AppLocalizations.of(Get.context!)!.mark_pickup_error,
+        "Please capture the evidence image first.",
+      );
+      return;
+    }
 
     try {
       final response = await ApiServices().put(
         "${UrlConstants.sampah}/pickup/$id",
-        {},
+        {
+          "image_base64": capturedImageUrl.value,
+        },
       );
+
+      LatLng? userLocation = curruntPosition.value;
+      // calculate the distance user location to selected marker, if > 50m show error
+      if (userLocation != null &&
+          Distance().as(LengthUnit.Meter, userLocation,
+                  selectedMarkerDetail.value!.geom!) >
+              50000) {
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.mark_pickup_error,
+          "You are too far from the selected waste pile.",
+        );
+        return;
+      }
 
       if (response.statusCode != 200) {
         final message = jsonDecode(response.body)['detail'];
@@ -425,6 +448,7 @@ class HomeController extends GetxController {
         AppLocalizations.of(Get.context!)!.mark_pickup_success,
         AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
       );
+      capturedImageUrl.value = "";
 
       // Update the sampah data and map markers.
       await getAllSampah();

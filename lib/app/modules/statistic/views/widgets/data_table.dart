@@ -90,6 +90,14 @@ class DataTableWithPagination extends StatelessWidget {
             DataCell(Row(
               children: [
                 IconButton(
+                  icon: const Icon(Icons.map),
+                  iconSize: 30,
+                  color: Theme.of(context).appColors.iconPrimary,
+                  onPressed: () {
+                    Get.dialog(MapDialog(geom: row.geom));
+                  },
+                ),
+                IconButton(
                   icon: const Icon(Icons.image),
                   iconSize: 30,
                   color: Theme.of(context).appColors.iconPrimary,
@@ -120,28 +128,38 @@ class DataTableWithPagination extends StatelessWidget {
                     );
                   },
                 ),
-                IconButton(
-                  icon: const Icon(Icons.map),
-                  iconSize: 30,
-                  color: Theme.of(context).appColors.iconPrimary,
-                  onPressed: () {
-                    Get.dialog(MapDialog(geom: row.geom));
-                  },
-                ),
-                Obx(() => Visibility(
-                      visible: !row.pickupStatus!.value,
-                      child: Checkbox(
-                        value: row.pickupStatus!.value,
-                        onChanged: (value) {
-                          Get.dialog(PickupConfirmationDialog(
-                            rowId: row.id!,
-                            onConfirm: () =>
-                                controller.markPickupSampah(row.id!),
-                            isMobile: isMobile,
-                          ));
-                        },
-                      ),
-                    )),
+                if (row.evidenceUrl != null)
+                  IconButton(
+                    icon: const Icon(Icons.remove_red_eye),
+                    iconSize: 30,
+                    color: Theme.of(context).appColors.iconPrimary,
+                    onPressed: () {
+                      Get.dialog(
+                        Dialog(
+                          child: Stack(
+                            children: [
+                              InteractiveViewer(
+                                child: Image.network(row.evidenceUrl!),
+                              ),
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                  child: const Icon(
+                                    Icons.close,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
               ],
             )),
           ],

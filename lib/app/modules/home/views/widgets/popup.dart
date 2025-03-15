@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/sampah_detail_model.dart';
+import 'package:frontend_waste_management_stackholder/app/data/services/camera_service.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/controllers/home_controller.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/item_tiles.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
@@ -211,65 +212,98 @@ class Popup extends GetView<HomeController> {
                         Checkbox(
                           value: detail.isPickup!,
                           onChanged: (value) {
-                            Get.dialog(Dialog(
-                              child: Padding(
-                                padding: const EdgeInsets.all(32.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    AppText.labelDefaultEmphasis(
-                                      AppLocalizations.of(context)!
-                                          .pickup_confirmation,
-                                      context: context,
-                                      textAlign: TextAlign.center,
-                                      color: color.textSecondary,
-                                    ),
-                                    VerticalGap.formMedium(),
-                                    AppText.labelSmallDefault(
-                                        AppLocalizations.of(context)!
-                                            .pickup_confirmation_message,
-                                        color: color.textSecondary,
-                                        textAlign: TextAlign.center,
-                                        context: context),
-                                    VerticalGap.formBig(),
-                                    Row(
+                            Get.dialog(
+                                barrierDismissible: false,
+                                Dialog(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(32.0),
+                                    child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                          child: AppText.labelSmallDefault(
-                                            AppLocalizations.of(context)!
-                                                .cancel,
-                                            color: color.textSecondary,
-                                            context: context,
-                                          ),
+                                        AppText.labelDefaultEmphasis(
+                                          AppLocalizations.of(context)!
+                                              .pickup_confirmation,
+                                          context: context,
+                                          textAlign: TextAlign.center,
+                                          color: color.textSecondary,
                                         ),
-                                        HorizontalGap.formHuge(),
-                                        TextButton(
-                                          onPressed: () {
-                                            controller
-                                                .markPickupSampah(detail.id!);
-                                            Get.back();
-                                          },
-                                          child: AppText.labelSmallDefault(
-                                            AppLocalizations.of(context)!
-                                                .already,
-                                            color: color.textPrimary,
-                                            context: context,
-                                          ),
+                                        VerticalGap.formMedium(),
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              openCameraDialog(
+                                                onCaptured: (capturedDataUrl) {
+                                                  // Update the controller's captured image URL
+                                                  controller.capturedImageUrl
+                                                      .value = capturedDataUrl;
+                                                  // Optionally close the dialog if desired:
+                                                  // Get.back();
+                                                },
+                                              );
+                                            },
+                                            child:
+                                                Text("Take Evidence Picture")),
+                                        Obx(() {
+                                          final capturedImageUrl =
+                                              controller.capturedImageUrl.value;
+                                          if (capturedImageUrl.isNotEmpty) {
+                                            return Column(
+                                              children: [
+                                                VerticalGap.formMedium(),
+                                                AppText.labelDefaultEmphasis(
+                                                  "Evidence Image:",
+                                                  color: color.textSecondary,
+                                                  context: context,
+                                                ),
+                                                VerticalGap.formSmall(),
+                                                Image.network(capturedImageUrl),
+                                              ],
+                                            );
+                                          }
+                                          return const SizedBox.shrink();
+                                        }),
+                                        VerticalGap.formBig(),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () {
+                                                controller.capturedImageUrl
+                                                    .value = "";
+                                                Get.back();
+                                              },
+                                              child: AppText.labelSmallDefault(
+                                                AppLocalizations.of(context)!
+                                                    .cancel,
+                                                color: color.textSecondary,
+                                                context: context,
+                                              ),
+                                            ),
+                                            HorizontalGap.formHuge(),
+                                            TextButton(
+                                              onPressed: () {
+                                                controller.markPickupSampah(
+                                                    detail.id!);
+                                                Get.back();
+                                              },
+                                              child: AppText.labelSmallDefault(
+                                                AppLocalizations.of(context)!
+                                                    .already,
+                                                color: color.textPrimary,
+                                                context: context,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ));
+                                  ),
+                                ));
                           },
                         ),
                       ],
@@ -323,7 +357,51 @@ class Popup extends GetView<HomeController> {
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        VerticalGap.formSmall(),
+                        if (detail.evidence != null)
+                          GestureDetector(
+                            onTap: () {
+                              Get.dialog(
+                                Dialog(
+                                  child: Stack(
+                                    children: [
+                                      InteractiveViewer(
+                                        child: Image.network(detail.evidence!),
+                                      ),
+                                      Positioned(
+                                        top: 8,
+                                        right: 8,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: size.height * 0.2,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(23.0),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    detail.evidence!,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
                       ],
                     ),
                   ),

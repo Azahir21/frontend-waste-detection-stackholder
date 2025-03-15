@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/sampah_detail_model.dart';
+import 'package:frontend_waste_management_stackholder/app/data/services/camera_service.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/controllers/home_controller.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/item_tiles.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
@@ -10,6 +11,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
+
 import 'package:get/get.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -178,61 +180,92 @@ class SideBarDetail extends GetView<HomeController> {
                     Checkbox(
                       value: detail.isPickup!,
                       onChanged: (value) {
-                        Get.dialog(Dialog(
-                          child: Padding(
-                            padding: const EdgeInsets.all(32.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                AppText.labelDefaultEmphasis(
-                                  AppLocalizations.of(context)!
-                                      .pickup_confirmation,
-                                  context: context,
-                                  color: color.textSecondary,
-                                ),
-                                VerticalGap.formMedium(),
-                                AppText.labelSmallDefault(
-                                    AppLocalizations.of(context)!
-                                        .pickup_confirmation_message,
-                                    color: color.textSecondary,
-                                    textAlign: TextAlign.center,
-                                    context: context),
-                                VerticalGap.formBig(),
-                                Row(
+                        Get.dialog(
+                            barrierDismissible: false,
+                            Dialog(
+                              child: Padding(
+                                padding: const EdgeInsets.all(32.0),
+                                child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    CenteredTextButtonWithIcon.secondary(
-                                      label:
-                                          AppLocalizations.of(context)!.cancel,
-                                      width: 120,
-                                      height: 35,
-                                      onTap: () {
-                                        Get.back();
-                                      },
+                                    AppText.labelDefaultEmphasis(
+                                      AppLocalizations.of(context)!
+                                          .pickup_confirmation,
                                       context: context,
+                                      color: color.textSecondary,
                                     ),
-                                    HorizontalGap.formHuge(),
-                                    CenteredTextButtonWithIcon.primary(
-                                      label:
-                                          AppLocalizations.of(context)!.already,
-                                      width: 120,
-                                      height: 35,
-                                      onTap: () {
-                                        controller.markPickupSampah(detail.id!);
-                                        Get.back();
-                                      },
-                                      context: context,
+                                    VerticalGap.formMedium(),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          openCameraDialog(
+                                            onCaptured: (capturedDataUrl) {
+                                              // Update the controller's captured image URL
+                                              controller.capturedImageUrl
+                                                  .value = capturedDataUrl;
+                                              // Optionally close the dialog if desired:
+                                              // Get.back();
+                                            },
+                                          );
+                                        },
+                                        child: Text("take evidence picture")),
+                                    Obx(() {
+                                      if (controller
+                                          .capturedImageUrl.value.isNotEmpty) {
+                                        return Column(
+                                          children: [
+                                            VerticalGap.formMedium(),
+                                            AppText.labelDefaultEmphasis(
+                                              "Evidence Image:",
+                                              color: color.textSecondary,
+                                              context: context,
+                                            ),
+                                            VerticalGap.formSmall(),
+                                            Image.network(controller
+                                                .capturedImageUrl.value),
+                                          ],
+                                        );
+                                      }
+                                      return const SizedBox.shrink();
+                                    }),
+                                    VerticalGap.formBig(),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        CenteredTextButtonWithIcon.secondary(
+                                          label: AppLocalizations.of(context)!
+                                              .cancel,
+                                          width: 120,
+                                          height: 35,
+                                          onTap: () {
+                                            controller.capturedImageUrl.value =
+                                                "";
+                                            Get.back();
+                                          },
+                                          context: context,
+                                        ),
+                                        HorizontalGap.formHuge(),
+                                        CenteredTextButtonWithIcon.primary(
+                                          label: AppLocalizations.of(context)!
+                                              .already,
+                                          width: 120,
+                                          height: 35,
+                                          onTap: () {
+                                            controller
+                                                .markPickupSampah(detail.id!);
+                                            Get.back();
+                                          },
+                                          context: context,
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        ));
+                              ),
+                            ));
                       },
                     ),
                   ],
@@ -287,6 +320,59 @@ class SideBarDetail extends GetView<HomeController> {
                         ),
                       ],
                     ),
+                    VerticalGap.formSmall(),
+                    if (detail.evidence != null)
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AppText.labelSmallEmphasis("Evidence Image:",
+                              color: color.textSecondary, context: context),
+                          VerticalGap.formSmall(),
+                          GestureDetector(
+                            onTap: () {
+                              Get.dialog(
+                                Dialog(
+                                  child: Stack(
+                                    children: [
+                                      InteractiveViewer(
+                                        child: Image.network(detail.evidence!),
+                                      ),
+                                      Positioned(
+                                        top: 8,
+                                        right: 8,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Get.back();
+                                          },
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 200,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(23.0),
+                                image: DecorationImage(
+                                  image: NetworkImage(
+                                    detail.evidence!,
+                                  ),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),

@@ -7,6 +7,7 @@ class SampahDetail {
   String? address;
   LatLng? geom;
   String? image;
+  String? evidence;
   DateTime? captureTime;
   bool? isPickup;
   DateTime? pickupAt;
@@ -22,6 +23,7 @@ class SampahDetail {
     this.address,
     this.geom,
     this.image,
+    this.evidence,
     this.captureTime,
     this.isPickup,
     this.pickupAt,
@@ -43,6 +45,7 @@ class SampahDetail {
         address: json["address"],
         geom: json["geom"] == null ? null : _parseWktToLatLng(json["geom"]),
         image: json["image"],
+        evidence: json["evidence"],
         captureTime: json["captureTime"] == null
             ? null
             : DateTime.parse(json["captureTime"]),
@@ -69,6 +72,7 @@ class SampahDetail {
             ? null
             : 'POINT (${geom!.longitude} ${geom!.latitude})',
         "image": image,
+        "evidence": evidence,
         "captureTime": captureTime?.toIso8601String(),
         "point": point,
         "total_sampah": totalSampah,

@@ -129,8 +129,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                 controller.routeToTPA.value
                                     ? MarkerLayer(markers: [
                                         Marker(
-                                          width: 50.0,
-                                          height: 50.0,
+                                          width: 40.0,
+                                          height: 40.0,
                                           point: controller.tpaLocation.value!,
                                           child: AppIcon.custom(
                                             appIconName:
@@ -139,8 +139,8 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                                           ),
                                         ),
                                         Marker(
-                                          width: 50.0,
-                                          height: 50.0,
+                                          width: 40.0,
+                                          height: 40.0,
                                           point: controller.selectedMarkerDetail
                                               .value!.geom!,
                                           child: AppIcon.custom(

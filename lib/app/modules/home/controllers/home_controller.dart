@@ -96,7 +96,7 @@ class HomeController extends GetxController {
   Future<void> loadTPAData() async {
     final data =
         await rootBundle.loadString('data/response_1741244894706.json');
-    // .loadString(
+    // await rootBundle.loadString(
     //     '/assets/data/response_1741244894706.json'); // for web build
     final List<dynamic> jsonData = jsonDecode(data);
 
@@ -384,8 +384,8 @@ class HomeController extends GetxController {
   /// Returns a Marker widget for the given data element.
   Marker _buildMarker(dynamic element) {
     return Marker(
-      width: 50.0,
-      height: 50.0,
+      width: 40.0,
+      height: 40.0,
       point: element.geom!,
       rotate: true,
       child: GestureDetector(

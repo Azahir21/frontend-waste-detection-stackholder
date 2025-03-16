@@ -238,16 +238,21 @@ class _LineChart extends StatelessWidget {
 
   SideTitles leftTitles() => SideTitles(
         showTitles: true,
-        interval: 1,
+        interval: 2, // Changed from 1 to 2 to show only even numbers
         reservedSize: 40,
         getTitlesWidget: (value, meta) {
-          return Text(
-            value.toInt().toString(),
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          );
+          // Only show labels for even values
+          if (value % 2 == 0) {
+            return Text(
+              value.toInt().toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              ),
+            );
+          } else {
+            return const SizedBox.shrink(); // Hide odd numbers
+          }
         },
       );
 

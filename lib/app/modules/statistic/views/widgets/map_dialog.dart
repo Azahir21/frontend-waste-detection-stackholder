@@ -44,8 +44,8 @@ class MapDialog extends StatelessWidget {
                 MarkerLayer(
                   markers: [
                     Marker(
-                      width: 50.0,
-                      height: 50.0,
+                      width: 40.0,
+                      height: 40.0,
                       point: geom!,
                       child: AppIcon.custom(
                         appIconName: isWastePile

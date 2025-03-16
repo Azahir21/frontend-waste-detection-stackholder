@@ -7,12 +7,14 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatisticCharts extends StatelessWidget {
   final bool isMobile;
-  final bool isTab;
+  final bool isTabSmall;
+  final bool isTabBig;
   final TotalStatisticalData stats;
   const StatisticCharts({
     Key? key,
     required this.isMobile,
-    required this.isTab,
+    required this.isTabSmall,
+    required this.isTabBig,
     required this.stats,
   }) : super(key: key);
 
@@ -22,6 +24,13 @@ class StatisticCharts extends StatelessWidget {
       // Mobile: charts in a single column.
       return Column(
         children: [
+          PieChartCard(
+              title: "Overall statistics",
+              garbagePile: (stats.collectedGarbagePile! +
+                  stats.notCollectedGarbagePile!),
+              illegalTrash:
+                  (stats.collectedGarbagePcs! + stats.notCollectedGarbagePcs!)),
+          VerticalGap.formMedium(),
           PieChartCard(
             title: AppLocalizations.of(context)!.collected_garbage,
             garbagePile: stats.collectedGarbagePile!,
@@ -34,13 +43,22 @@ class StatisticCharts extends StatelessWidget {
             illegalTrash: stats.notCollectedGarbagePcs!,
           ),
           VerticalGap.formMedium(),
-          LineChartCard(historicalData: stats.historicalData ?? []),
+          LineChartCard(
+              allHistoricalData: stats.allHistoricalData ?? [],
+              userHistoricalData: stats.userHistoricalData ?? []),
         ],
       );
-    } else if (isTab) {
+    } else if (isTabSmall) {
       // Tablet: two pie charts on top, line chart below.
       return Column(
         children: [
+          PieChartCard(
+              title: "Overall statistics",
+              garbagePile: (stats.collectedGarbagePile! +
+                  stats.notCollectedGarbagePile!),
+              illegalTrash:
+                  (stats.collectedGarbagePcs! + stats.notCollectedGarbagePcs!)),
+          const SizedBox(height: 24),
           Row(
             children: [
               Expanded(
@@ -61,32 +79,89 @@ class StatisticCharts extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          LineChartCard(historicalData: stats.historicalData ?? []),
+          LineChartCard(
+              allHistoricalData: stats.allHistoricalData ?? [],
+              userHistoricalData: stats.userHistoricalData ?? []),
+        ],
+      );
+    } else if (isTabBig) {
+      // Large tablet: two pie charts side by side, line chart below.
+      return Column(
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: PieChartCard(
+                  title: "Overall statistics",
+                  garbagePile: (stats.collectedGarbagePile! +
+                      stats.notCollectedGarbagePile!),
+                  illegalTrash: (stats.collectedGarbagePcs! +
+                      stats.notCollectedGarbagePcs!),
+                ),
+              ),
+              const SizedBox(width: 32),
+              Expanded(
+                child: PieChartCard(
+                  title: AppLocalizations.of(context)!.collected_garbage,
+                  garbagePile: stats.collectedGarbagePile!,
+                  illegalTrash: stats.collectedGarbagePcs!,
+                ),
+              ),
+              const SizedBox(width: 32),
+              Expanded(
+                child: PieChartCard(
+                  title: AppLocalizations.of(context)!.uncollected_garbage,
+                  garbagePile: stats.notCollectedGarbagePile!,
+                  illegalTrash: stats.notCollectedGarbagePcs!,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+          LineChartCard(
+              allHistoricalData: stats.allHistoricalData ?? [],
+              userHistoricalData: stats.userHistoricalData ?? []),
         ],
       );
     } else {
       // Desktop: all charts in one row.
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      return Column(
         children: [
-          Expanded(
-            child: PieChartCard(
-              title: AppLocalizations.of(context)!.collected_garbage,
-              garbagePile: stats.collectedGarbagePile!,
-              illegalTrash: stats.collectedGarbagePcs!,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: PieChartCard(
+                  title: "Overall statistics",
+                  garbagePile: (stats.collectedGarbagePile! +
+                      stats.notCollectedGarbagePile!),
+                  illegalTrash: (stats.collectedGarbagePcs! +
+                      stats.notCollectedGarbagePcs!),
+                ),
+              ),
+              const SizedBox(width: 30),
+              Expanded(
+                child: PieChartCard(
+                  title: AppLocalizations.of(context)!.collected_garbage,
+                  garbagePile: stats.collectedGarbagePile!,
+                  illegalTrash: stats.collectedGarbagePcs!,
+                ),
+              ),
+              const SizedBox(width: 30),
+              Expanded(
+                child: PieChartCard(
+                  title: AppLocalizations.of(context)!.uncollected_garbage,
+                  garbagePile: stats.notCollectedGarbagePile!,
+                  illegalTrash: stats.notCollectedGarbagePcs!,
+                ),
+              ),
+              const SizedBox(width: 30),
+              Expanded(
+                  child: LineChartCard(
+                      allHistoricalData: stats.allHistoricalData ?? [],
+                      userHistoricalData: stats.userHistoricalData ?? [])),
+            ],
           ),
-          const SizedBox(width: 30),
-          Expanded(
-            child: PieChartCard(
-              title: AppLocalizations.of(context)!.uncollected_garbage,
-              garbagePile: stats.notCollectedGarbagePile!,
-              illegalTrash: stats.notCollectedGarbagePcs!,
-            ),
-          ),
-          const SizedBox(width: 30),
-          Expanded(
-              child: LineChartCard(historicalData: stats.historicalData ?? [])),
         ],
       );
     }

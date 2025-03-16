@@ -5,14 +5,16 @@ class TotalStatisticalData {
   int? collectedGarbagePcs;
   int? notCollectedGarbagePile;
   int? notCollectedGarbagePcs;
-  List<HistoricalData>? historicalData;
+  List<HistoricalData>? allHistoricalData;
+  List<HistoricalData>? userHistoricalData;
 
   TotalStatisticalData({
     this.collectedGarbagePile,
     this.collectedGarbagePcs,
     this.notCollectedGarbagePile,
     this.notCollectedGarbagePcs,
-    this.historicalData,
+    this.allHistoricalData,
+    this.userHistoricalData,
   });
 
   factory TotalStatisticalData.fromRawJson(String str) =>
@@ -26,9 +28,13 @@ class TotalStatisticalData {
         collectedGarbagePcs: json["collected_garbage_pcs"],
         notCollectedGarbagePile: json["not_collected_garbage_pile"],
         notCollectedGarbagePcs: json["not_collected_garbage_pcs"],
-        historicalData: json["all_historical_data"] == null
+        allHistoricalData: json["all_historical_data"] == null
             ? []
             : List<HistoricalData>.from(json["all_historical_data"]!
+                .map((x) => HistoricalData.fromJson(x))),
+        userHistoricalData: json["user_historical_data"] == null
+            ? []
+            : List<HistoricalData>.from(json["user_historical_data"]!
                 .map((x) => HistoricalData.fromJson(x))),
       );
 
@@ -37,9 +43,12 @@ class TotalStatisticalData {
         "collected_garbage_pcs": collectedGarbagePcs,
         "not_collected_garbage_pile": notCollectedGarbagePile,
         "not_collected_garbage_pcs": notCollectedGarbagePcs,
-        "historical_data": historicalData == null
+        "all_historical_data": allHistoricalData == null
             ? []
-            : List<dynamic>.from(historicalData!.map((x) => x.toJson())),
+            : List<dynamic>.from(allHistoricalData!.map((x) => x.toJson())),
+        "user_historical_data": userHistoricalData == null
+            ? []
+            : List<dynamic>.from(userHistoricalData!.map((x) => x.toJson())),
       };
 }
 

@@ -21,9 +21,12 @@ class StatisticView extends GetView<StatisticController> {
       key: _scaffoldKey,
       backgroundColor: Colors.white,
       body: LayoutBuilder(builder: (context, constraints) {
+        print(constraints.maxWidth);
         final bool isMobile = constraints.maxWidth < 600;
-        final bool isTab =
+        final bool isTabSmall =
             constraints.maxWidth < 900 && constraints.maxWidth >= 600;
+        final bool isTabBig =
+            constraints.maxWidth < 1300 && constraints.maxWidth >= 900;
         return SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -46,7 +49,10 @@ class StatisticView extends GetView<StatisticController> {
                     StatisticHeader(isMobile: isMobile),
                     VerticalGap.formHuge(),
                     StatisticCharts(
-                        isMobile: isMobile, isTab: isTab, stats: stats),
+                        isMobile: isMobile,
+                        isTabSmall: isTabSmall,
+                        isTabBig: isTabBig,
+                        stats: stats),
                     VerticalGap.formHuge(),
                     // On mobile, show the table normally.
                     // On larger screens, wrap it in a Stack to show the filter overlay.

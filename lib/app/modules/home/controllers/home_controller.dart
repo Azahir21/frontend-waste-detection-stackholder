@@ -427,7 +427,7 @@ class HomeController extends GetxController {
       if (userLocation != null &&
           Distance().as(LengthUnit.Meter, userLocation,
                   selectedMarkerDetail.value!.geom!) >
-              50000) {
+              50) {
         showFailedSnackbar(
           AppLocalizations.of(Get.context!)!.mark_pickup_error,
           "You are too far from the selected waste pile.",

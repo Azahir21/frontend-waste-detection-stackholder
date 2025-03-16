@@ -1,13 +1,98 @@
+import 'dart:async';
 import 'dart:html' as html;
 import 'dart:typed_data';
 import 'package:exif/exif.dart';
-import 'package:rational/rational.dart';
+
+/// Helper function to resize an image if it exceeds the specified size limit
+Future<String> resizeImageIfNeeded(String dataUrl,
+    {int maxSizeInBytes = 1024 * 1024}) async {
+  // Extract base64 data from the data URL
+  final String header = 'base64,';
+  final int index = dataUrl.indexOf(header);
+  if (index == -1) return dataUrl;
+
+  final String base64Data = dataUrl.substring(index + header.length);
+  final Uint8List imageData = base64Decode(base64Data);
+
+  // If the image is already below the size limit, return it unchanged
+  if (imageData.length <= maxSizeInBytes) {
+    return dataUrl;
+  }
+
+  // Calculate the required scaling factor to get below the size limit
+  // Start with 0.9 as a reasonable reduction and adjust as needed
+  double scaleFactor = 0.9;
+  int attempts = 0;
+  const int maxAttempts = 10; // Prevent infinite loops
+
+  // Create an Image element to get dimensions
+  final img = html.ImageElement();
+  final completer = Completer<html.ImageElement>();
+  img.onLoad.listen((event) => completer.complete(img));
+  img.src = dataUrl;
+  await completer.future;
+
+  int width = img.width ?? 0;
+  int height = img.height ?? 0;
+
+  // Create a canvas for resizing
+  final canvas = html.CanvasElement();
+  final ctx = canvas.getContext('2d') as html.CanvasRenderingContext2D;
+  String resizedDataUrl = dataUrl;
+
+  while (attempts < maxAttempts) {
+    // Calculate new dimensions
+    int newWidth = (width * scaleFactor).round();
+    int newHeight = (height * scaleFactor).round();
+
+    // Resize the image using canvas
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+    ctx.drawImageScaled(img, 0, 0, newWidth, newHeight);
+
+    // Get new data URL at a slightly reduced quality
+    double quality =
+        0.92 - (attempts * 0.05); // Reduce quality slightly in each iteration
+    quality = quality < 0.5 ? 0.5 : quality; // Don't go below 0.5 quality
+
+    resizedDataUrl = canvas.toDataUrl('image/jpeg', quality);
+
+    // Check if we're now below the size limit
+    final String newBase64Data = resizedDataUrl
+        .substring(resizedDataUrl.indexOf(header) + header.length);
+    final Uint8List newImageData = base64Decode(newBase64Data);
+
+    if (newImageData.length <= maxSizeInBytes) {
+      print(
+          'Image resized: ${imageData.length} bytes -> ${newImageData.length} bytes');
+      return resizedDataUrl;
+    }
+
+    // If still too large, reduce scale factor further
+    scaleFactor *= 0.8;
+    attempts++;
+  }
+
+  // Return the last resized version even if it's still above the limit
+  // This is better than nothing, and we've made a good attempt
+  return resizedDataUrl;
+}
+
+/// Base64 decode function for working with data URLs
+Uint8List base64Decode(String str) {
+  return Uint8List.fromList(html.window.atob(str).codeUnits);
+}
 
 /// Helper function to open a full-screen HTML camera overlay.
 /// When the user captures an image, [onCaptured] is called with the image's data URL.
 /// Note: This function uses a canvas to capture the video frame, so the resulting image will not contain EXIF metadata.
-void openCameraDialog(
-    {required void Function(String imageDataUrl) onCaptured}) {
+/// Helper function to open a full-screen HTML camera overlay using the rear camera by default.
+/// When the user captures an image, [onCaptured] is called with the image's data URL.
+void openCameraDialog({
+  required void Function(String imageDataUrl) onCaptured,
+  int maxSizeInBytes = 1024 * 1024, // Default 1MB
+  bool useRearCamera = true, // Default to rear camera
+}) {
   // Compute mobile-friendly dimensions based on the available screen width.
   final screenWidth = html.window.innerWidth;
   final videoWidth = (screenWidth ?? 0) < 640 ? (screenWidth ?? 0) * 0.9 : 640;
@@ -59,6 +144,71 @@ void openCameraDialog(
   });
   dialog.append(closeButton);
 
+  // Create a toggle camera button at the top-left corner
+  final toggleButton = html.ButtonElement()
+    ..text = '🔄'
+    ..style.position = 'absolute'
+    ..style.top = '20px'
+    ..style.left = '20px'
+    ..style.background = 'transparent'
+    ..style.border = 'none'
+    ..style.color = 'white'
+    ..style.fontSize = '24px'
+    ..style.cursor = 'pointer';
+  dialog.append(toggleButton);
+
+  // Track current camera state
+  bool isUsingRearCamera = useRearCamera;
+
+  // Function to initialize camera
+  void initializeCamera() {
+    // Define constraints based on which camera to use
+    final cameraConstraints = {
+      'video': {
+        'facingMode': isUsingRearCamera ? 'environment' : 'user',
+        'width': {'ideal': 1280},
+        'height': {'ideal': 720},
+      }
+    };
+
+    // Stop any existing streams before requesting a new one
+    if (video.srcObject != null) {
+      final tracks = (video.srcObject as html.MediaStream).getTracks();
+      for (var track in tracks) {
+        track.stop();
+      }
+      video.srcObject = null;
+    }
+
+    // Request access to the camera with specific constraints
+    html.window.navigator.mediaDevices
+        ?.getUserMedia(cameraConstraints)
+        .then((stream) {
+      video.srcObject = stream;
+    }).catchError((error) {
+      print('Error accessing camera: $error');
+      // If failed with rear camera, try falling back to any camera
+      if (isUsingRearCamera) {
+        print('Falling back to any available camera');
+        html.window.navigator.mediaDevices
+            ?.getUserMedia({'video': true}).then((stream) {
+          video.srcObject = stream;
+        }).catchError((fallbackError) {
+          print('Error accessing any camera: $fallbackError');
+          dialog.remove();
+        });
+      } else {
+        dialog.remove();
+      }
+    });
+  }
+
+  // Toggle button handler
+  toggleButton.onClick.listen((event) {
+    isUsingRearCamera = !isUsingRearCamera;
+    initializeCamera();
+  });
+
   // Create a styled capture button.
   final captureButton = html.ButtonElement()
     ..text = 'Capture'
@@ -83,16 +233,10 @@ void openCameraDialog(
   // Add the overlay to the document body.
   html.document.body?.append(dialog);
 
-  // Request access to the camera.
-  html.window.navigator.mediaDevices
-      ?.getUserMedia({'video': true}).then((stream) {
-    video.srcObject = stream;
-  }).catchError((error) {
-    print('Error accessing camera: $error');
-    dialog.remove();
-  });
+  // Initialize camera with the selected preference
+  initializeCamera();
 
-  captureButton.onClick.listen((event) {
+  captureButton.onClick.listen((event) async {
     // Get the actual video dimensions from the stream.
     final actualVideoWidth = video.videoWidth;
     final actualVideoHeight = video.videoHeight;
@@ -134,6 +278,10 @@ void openCameraDialog(
     // Capture image as PNG.
     String imageDataUrl = canvas.toDataUrl('image/png');
 
+    // Resize the image if needed
+    String resizedDataUrl =
+        await resizeImageIfNeeded(imageDataUrl, maxSizeInBytes: maxSizeInBytes);
+
     // Stop the video stream.
     final tracks = (video.srcObject as html.MediaStream).getTracks();
     for (var track in tracks) {
@@ -144,7 +292,7 @@ void openCameraDialog(
     dialog.remove();
 
     // Return the captured image.
-    onCaptured(imageDataUrl);
+    onCaptured(resizedDataUrl);
   });
 }
 
@@ -343,6 +491,7 @@ void pickImageFromSystem({
   required void Function(
           String imageDataUrl, double? latitude, double? longitude)
       onPicked,
+  int maxSizeInBytes = 1024 * 1024, // Default 1MB
 }) {
   final input = html.FileUploadInputElement()
     ..accept = 'image/*'
@@ -359,6 +508,9 @@ void pickImageFromSystem({
       readerDataUrl.readAsDataUrl(file);
       await readerDataUrl.onLoadEnd.first;
       final dataUrl = readerDataUrl.result as String;
+
+      final resizedDataUrl =
+          await resizeImageIfNeeded(dataUrl, maxSizeInBytes: maxSizeInBytes);
 
       final readerBuffer = html.FileReader();
       readerBuffer.readAsArrayBuffer(file);
@@ -443,7 +595,7 @@ void pickImageFromSystem({
       if (longitude?.isNaN ?? false) {
         longitude = null;
       }
-      onPicked(dataUrl, latitude, longitude);
+      onPicked(resizedDataUrl, latitude, longitude);
     } else {
       input.remove();
     }

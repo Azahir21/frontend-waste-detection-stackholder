@@ -50,3 +50,9 @@ Future<String> getAddressFromLatLng(LatLng position) async {
     throw Exception('Failed to get address from coordinates');
   }
 }
+
+Future<LatLng> getUserCurrentLocation() async {
+  Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high);
+  return LatLng(position.latitude, position.longitude);
+}

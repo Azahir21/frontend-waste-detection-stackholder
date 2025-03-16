@@ -5,11 +5,13 @@ import 'package:frontend_waste_management_stackholder/app/modules/statistic/view
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/widgets/pickup_confirmation_dialog.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/statistic/views/widgets/table_header.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
 
 class DataTableWithPagination extends StatelessWidget {
   final bool isMobile;
@@ -159,6 +161,51 @@ class DataTableWithPagination extends StatelessWidget {
                         ),
                       );
                     },
+                  )
+                else
+                  Visibility(
+                    visible: row.pickupStatus!.value == false,
+                    child: Checkbox(
+                      value: row.pickupStatus!.value,
+                      onChanged: (value) {
+                        Get.dialog(
+                            barrierDismissible: false,
+                            PickupConfirmationDialog(
+                              rowId: row.id!,
+                              onConfirm: () {
+                                final distance = Distance().as(
+                                  LengthUnit.Meter,
+                                  controller.evidencePosition.value,
+                                  row.geom!,
+                                );
+
+                                if (distance > 14588411) {
+                                  // Log the error for debugging
+                                  print(
+                                      "Evidence Position: ${controller.evidencePosition.value}");
+                                  print("Distance: $distance");
+
+                                  // Show the snackbar
+                                  Future.delayed(Duration.zero, () {
+                                    showFailedSnackbar(
+                                      "Failed to mark pickup",
+                                      "You are too far from the selected waste pile.",
+                                    );
+                                    controller.capturedImageUrl.value = "";
+                                  });
+
+                                  return;
+                                }
+
+                                controller.markPickupSampah(
+                                  row.id!,
+                                  row.geom!,
+                                );
+                              },
+                              isMobile: isMobile,
+                            ));
+                      },
+                    ),
                   ),
               ],
             )),

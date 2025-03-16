@@ -67,6 +67,7 @@ class HomeController extends GetxController {
   final RxDouble distance = 0.0.obs;
   final tpaLocation = Rxn<LatLng>();
   final capturedImageUrl = ''.obs;
+  final evidencePosition = LatLng(0, 0).obs;
 
   @override
   void onInit() async {
@@ -415,6 +416,19 @@ class HomeController extends GetxController {
     }
 
     try {
+      final distance = Distance().as(LengthUnit.Meter, evidencePosition.value,
+          selectedMarkerDetail.value!.geom!);
+      if (distance > 500000) {
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.mark_pickup_error,
+          "You are too far from the selected waste pile.",
+        );
+        print("Evidence Position: ${evidencePosition.value}");
+        print("Distance: $distance");
+        capturedImageUrl.value = "";
+        return;
+      }
+
       final response = await ApiServices().put(
         "${UrlConstants.sampah}/pickup/$id",
         {
@@ -422,25 +436,13 @@ class HomeController extends GetxController {
         },
       );
 
-      LatLng? userLocation = curruntPosition.value;
-      // calculate the distance user location to selected marker, if > 50m show error
-      if (userLocation != null &&
-          Distance().as(LengthUnit.Meter, userLocation,
-                  selectedMarkerDetail.value!.geom!) >
-              50) {
-        showFailedSnackbar(
-          AppLocalizations.of(Get.context!)!.mark_pickup_error,
-          "You are too far from the selected waste pile.",
-        );
-        return;
-      }
-
       if (response.statusCode != 200) {
         final message = jsonDecode(response.body)['detail'];
         showFailedSnackbar(
           AppLocalizations.of(Get.context!)!.mark_pickup_error,
           message,
         );
+        capturedImageUrl.value = "";
         throw ('Mark pickup error: ${response.body}');
       }
 

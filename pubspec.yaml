@@ -59,6 +59,8 @@ dependencies:
   fl_chart: ^0.69.2
   universal_html: ^2.2.4
   image_picker: ^1.1.2
+  exif: ^3.3.0
+  rational: ^2.2.3
 
 dev_dependencies:
   flutter_test:

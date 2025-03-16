@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/data_statistics_model.dart';
 import 'package:frontend_waste_management_stackholder/app/data/models/total_statistical_data.dart';
 import 'package:frontend_waste_management_stackholder/app/data/services/api_service.dart';
+import 'package:frontend_waste_management_stackholder/app/data/services/location_handler.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/core/values/const.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:latlong2/latlong.dart';
 import 'package:universal_html/html.dart' as html;
 
 class StatisticController extends GetxController {
@@ -42,6 +44,8 @@ class StatisticController extends GetxController {
   final lastDate = DateTime.now().obs;
   final firstDateController = TextEditingController().obs;
   final lastDateController = TextEditingController().obs;
+  final capturedImageUrl = ''.obs;
+  final evidencePosition = LatLng(0, 0).obs;
 
   @override
   void onInit() async {
@@ -96,35 +100,54 @@ class StatisticController extends GetxController {
     }
   }
 
-  // Future<void> markPickupSampah(int id) async {
-  //   try {
-  //     final response = await ApiServices().put(
-  //       "${UrlConstants.sampah}/pickup/$id",
-  //       {},
-  //     );
+  Future<void> markPickupSampah(int id, LatLng location) async {
+    if (capturedImageUrl.value.isEmpty) {
+      showFailedSnackbar(
+        AppLocalizations.of(Get.context!)!.mark_pickup_error,
+        "Please capture the evidence image first.",
+      );
+      capturedImageUrl.value = "";
+      return;
+    }
 
-  //     if (response.statusCode != 200) {
-  //       final message = jsonDecode(response.body)['detail'];
-  //       showFailedSnackbar(
-  //         AppLocalizations.of(Get.context!)!.mark_pickup_error,
-  //         message,
-  //       );
-  //       throw ('Mark pickup error: ${response.body}');
-  //     }
+    try {
+      // showFailedSnackbar(
+      //   AppLocalizations.of(Get.context!)!.mark_pickup_error,
+      //   "You are too far from the selected waste pile.",
+      // );
 
-  //     showSuccessSnackbar(
-  //       AppLocalizations.of(Get.context!)!.mark_pickup_success,
-  //       AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
-  //     );
-  //     await fetchTotalStatisticalData();
-  //     await fetchDataStats(
-  //       page: currentPage.value,
-  //       pageSize: pageSize.value,
-  //     );
-  //   } catch (e) {
-  //     debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
-  //   }
-  // }
+      final response = await ApiServices().put(
+        "${UrlConstants.sampah}/pickup/$id",
+        {
+          "image_base64": capturedImageUrl.value,
+        },
+      );
+
+      if (response.statusCode != 200) {
+        final message = jsonDecode(response.body)['detail'];
+        showFailedSnackbar(
+          AppLocalizations.of(Get.context!)!.mark_pickup_error,
+          message,
+        );
+        capturedImageUrl.value = "";
+        throw ('Mark pickup error: ${response.body}');
+      }
+
+      showSuccessSnackbar(
+        AppLocalizations.of(Get.context!)!.mark_pickup_success,
+        AppLocalizations.of(Get.context!)!.mark_pickup_success_message,
+      );
+      capturedImageUrl.value = "";
+
+      await fetchTotalStatisticalData();
+      await fetchDataStats(
+        page: currentPage.value,
+        pageSize: pageSize.value,
+      );
+    } catch (e) {
+      debugPrint('${AppLocalizations.of(Get.context!)!.mark_pickup_error}: $e');
+    }
+  }
 
   void resetDownloadFilter() {
     dataTypeDownload.value = 'all';

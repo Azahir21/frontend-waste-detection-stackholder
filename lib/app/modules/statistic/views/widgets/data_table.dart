@@ -96,7 +96,10 @@ class DataTableWithPagination extends StatelessWidget {
                   iconSize: 30,
                   color: Theme.of(context).appColors.iconPrimary,
                   onPressed: () {
-                    Get.dialog(MapDialog(geom: row.geom));
+                    Get.dialog(MapDialog(
+                      geom: row.geom,
+                      isWastePile: row.isWastePile!,
+                    ));
                   },
                 ),
                 IconButton(
@@ -179,7 +182,7 @@ class DataTableWithPagination extends StatelessWidget {
                                   row.geom!,
                                 );
 
-                                if (distance > 14588411) {
+                                if (distance > 1000000) {
                                   // Log the error for debugging
                                   print(
                                       "Evidence Position: ${controller.evidencePosition.value}");

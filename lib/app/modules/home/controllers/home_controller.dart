@@ -384,8 +384,8 @@ class HomeController extends GetxController {
   /// Returns a Marker widget for the given data element.
   Marker _buildMarker(dynamic element) {
     return Marker(
-      width: 40.0,
-      height: 40.0,
+      width: 50.0,
+      height: 50.0,
       point: element.geom!,
       rotate: true,
       child: GestureDetector(
@@ -395,11 +395,21 @@ class HomeController extends GetxController {
           animateMapMove(element.geom!,
               mapController.camera.zoom <= 12 ? 12 : mapController.camera.zoom);
         },
-        child: AppIcon.custom(
-          appIconName: element.isWastePile!
-              ? AppIconName.pilePinlocation
-              : AppIconName.pcsPinlocation,
-          context: Get.context!,
+        child: Obx(
+          () => AppIcon.custom(
+            appIconName: element.id == selectedMarkerDetail.value?.id
+                ? (element.isWastePile!
+                    ? AppIconName.pileSelected
+                    : AppIconName.pcsSelected)
+                : element.isPickup!
+                    ? (element.isWastePile!
+                        ? AppIconName.pileCollected
+                        : AppIconName.pcsCollected)
+                    : (element.isWastePile!
+                        ? AppIconName.pileUncollected
+                        : AppIconName.pcsUncollected),
+            context: Get.context!,
+          ),
         ),
       ),
     );
@@ -418,7 +428,7 @@ class HomeController extends GetxController {
     try {
       final distance = Distance().as(LengthUnit.Meter, evidencePosition.value,
           selectedMarkerDetail.value!.geom!);
-      if (distance > 500000) {
+      if (distance > 1000000) {
         showFailedSnackbar(
           AppLocalizations.of(Get.context!)!.mark_pickup_error,
           "You are too far from the selected waste pile.",

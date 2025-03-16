@@ -53,4 +53,16 @@ class AppIconName {
   static get timeseries => const AppIconName("${_iconsPath}timeseries.png");
   static get date => const AppIconName("${_iconsPath}date.png");
   static get download => const AppIconName("${_iconsPath}download.png");
+
+  static get pcsCollected =>
+      const AppIconName("${_iconsPath}pcs-collected.png");
+  static get pcsUncollected =>
+      const AppIconName("${_iconsPath}pcs-uncollected.png");
+  static get pileCollected =>
+      const AppIconName("${_iconsPath}pile-collected.png");
+  static get pileUncollected =>
+      const AppIconName("${_iconsPath}pile-uncollected.png");
+  static get pcsSelected => const AppIconName("${_iconsPath}pcs-selected.png");
+  static get pileSelected =>
+      const AppIconName("${_iconsPath}pile-selected.png");
 }

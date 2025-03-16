@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_cancellable_tile_provider/flutter_map_cancellable_tile_provider.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/app_icon.dart';
+import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapDialog extends StatelessWidget {
   final LatLng? geom;
-  const MapDialog({Key? key, required this.geom}) : super(key: key);
+  final bool isWastePile;
+  const MapDialog({Key? key, required this.geom, required this.isWastePile})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +44,15 @@ class MapDialog extends StatelessWidget {
                 MarkerLayer(
                   markers: [
                     Marker(
-                      width: 80.0,
-                      height: 80.0,
+                      width: 50.0,
+                      height: 50.0,
                       point: geom!,
-                      child: const Icon(Icons.location_on,
-                          color: Colors.red, size: 50),
+                      child: AppIcon.custom(
+                        appIconName: isWastePile
+                            ? AppIconName.pilePinlocation
+                            : AppIconName.pcsPinlocation,
+                        context: Get.context!,
+                      ),
                     ),
                   ],
                 ),

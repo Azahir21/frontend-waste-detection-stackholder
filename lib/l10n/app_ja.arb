@@ -769,5 +769,71 @@
   "all_data_displayed": "日付フィルターなしですべてのデータが表示されています",
   "@all_data_displayed": {
     "description": "Message indicating all data is being displayed"
+  },
+  "capture_evidence_first": "まず証拠画像を撮影してください。",
+  "@capture_evidence_first": {
+    "description": "Message shown when user tries to proceed without capturing an evidence image"
+  },
+  "too_far_from_waste_pile": "選択したゴミ集積所から離れすぎています。最小距離は{distance}メートルです。",
+  "@too_far_from_waste_pile": {
+    "description": "Error message when user is too far from waste pile to take action",
+    "placeholders": {
+      "distance": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "failed_to_get_evidence_position": "証拠位置の取得に失敗しました",
+  "@failed_to_get_evidence_position": {
+    "description": "Error message when the app fails to determine the GPS position of evidence"
+  },
+  "try_again_with_valid_image": "有効な画像で再度お試しください",
+  "@try_again_with_valid_image": {
+    "description": "Message shown when uploaded image doesn't meet requirements"
+  },
+  "failed_to_download_file": "ファイルのダウンロードに失敗しました",
+  "@failed_to_download_file": {
+    "description": "Error message when file download fails"
+  },
+  "evidence_image": "証拠画像",
+  "@evidence_image": {
+    "description": "Label for evidence image in the UI"
+  },
+  "all_user_data": "すべてのユーザーデータ",
+  "@all_user_data": {
+    "description": "Label for section showing data from all users"
+  },
+  "user_data": "ユーザーデータ",
+  "@user_data": {
+    "description": "Label for section showing individual user data"
+  },
+  "overall_statistics": "全体統計",
+  "@overall_statistics": {
+    "description": "Label for section showing aggregate statistics"
+  },
+  "user": "ユーザー ",
+  "@user": {
+    "description": "Label prefix for user identification"
+  },
+  "search_location": "場所を検索",
+  "@search_location": {
+    "description": "Label for location search functionality"
+  },
+  "filter_download": "ダウンロードをフィルター",
+  "@filter_download": {
+    "description": "Label for download filter options"
+  },
+  "pick_evidence_picture": "証拠写真を選択",
+  "@pick_evidence_picture": {
+    "description": "Button label for selecting an existing evidence picture"
+  },
+  "take_evidence_picture": "証拠写真を撮影",
+  "@take_evidence_picture": {
+    "description": "Button label for capturing a new evidence picture"
+  },
+  "no_data_available": "データがありません",
+  "@no_data_available": {
+    "description": "Message shown when no data is available to display"
   }
 }

@@ -769,5 +769,71 @@
   "all_data_displayed": "All data is now displayed without any date filter",
   "@all_data_displayed": {
     "description": "Message indicating all data is being displayed"
+  },
+  "capture_evidence_first": "Please capture the evidence image first.",
+  "@capture_evidence_first": {
+    "description": "Message shown when user tries to proceed without capturing an evidence image"
+  },
+  "too_far_from_waste_pile": "You are too far from the selected waste pile. minimum distance is {distance} meters.",
+  "@too_far_from_waste_pile": {
+    "description": "Error message when user is too far from waste pile to take action",
+    "placeholders": {
+      "distance": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "failed_to_get_evidence_position": "Failed to get evidence position",
+  "@failed_to_get_evidence_position": {
+    "description": "Error message when the app fails to determine the GPS position of evidence"
+  },
+  "try_again_with_valid_image": "Please try again, with a valid image",
+  "@try_again_with_valid_image": {
+    "description": "Message shown when uploaded image doesn't meet requirements"
+  },
+  "failed_to_download_file": "Failed to download file",
+  "@failed_to_download_file": {
+    "description": "Error message when file download fails"
+  },
+  "evidence_image": "Evidence Image",
+  "@evidence_image": {
+    "description": "Label for evidence image in the UI"
+  },
+  "all_user_data": "All User Data",
+  "@all_user_data": {
+    "description": "Label for section showing data from all users"
+  },
+  "user_data": "User Data",
+  "@user_data": {
+    "description": "Label for section showing individual user data"
+  },
+  "overall_statistics": "Overall Statistics",
+  "@overall_statistics": {
+    "description": "Label for section showing aggregate statistics"
+  },
+  "user": "User ",
+  "@user": {
+    "description": "Label prefix for user identification"
+  },
+  "search_location": "Search Location",
+  "@search_location": {
+    "description": "Label for location search functionality"
+  },
+  "filter_download": "Filter Download",
+  "@filter_download": {
+    "description": "Label for download filter options"
+  },
+  "pick_evidence_picture": "Pick Evidence Picture",
+  "@pick_evidence_picture": {
+    "description": "Button label for selecting an existing evidence picture"
+  },
+  "take_evidence_picture": "Take Evidence Picture",
+  "@take_evidence_picture": {
+    "description": "Button label for capturing a new evidence picture"
+  },
+  "no_data_available": "No Data Available",
+  "@no_data_available": {
+    "description": "Message shown when no data is available to display"
   }
 }

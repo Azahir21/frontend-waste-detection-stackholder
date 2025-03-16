@@ -773,5 +773,71 @@
   "all_data_displayed": "Semua data sekarang ditampilkan tanpa filter tanggal",
   "@all_data_displayed": {
     "description": "Message indicating all data is being displayed"
+  },
+  "capture_evidence_first": "Silakan ambil gambar bukti terlebih dahulu.",
+  "@capture_evidence_first": {
+    "description": "Message shown when user tries to proceed without capturing an evidence image"
+  },
+  "too_far_from_waste_pile": "Anda terlalu jauh dari tumpukan sampah yang dipilih. jarak minimum adalah {distance} meter.",
+  "@too_far_from_waste_pile": {
+    "description": "Error message when user is too far from waste pile to take action",
+    "placeholders": {
+      "distance": {
+        "type": "double",
+        "format": "decimalPattern"
+      }
+    }
+  },
+  "failed_to_get_evidence_position": "Gagal mendapatkan posisi bukti",
+  "@failed_to_get_evidence_position": {
+    "description": "Error message when the app fails to determine the GPS position of evidence"
+  },
+  "try_again_with_valid_image": "Silakan coba lagi dengan gambar yang valid",
+  "@try_again_with_valid_image": {
+    "description": "Message shown when uploaded image doesn't meet requirements"
+  },
+  "failed_to_download_file": "Gagal mengunduh file",
+  "@failed_to_download_file": {
+    "description": "Error message when file download fails"
+  },
+  "evidence_image": "Gambar Bukti",
+  "@evidence_image": {
+    "description": "Label for evidence image in the UI"
+  },
+  "all_user_data": "Data Semua Pengguna",
+  "@all_user_data": {
+    "description": "Label for section showing data from all users"
+  },
+  "user_data": "Data Pengguna",
+  "@user_data": {
+    "description": "Label for section showing individual user data"
+  },
+  "overall_statistics": "Statistik Keseluruhan",
+  "@overall_statistics": {
+    "description": "Label for section showing aggregate statistics"
+  },
+  "user": "Pengguna ",
+  "@user": {
+    "description": "Label prefix for user identification"
+  },
+  "search_location": "Cari Lokasi",
+  "@search_location": {
+    "description": "Label for location search functionality"
+  },
+  "filter_download": "Filter Unduhan",
+  "@filter_download": {
+    "description": "Label for download filter options"
+  },
+  "pick_evidence_picture": "Pilih Gambar Bukti",
+  "@pick_evidence_picture": {
+    "description": "Button label for selecting an existing evidence picture"
+  },
+  "take_evidence_picture": "Ambil Gambar Bukti",
+  "@take_evidence_picture": {
+    "description": "Button label for capturing a new evidence picture"
+  },
+  "no_data_available": "Tidak Ada Data Tersedia",
+  "@no_data_available": {
+    "description": "Message shown when no data is available to display"
   }
 }

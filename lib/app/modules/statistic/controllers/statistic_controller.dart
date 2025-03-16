@@ -104,7 +104,7 @@ class StatisticController extends GetxController {
     if (capturedImageUrl.value.isEmpty) {
       showFailedSnackbar(
         AppLocalizations.of(Get.context!)!.mark_pickup_error,
-        "Please capture the evidence image first.",
+        AppLocalizations.of(Get.context!)!.capture_evidence_first,
       );
       capturedImageUrl.value = "";
       return;
@@ -219,7 +219,9 @@ class StatisticController extends GetxController {
         html.document.body!.children.remove(anchor);
         html.Url.revokeObjectUrl(url);
       } else {
-        showFailedSnackbar("Failed to download file", response.body);
+        showFailedSnackbar(
+            AppLocalizations.of(Get.context!)!.failed_to_download_file,
+            response.body);
         throw Exception('Failed to download file: ${response.body}');
       }
     } catch (e) {

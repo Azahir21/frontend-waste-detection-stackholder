@@ -420,7 +420,7 @@ class HomeController extends GetxController {
     if (capturedImageUrl.value.isEmpty) {
       showFailedSnackbar(
         AppLocalizations.of(Get.context!)!.mark_pickup_error,
-        "Please capture the evidence image first.",
+        AppLocalizations.of(Get.context!)!.capture_evidence_first,
       );
       return;
     }
@@ -431,7 +431,7 @@ class HomeController extends GetxController {
       if (distance > 1000000) {
         showFailedSnackbar(
           AppLocalizations.of(Get.context!)!.mark_pickup_error,
-          "You are too far from the selected waste pile.",
+          AppLocalizations.of(Get.context!)!.too_far_from_waste_pile(distance),
         );
         print("Evidence Position: ${evidencePosition.value}");
         print("Distance: $distance");

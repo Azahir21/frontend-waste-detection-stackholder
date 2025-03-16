@@ -382,7 +382,7 @@ class LineChartCardState extends State<LineChartCard> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    "all historical data",
+                    AppLocalizations.of(context)!.all_user_data,
                     style: const TextStyle(fontSize: 12),
                   ),
                 ],
@@ -397,7 +397,7 @@ class LineChartCardState extends State<LineChartCard> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    "user historical data",
+                    AppLocalizations.of(context)!.user_data,
                     style: const TextStyle(fontSize: 12),
                   ),
                 ],

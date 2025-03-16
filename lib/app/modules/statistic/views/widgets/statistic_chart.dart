@@ -25,7 +25,7 @@ class StatisticCharts extends StatelessWidget {
       return Column(
         children: [
           PieChartCard(
-              title: "Overall statistics",
+              title: AppLocalizations.of(context)!.overall_statistics,
               garbagePile: (stats.collectedGarbagePile! +
                   stats.notCollectedGarbagePile!),
               illegalTrash:
@@ -53,7 +53,7 @@ class StatisticCharts extends StatelessWidget {
       return Column(
         children: [
           PieChartCard(
-              title: "Overall statistics",
+              title: AppLocalizations.of(context)!.overall_statistics,
               garbagePile: (stats.collectedGarbagePile! +
                   stats.notCollectedGarbagePile!),
               illegalTrash:
@@ -92,7 +92,7 @@ class StatisticCharts extends StatelessWidget {
             children: [
               Expanded(
                 child: PieChartCard(
-                  title: "Overall statistics",
+                  title: AppLocalizations.of(context)!.overall_statistics,
                   garbagePile: (stats.collectedGarbagePile! +
                       stats.notCollectedGarbagePile!),
                   illegalTrash: (stats.collectedGarbagePcs! +
@@ -132,7 +132,7 @@ class StatisticCharts extends StatelessWidget {
             children: [
               Expanded(
                 child: PieChartCard(
-                  title: "Overall statistics",
+                  title: AppLocalizations.of(context)!.overall_statistics,
                   garbagePile: (stats.collectedGarbagePile! +
                       stats.notCollectedGarbagePile!),
                   illegalTrash: (stats.collectedGarbagePcs! +

@@ -24,7 +24,8 @@ class DataTableWithPagination extends StatelessWidget {
     return Obx(() {
       final dataStats = controller.dataStatistics.value;
       if (dataStats.data == null || dataStats.data!.isEmpty) {
-        return const Center(child: Text("No Data Available"));
+        return Center(
+            child: Text(AppLocalizations.of(context)!.no_data_available));
       }
 
       final rows = dataStats.data!.map((row) {
@@ -191,8 +192,10 @@ class DataTableWithPagination extends StatelessWidget {
                                   // Show the snackbar
                                   Future.delayed(Duration.zero, () {
                                     showFailedSnackbar(
-                                      "Failed to mark pickup",
-                                      "You are too far from the selected waste pile.",
+                                      AppLocalizations.of(Get.context!)!
+                                          .mark_pickup_error,
+                                      AppLocalizations.of(Get.context!)!
+                                          .too_far_from_waste_pile(distance),
                                     );
                                     controller.capturedImageUrl.value = "";
                                   });

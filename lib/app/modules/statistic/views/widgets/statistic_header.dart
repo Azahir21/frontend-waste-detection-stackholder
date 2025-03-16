@@ -50,7 +50,7 @@ class _StatisticHeaderState extends State<StatisticHeader> {
                 Get.dialog(AlertDialog(
                   title: Center(
                     child: AppText.labelDefaultEmphasis(
-                      "Filter Download",
+                      AppLocalizations.of(context)!.filter_download,
                       context: context,
                     ),
                   ),
@@ -161,7 +161,8 @@ class _StatisticHeaderState extends State<StatisticHeader> {
                           ),
                         ),
                         VerticalGap.formMedium(),
-                        AppText.labelSmallEmphasis("Search Location",
+                        AppText.labelSmallEmphasis(
+                            AppLocalizations.of(context)!.search_location,
                             color: Theme.of(context).appColors.textSecondary,
                             context: context),
                         VerticalGap.formSmall(),
@@ -211,8 +212,10 @@ class _StatisticHeaderState extends State<StatisticHeader> {
                                 .firstDateController.value.text.isNotEmpty &&
                             controller.lastDateController.value.text.isEmpty) {
                           showFailedSnackbar(
-                            "Failed to pick end date",
-                            "Please input start date first",
+                            AppLocalizations.of(context)!
+                                .failed_to_pick_end_date,
+                            AppLocalizations.of(context)!
+                                .please_input_start_and_end_date,
                           );
                           return;
                         }

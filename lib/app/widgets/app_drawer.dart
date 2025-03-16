@@ -50,7 +50,7 @@ class AppDrawer extends StatelessWidget {
           Visibility(
             visible: GetStorage().read('role') == 'admin',
             child: CustomIconButtonWithText.primary(
-              label: "User ",
+              label: AppLocalizations.of(context)!.user,
               isActive: selectedIndex == 2,
               iconName: AppIconName.userManagement,
               onTap: () {

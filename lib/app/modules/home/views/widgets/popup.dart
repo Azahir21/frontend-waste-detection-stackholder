@@ -10,6 +10,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/centered_text_
 import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackbar.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/horizontal_gap.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/home/views/widgets/preview_page.dart';
+import 'package:frontend_waste_management_stackholder/app/widgets/text_button.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/vertical_gap.dart';
 import 'package:frontend_waste_management_stackholder/core/theme/theme_data.dart';
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
@@ -217,25 +218,27 @@ class Popup extends GetView<HomeController> {
                             Get.dialog(
                                 barrierDismissible: false,
                                 Dialog(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(32.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        AppText.labelDefaultEmphasis(
-                                          AppLocalizations.of(context)!
-                                              .pickup_confirmation,
-                                          context: context,
-                                          textAlign: TextAlign.center,
-                                          color: color.textSecondary,
-                                        ),
-                                        VerticalGap.formMedium(),
-                                        ElevatedButton(
-                                            onPressed: () {
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(32.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          AppText.labelDefaultEmphasis(
+                                            AppLocalizations.of(context)!
+                                                .pickup_confirmation,
+                                            context: context,
+                                            textAlign: TextAlign.center,
+                                            color: color.textSecondary,
+                                          ),
+                                          VerticalGap.formMedium(),
+                                          CenteredTextButton.primary(
+                                            height: 35,
+                                            onTap: () {
                                               openCameraDialog(
                                                 onCaptured:
                                                     (capturedDataUrl) async {
@@ -251,11 +254,14 @@ class Popup extends GetView<HomeController> {
                                                 },
                                               );
                                             },
-                                            child:
-                                                Text("take evidence picture")),
-                                        VerticalGap.formMedium(),
-                                        ElevatedButton(
-                                            onPressed: () {
+                                            label: AppLocalizations.of(context)!
+                                                .take_evidence_picture,
+                                            context: context,
+                                          ),
+                                          VerticalGap.formMedium(),
+                                          CenteredTextButton.primary(
+                                            height: 35,
+                                            onTap: () {
                                               pickImageFromSystem(
                                                 onPicked: (capturedDataUrl,
                                                     latitude, longitude) {
@@ -274,8 +280,12 @@ class Popup extends GetView<HomeController> {
                                                     controller.capturedImageUrl
                                                         .value = "";
                                                     showFailedSnackbar(
-                                                      "Failed to get evidence position",
-                                                      "Please try again, with a valid image",
+                                                      AppLocalizations.of(
+                                                              Get.context!)!
+                                                          .failed_to_get_evidence_position,
+                                                      AppLocalizations.of(
+                                                              Get.context!)!
+                                                          .try_again_with_valid_image,
                                                     );
                                                   }
                                                   // Optionally close the dialog if desired:
@@ -283,96 +293,101 @@ class Popup extends GetView<HomeController> {
                                                 },
                                               );
                                             },
-                                            child:
-                                                Text("pick evidence picture")),
-                                        Obx(() {
-                                          if (controller.capturedImageUrl.value
-                                              .isNotEmpty) {
-                                            return Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                VerticalGap.formMedium(),
-                                                AppText.labelDefaultEmphasis(
-                                                  "Evidence Image:",
+                                            label: AppLocalizations.of(context)!
+                                                .pick_evidence_picture,
+                                            context: context,
+                                          ),
+                                          Obx(() {
+                                            if (controller.capturedImageUrl
+                                                .value.isNotEmpty) {
+                                              return Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  VerticalGap.formMedium(),
+                                                  AppText.labelDefaultEmphasis(
+                                                    "${AppLocalizations.of(context)!.evidence_image}:",
+                                                    color: color.textSecondary,
+                                                    context: context,
+                                                  ),
+                                                  VerticalGap.formSmall(),
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    child: Container(
+                                                      constraints:
+                                                          const BoxConstraints(
+                                                        maxHeight: 300,
+                                                        maxWidth:
+                                                            350, // Constrain width
+                                                      ),
+                                                      child: Image.network(
+                                                        controller
+                                                            .capturedImageUrl
+                                                            .value,
+                                                        fit: BoxFit.contain,
+                                                        loadingBuilder: (context,
+                                                                child,
+                                                                loadingProgress) =>
+                                                            loadingProgress ==
+                                                                    null
+                                                                ? child
+                                                                : Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(
+                                                                      value: loadingProgress.expectedTotalBytes !=
+                                                                              null
+                                                                          ? loadingProgress.cumulativeBytesLoaded /
+                                                                              loadingProgress.expectedTotalBytes!
+                                                                          : null,
+                                                                    ),
+                                                                  ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                            return const SizedBox.shrink();
+                                          }),
+                                          VerticalGap.formBig(),
+                                          Wrap(
+                                            spacing: 16,
+                                            runSpacing: 12,
+                                            alignment: WrapAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  controller.capturedImageUrl
+                                                      .value = "";
+                                                  Get.back();
+                                                },
+                                                child:
+                                                    AppText.labelSmallDefault(
+                                                  AppLocalizations.of(context)!
+                                                      .cancel,
                                                   color: color.textSecondary,
                                                   context: context,
                                                 ),
-                                                VerticalGap.formSmall(),
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  child: Container(
-                                                    constraints:
-                                                        const BoxConstraints(
-                                                      maxHeight: 300,
-                                                      maxWidth:
-                                                          350, // Constrain width
-                                                    ),
-                                                    child: Image.network(
-                                                      controller
-                                                          .capturedImageUrl
-                                                          .value,
-                                                      fit: BoxFit.contain,
-                                                      loadingBuilder: (context,
-                                                              child,
-                                                              loadingProgress) =>
-                                                          loadingProgress ==
-                                                                  null
-                                                              ? child
-                                                              : Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(
-                                                                    value: loadingProgress.expectedTotalBytes !=
-                                                                            null
-                                                                        ? loadingProgress.cumulativeBytesLoaded /
-                                                                            loadingProgress.expectedTotalBytes!
-                                                                        : null,
-                                                                  ),
-                                                                ),
-                                                    ),
-                                                  ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  controller.markPickupSampah(
+                                                      detail.id!);
+                                                  Get.back();
+                                                },
+                                                child:
+                                                    AppText.labelSmallDefault(
+                                                  AppLocalizations.of(context)!
+                                                      .already,
+                                                  color: color.textPrimary,
+                                                  context: context,
                                                 ),
-                                              ],
-                                            );
-                                          }
-                                          return const SizedBox.shrink();
-                                        }),
-                                        VerticalGap.formBig(),
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            TextButton(
-                                              onPressed: () {
-                                                controller.capturedImageUrl
-                                                    .value = "";
-                                                Get.back();
-                                              },
-                                              child: AppText.labelSmallDefault(
-                                                AppLocalizations.of(context)!
-                                                    .cancel,
-                                                color: color.textSecondary,
-                                                context: context,
                                               ),
-                                            ),
-                                            HorizontalGap.formHuge(),
-                                            TextButton(
-                                              onPressed: () {
-                                                controller.markPickupSampah(
-                                                    detail.id!);
-                                                Get.back();
-                                              },
-                                              child: AppText.labelSmallDefault(
-                                                AppLocalizations.of(context)!
-                                                    .already,
-                                                color: color.textPrimary,
-                                                context: context,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ));

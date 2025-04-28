@@ -61,6 +61,7 @@ dependencies:
   image_picker: ^1.1.2
   exif: ^3.3.0
   rational: ^2.2.3
+  horizontal_data_table: ^4.3.1
 
 dev_dependencies:
   flutter_test:

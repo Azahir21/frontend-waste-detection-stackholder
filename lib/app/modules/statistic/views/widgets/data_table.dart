@@ -201,17 +201,24 @@ class DataTableWithPagination extends StatelessWidget {
                         ),
                       ),
                       // Action column cells
-                      ...dataStats.data!.map((row) {
+                      ...dataStats.data!.asMap().entries.map((entry) {
+                        final int index = entry.key;
+                        final row = entry.value;
+                        final bool isLastRow =
+                            index == dataStats.data!.length - 1;
+
                         return Container(
                           height: 48, // Match DataTable row height
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.only(left: 8),
                           decoration: BoxDecoration(
                             border: Border(
-                              bottom: BorderSide(
-                                color: Theme.of(context).dividerColor,
-                                width: 0.5,
-                              ),
+                              bottom: isLastRow
+                                  ? BorderSide.none
+                                  : BorderSide(
+                                      color: Theme.of(context).dividerColor,
+                                      width: 0.5,
+                                    ),
                               left: BorderSide(
                                 color: Theme.of(context).dividerColor,
                                 width: 2, // Thicker border for emphasis

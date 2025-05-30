@@ -133,7 +133,7 @@ class PieChartCardState extends State<PieChartCard> {
           );
         case 1:
           return PieChartSectionData(
-            color: AppColors.contentColorYellow,
+            color: AppColors.contentColorGreen,
             value: widget.illegalTrash.toDouble(),
             title: widget.illegalTrash.toString(),
             radius: radius,

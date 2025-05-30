@@ -50,6 +50,10 @@ class StatisticController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    final targetLocation = GetStorage().read('target_location');
+    if (targetLocation != null && targetLocation.toString().isNotEmpty) {
+      search.value = targetLocation.toString();
+    }
     await fetchTotalStatisticalData();
     await fetchDataStats();
   }

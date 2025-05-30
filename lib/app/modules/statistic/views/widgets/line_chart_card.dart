@@ -197,7 +197,7 @@ class _LineChart extends StatelessWidget {
               if (spot.barIndex == 0) {
                 textColor = AppColors.contentColorCyan;
               } else if (spot.barIndex == 1) {
-                textColor = Colors.orange.shade300;
+                textColor = Color(0xFF3BFF49);
               } else {
                 textColor = Colors.white; // fallback color
               }
@@ -318,7 +318,7 @@ class _LineChart extends StatelessWidget {
   // Line series for user historical data.
   LineChartBarData get lineChartBarDataUser => LineChartBarData(
         isCurved: true,
-        color: Colors.orange.shade300, // a distinct color for user data
+        color: Color(0xFF3BFF49), // a distinct color for user data
         barWidth: 8,
         isStrokeCapRound: true,
         dotData: const FlDotData(show: false),
@@ -398,7 +398,7 @@ class LineChartCardState extends State<LineChartCard> {
                   Container(
                     width: 16,
                     height: 16,
-                    color: Colors.orange.shade300,
+                    color: Color(0xFF3BFF49),
                   ),
                   const SizedBox(width: 4),
                   Text(

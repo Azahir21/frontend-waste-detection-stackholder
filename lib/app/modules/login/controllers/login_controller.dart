@@ -47,6 +47,7 @@ class LoginController extends GetxController {
       GetStorage().write('token', loginData.accessToken);
       GetStorage().write('username', loginData.username);
       GetStorage().write('role', loginData.role);
+      GetStorage().write('target_location', loginData.targetLocation);
 
       // Retrieve last visited route, default to '/app/home'
       String lastRoute = GetStorage().read('last_route') ?? '/app/home';

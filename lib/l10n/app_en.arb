@@ -652,7 +652,7 @@
       }
     }
   },
-  "collection_rate_weekly": "Weekly Collection Rate",
+  "collection_rate_weekly": "Waste Collection Count (Weekly)",
   "@collection_rate_weekly": {
     "description": "Title for weekly collection rate"
   },

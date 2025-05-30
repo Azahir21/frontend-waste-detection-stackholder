@@ -5,12 +5,14 @@ class Login {
   String? tokenType;
   String? username;
   String? role;
+  String? targetLocation;
 
   Login({
     this.accessToken,
     this.tokenType,
     this.username,
     this.role,
+    this.targetLocation,
   });
 
   factory Login.fromRawJson(String str) => Login.fromJson(json.decode(str));
@@ -22,6 +24,7 @@ class Login {
         tokenType: json["token_type"],
         username: json["username"],
         role: json["role"],
+        targetLocation: json["target_location"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,5 +32,6 @@ class Login {
         "token_type": tokenType,
         "username": username,
         "role": role,
+        "target_location": targetLocation,
       };
 }

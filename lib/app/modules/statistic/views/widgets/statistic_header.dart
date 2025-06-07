@@ -168,15 +168,18 @@ class _StatisticHeaderState extends State<StatisticHeader> {
                         VerticalGap.formSmall(),
                         SizedBox(
                           width: 300,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              hintText: "Jawa Timur",
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
+                          child: Obx(
+                            () => TextFormField(
+                              initialValue: controller.searchDownload.value,
+                              decoration: InputDecoration(
+                                hintText: "Jawa Timur",
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                               ),
+                              onChanged: (value) =>
+                                  controller.searchDownload.value = value,
                             ),
-                            onChanged: (value) =>
-                                controller.searchDownload.value = value,
                           ),
                         ),
                         VerticalGap.formMedium(),

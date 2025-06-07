@@ -53,6 +53,7 @@ class StatisticController extends GetxController {
     final targetLocation = GetStorage().read('target_location');
     if (targetLocation != null && targetLocation.toString().isNotEmpty) {
       search.value = targetLocation.toString();
+      searchDownload.value = targetLocation.toString();
     }
     await fetchTotalStatisticalData();
     await fetchDataStats();
@@ -158,7 +159,7 @@ class StatisticController extends GetxController {
   void resetDownloadFilter() {
     dataTypeDownload.value = 'all';
     statusDownload.value = 'all';
-    searchDownload.value = '';
+    searchDownload.value = GetStorage().read('target_location') ?? '';
     firstDate.value = DateTime.now();
     lastDate.value = DateTime.now();
     firstDateController.value.text = '';
@@ -167,10 +168,24 @@ class StatisticController extends GetxController {
 
   Future<void> downloadStatisticsExcel() async {
     try {
+      // Initialize searchDownload with target_location if it exists and searchDownload is empty
+      final targetLocation = GetStorage().read('target_location');
+      if (targetLocation != null &&
+          targetLocation.toString().isNotEmpty &&
+          searchDownload.value.isEmpty) {
+        searchDownload.value = targetLocation.toString();
+      }
+
+      bool viewTargetLocationOnly =
+          GetStorage().read('view_target_location_only') ?? false;
+
       final queryParameters = {
         'data_type': dataTypeDownload.value,
         'status': statusDownload.value,
         'search': searchDownload.value,
+        'target_location': viewTargetLocationOnly && targetLocation != null
+            ? targetLocation.toString()
+            : '',
       };
 
       if (firstDateController.value.text.isNotEmpty) {

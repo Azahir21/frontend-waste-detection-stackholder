@@ -5,7 +5,8 @@
       "name": "frontend_waste_management_stackholder",
       "request": "launch",
       "type": "dart",
-      "args": ["--dart-define=PORT=5000"]
+      // "args": ["--dart-define=PORT=5000"]
+      "args": ["-d", "chrome", "--web-port", "8000"]
     },
     {
       "name": "frontend_waste_management_stackholder (profile mode)",

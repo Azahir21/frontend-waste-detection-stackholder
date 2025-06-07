@@ -16,6 +16,7 @@ import 'package:frontend_waste_management_stackholder/app/widgets/custom_snackba
 import 'package:frontend_waste_management_stackholder/core/values/app_icon_name.dart';
 import 'package:frontend_waste_management_stackholder/core/values/const.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -267,7 +268,7 @@ class HomeController extends GetxController {
 
     try {
       final response = await ApiServices().get(
-          "${UrlConstants.sampah}?data_type=${filterDataType.value}&status=${filterStatus.value}");
+          "${UrlConstants.sampah}?data_type=${filterDataType.value}&status=${filterStatus.value}&target_location=${GetStorage().read('view_target_location_only') ? GetStorage().read('target_location') : ''}");
       if (response.statusCode != 200) {
         final message = jsonDecode(response.body)['detail'];
         showFailedSnackbar(
@@ -279,7 +280,7 @@ class HomeController extends GetxController {
 
       sampahsData.value = parseSampahDetail(response.body);
       // Update map data using the helper functions.
-      _updateMapData(sampahsData.value);
+      _updateMapData(sampahsData);
     } catch (e) {
       debugPrint('${AppLocalizations.of(Get.context!)!.waste_data_error}: $e');
     }
@@ -294,7 +295,7 @@ class HomeController extends GetxController {
     isLoading.value = true;
 
     final url =
-        "${UrlConstants.sampah}/timeseries?start_date=${firstDate.value.toIso8601String()}&end_date=${lastDate.value.toIso8601String()}&data_type=${filterDataType.value}&status=${filterStatus.value}";
+        "${UrlConstants.sampah}/timeseries?start_date=${firstDate.value.toIso8601String()}&end_date=${lastDate.value.toIso8601String()}&data_type=${filterDataType.value}&status=${filterStatus.value}&target_location=${GetStorage().read('view_target_location_only') ? GetStorage().read('target_location') : ''}";
     final response = await ApiServices().get(url);
 
     if (response.statusCode != 200) {

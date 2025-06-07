@@ -81,8 +81,10 @@ class StatisticController extends GetxController {
   Future<void> fetchDataStats({int page = 1, int pageSize = 10}) async {
     isLoading.value = true;
     try {
+      bool viewTargetLocationOnly =
+          GetStorage().read('view_target_location_only') ?? false;
       final queryString =
-          "?data_type=${dataType.value}&status=${status.value}&sort_by=${sortBy.value}&sort_order=${sortOrder.value}&search=${search.value}&page=$page&page_size=$pageSize";
+          "?data_type=${dataType.value}&status=${status.value}&sort_by=${sortBy.value}&sort_order=${sortOrder.value}&search=${search.value}&page=$page&page_size=$pageSize&target_location=${viewTargetLocationOnly ? GetStorage().read('target_location') : ''}";
 
       final response =
           await ApiServices().get('${UrlConstants.dataStats}$queryString');

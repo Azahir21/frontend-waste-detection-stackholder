@@ -6,6 +6,7 @@ class Login {
   String? username;
   String? role;
   String? targetLocation;
+  bool? viewTargetLocationOnly;
 
   Login({
     this.accessToken,
@@ -13,6 +14,7 @@ class Login {
     this.username,
     this.role,
     this.targetLocation,
+    this.viewTargetLocationOnly,
   });
 
   factory Login.fromRawJson(String str) => Login.fromJson(json.decode(str));
@@ -25,6 +27,7 @@ class Login {
         username: json["username"],
         role: json["role"],
         targetLocation: json["target_location"],
+        viewTargetLocationOnly: json["view_target_location_only"] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,5 +36,6 @@ class Login {
         "username": username,
         "role": role,
         "target_location": targetLocation,
+        "view_target_location_only": viewTargetLocationOnly,
       };
 }

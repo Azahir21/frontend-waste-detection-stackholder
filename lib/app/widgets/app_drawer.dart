@@ -70,6 +70,10 @@ class AppDrawer extends StatelessWidget {
             textColor: Theme.of(context).appColors.textRed,
             onTap: () {
               GetStorage().remove('token');
+              GetStorage().remove('username');
+              GetStorage().remove('role');
+              GetStorage().remove('target_location');
+              GetStorage().remove('view_target_location_only');
               Get.offAllNamed('/login');
             },
             context: context,

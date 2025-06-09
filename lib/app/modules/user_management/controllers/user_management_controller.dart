@@ -26,8 +26,12 @@ class UserManagementController extends GetxController {
   String username = "";
   String email = "";
   String password = "";
+  String targetLocation = "";
+  final RxBool viewTargetLocationOnly = false.obs;
   final RxBool validPassword = true.obs;
   final massage = "".obs;
+  final RxBool isEditMode = false.obs;
+  String editUserId = "";
 
   @override
   void onInit() {
@@ -97,6 +101,8 @@ class UserManagementController extends GetxController {
           "username": username,
           "email": email,
           "password": password,
+          "targetLocation": targetLocation.isEmpty ? null : targetLocation,
+          "viewTargetLocationOnly": viewTargetLocationOnly.value,
         },
       );
       if (response.statusCode != 200) {
@@ -111,10 +117,104 @@ class UserManagementController extends GetxController {
         AppLocalizations.of(Get.context!)!.register_success,
         AppLocalizations.of(Get.context!)!.register_success_message,
       );
+      resetForm();
+      fetchDataUser();
       Get.back();
     } catch (e) {
       print('Registration error: $e');
     }
+  }
+
+  Future<void> updateUser() async {
+    try {
+      final requestBody = {
+        "fullName": fullName,
+        "jenisKelamin": gender,
+        "username": username,
+        "email": email,
+        "password": password.isEmpty ? null : password,
+        "targetLocation": targetLocation.isEmpty ? null : targetLocation,
+        "viewTargetLocationOnly": viewTargetLocationOnly.value,
+      };
+
+      debugPrint('Update request body: $requestBody');
+
+      final response = await ApiServices().put(
+        '${UrlConstants.updateUser}?id=$editUserId',
+        requestBody,
+      );
+
+      if (response.statusCode != 200) {
+        // Handle different error response formats
+        String message;
+        try {
+          final responseData = jsonDecode(response.body);
+          if (responseData is Map) {
+            if (responseData.containsKey('detail')) {
+              final detail = responseData['detail'];
+              if (detail is List && detail.isNotEmpty) {
+                // Handle validation errors array
+                message = detail
+                    .map((error) => error['msg'] ?? error.toString())
+                    .join(', ');
+              } else {
+                message = detail.toString();
+              }
+            } else if (responseData.containsKey('msg')) {
+              message = responseData['msg'].toString();
+            } else {
+              message = 'Update failed';
+            }
+          } else {
+            message = responseData.toString();
+          }
+        } catch (e) {
+          message = 'Update failed: ${response.body}';
+        }
+
+        showFailedSnackbar(
+            AppLocalizations.of(Get.context!)!.update_error, message);
+        throw ('Update error: ${response.body}');
+      }
+
+      showSuccessSnackbar(
+        AppLocalizations.of(Get.context!)!.update_success,
+        AppLocalizations.of(Get.context!)!.update_success_message,
+      );
+
+      resetForm();
+      fetchDataUser();
+    } catch (e) {
+      debugPrint('Update error: $e');
+    }
+  }
+
+  void prepareForEdit(User user) {
+    isEditMode.value = true;
+    editUserId = user.id.toString();
+    fullName = user.fullName ?? "";
+    gender = user.gender ?? "";
+    username = user.username ?? "";
+    email = user.email ?? "";
+    password = ""; // Don't pre-fill password for security
+    targetLocation = user.targetLocation ?? "";
+    viewTargetLocationOnly.value = user.viewTargetLocationOnly?.value ?? false;
+  }
+
+  void prepareForAdd() {
+    isEditMode.value = false;
+    editUserId = "";
+    resetForm();
+  }
+
+  void resetForm() {
+    fullName = "";
+    gender = "";
+    username = "";
+    email = "";
+    password = "";
+    targetLocation = "";
+    viewTargetLocationOnly.value = false;
   }
 
   bool validateEmail(String email) {

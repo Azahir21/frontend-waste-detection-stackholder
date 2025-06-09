@@ -859,5 +859,37 @@
         "example": "Jakarta"
       }
     }
+  },
+  "update_error": "Gagal memperbarui",
+  "@update_error": {
+    "description": "Ditampilkan ketika pembaruan pengguna gagal"
+  },
+  "update_success": "Pembaruan berhasil",
+  "@update_success": {
+    "description": "Ditampilkan ketika pembaruan pengguna berhasil"
+  },
+  "update_success_message": "Pengguna telah berhasil diperbarui",
+  "@update_success_message": {
+    "description": "Ditampilkan ketika pembaruan pengguna berhasil"
+  },
+  "edit_user": "Edit Pengguna",
+  "@edit_user": {
+    "description": "Judul untuk dialog edit pengguna"
+  },
+  "target_location_edit": "Lokasi Target (Opsional)",
+  "@target_location_edit": {
+    "description": "Label untuk field lokasi target dalam form pengguna"
+  },
+  "view_target_location_only": "Hanya Lihat Lokasi Target",
+  "@view_target_location_only": {
+    "description": "Label untuk checkbox membatasi pengguna hanya ke lokasi target"
+  },
+  "cant_view_other_location": "Tidak Bisa Lihat Lokasi Lain",
+  "@cant_view_other_location": {
+    "description": "Header kolom untuk status pembatasan tampilan dalam tabel pengguna"
+  },
+  "leave_empty_to_keep_current": "Biarkan kosong untuk mempertahankan yang sekarang",
+  "@leave_empty_to_keep_current": {
+    "description": "Teks bantuan untuk field password dalam mode edit"
   }
 }

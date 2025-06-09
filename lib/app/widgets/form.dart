@@ -13,6 +13,7 @@ class CustomForm extends StatefulWidget {
     required this.height,
     this.autofillHints,
     this.onFieldSubmitted,
+    this.initialValue, // Add this parameter
   }) : super(key: key);
 
   final String labelText;
@@ -24,6 +25,7 @@ class CustomForm extends StatefulWidget {
   final double height;
   final List<String>? autofillHints;
   final ValueChanged<String>? onFieldSubmitted;
+  final String? initialValue; // Add this field
 
   factory CustomForm.text({
     Key? key,
@@ -32,6 +34,7 @@ class CustomForm extends StatefulWidget {
     TextInputType keyboardType = TextInputType.text,
     double width = 350,
     double height = 70,
+    String? initialValue, // Add this parameter
   }) {
     return CustomForm(
       key: key,
@@ -42,6 +45,7 @@ class CustomForm extends StatefulWidget {
       keyboardType: keyboardType,
       width: width,
       height: height,
+      initialValue: initialValue, // Pass it to the constructor
     );
   }
 
@@ -52,6 +56,7 @@ class CustomForm extends StatefulWidget {
     TextInputType keyboardType = TextInputType.phone,
     double width = 350,
     double height = 70,
+    String? initialValue, // Add this parameter
   }) {
     return CustomForm(
       key: key,
@@ -62,6 +67,7 @@ class CustomForm extends StatefulWidget {
       keyboardType: keyboardType,
       width: width,
       height: height,
+      initialValue: initialValue, // Pass it to the constructor
     );
   }
 
@@ -72,6 +78,7 @@ class CustomForm extends StatefulWidget {
     TextInputType keyboardType = TextInputType.number,
     double width = 350,
     double height = 70,
+    String? initialValue, // Add this parameter
   }) {
     return CustomForm(
       key: key,
@@ -82,6 +89,7 @@ class CustomForm extends StatefulWidget {
       keyboardType: keyboardType,
       width: width,
       height: height,
+      initialValue: initialValue, // Pass it to the constructor
     );
   }
 
@@ -91,6 +99,7 @@ class CustomForm extends StatefulWidget {
     required ValueSetter<String> onChanged,
     double width = 350,
     double height = 70,
+    String? initialValue, // Add this parameter
   }) {
     return CustomForm(
       key: key,
@@ -102,6 +111,7 @@ class CustomForm extends StatefulWidget {
       width: width,
       height: height,
       autofillHints: const [AutofillHints.email],
+      initialValue: initialValue, // Pass it to the constructor
     );
   }
 
@@ -113,6 +123,7 @@ class CustomForm extends StatefulWidget {
     double width = 350,
     double height = 70,
     ValueChanged<String>? onFieldSubmitted,
+    String? initialValue, // Add this parameter
   }) {
     return CustomForm(
       key: key,
@@ -125,6 +136,7 @@ class CustomForm extends StatefulWidget {
       height: height,
       autofillHints: const [AutofillHints.password],
       onFieldSubmitted: onFieldSubmitted,
+      initialValue: initialValue, // Pass it to the constructor
     );
   }
 
@@ -134,10 +146,19 @@ class CustomForm extends StatefulWidget {
 
 class _CustomFormState extends State<CustomForm> {
   final _focusNode = FocusNode();
+  late TextEditingController _controller; // Add this controller
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the controller with the initial value
+    _controller = TextEditingController(text: widget.initialValue ?? '');
+  }
 
   @override
   void dispose() {
     _focusNode.dispose();
+    _controller.dispose(); // Dispose the controller
     super.dispose();
   }
 
@@ -150,6 +171,7 @@ class _CustomFormState extends State<CustomForm> {
         width: widget.width,
         height: widget.height,
         child: TextFormField(
+          controller: _controller, // Use the controller instead of initialValue
           focusNode: _focusNode,
           obscureText: widget.isPassword && widget.obscureText,
           cursorColor: Colors.blue,

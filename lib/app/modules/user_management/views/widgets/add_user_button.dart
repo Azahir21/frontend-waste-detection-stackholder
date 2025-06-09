@@ -15,6 +15,7 @@ class AddUserButton extends StatelessWidget {
       : super(key: key);
 
   void _showAddUserDialog(BuildContext context) {
+    controller.prepareForAdd();
     showDialog(
       context: context,
       builder: (context) => AddUserDialog(controller: controller),

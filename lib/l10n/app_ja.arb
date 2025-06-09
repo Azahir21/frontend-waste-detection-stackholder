@@ -855,5 +855,37 @@
         "example": "東京"
       }
     }
+  },
+  "update_error": "更新に失敗しました",
+  "@update_error": {
+    "description": "ユーザーの更新が失敗した場合に表示されます"
+  },
+  "update_success": "更新が成功しました",
+  "@update_success": {
+    "description": "ユーザーの更新が成功した場合に表示されます"
+  },
+  "update_success_message": "ユーザーが正常に更新されました",
+  "@update_success_message": {
+    "description": "ユーザーの更新が成功した場合に表示されます"
+  },
+  "edit_user": "ユーザー編集",
+  "@edit_user": {
+    "description": "ユーザー編集ダイアログのタイトル"
+  },
+  "target_location_edit": "ターゲット場所（オプション）",
+  "@target_location_edit": {
+    "description": "ユーザーフォームのターゲット場所フィールドのラベル"
+  },
+  "view_target_location_only": "ターゲット場所のみ表示",
+  "@view_target_location_only": {
+    "description": "ユーザーをターゲット場所のみに制限するチェックボックスのラベル"
+  },
+  "cant_view_other_location": "他の場所を表示できません",
+  "@cant_view_other_location": {
+    "description": "ユーザーテーブルの表示制限ステータスの列ヘッダー"
+  },
+  "leave_empty_to_keep_current": "現在のものを保持するには空のままにしてください",
+  "@leave_empty_to_keep_current": {
+    "description": "編集モードでのパスワードフィールドのヘルパーテキスト"
   }
 }

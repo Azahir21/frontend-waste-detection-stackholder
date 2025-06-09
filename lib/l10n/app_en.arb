@@ -855,5 +855,37 @@
         "example": "Jakarta"
       }
     }
+  },
+  "update_error": "Failed to update",
+  "@update_error": {
+    "description": "Shown when user update fails"
+  },
+  "update_success": "Update successful",
+  "@update_success": {
+    "description": "Shown when user update succeeds"
+  },
+  "update_success_message": "User has been successfully updated",
+  "@update_success_message": {
+    "description": "Shown when user update succeeds"
+  },
+  "edit_user": "Edit User",
+  "@edit_user": {
+    "description": "Title for editing user dialog"
+  },
+  "target_location_edit": "Target Location (Optional)",
+  "@target_location_edit": {
+    "description": "Label for target location field in user form"
+  },
+  "view_target_location_only": "View Target Location Only",
+  "@view_target_location_only": {
+    "description": "Label for checkbox to restrict user to target location only"
+  },
+  "cant_view_other_location": "Can't View Other Location",
+  "@cant_view_other_location": {
+    "description": "Column header for view restriction status in user table"
+  },
+  "leave_empty_to_keep_current": "Leave empty to keep current",
+  "@leave_empty_to_keep_current": {
+    "description": "Helper text for password field in edit mode"
   }
 }

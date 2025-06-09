@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/user_management/controllers/user_management_controller.dart';
+import 'package:frontend_waste_management_stackholder/app/modules/user_management/views/widgets/add_user_dialog.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/user_management/views/widgets/page_navigation.dart';
 import 'package:frontend_waste_management_stackholder/app/modules/user_management/views/widgets/table_header.dart';
 import 'package:frontend_waste_management_stackholder/app/widgets/app_text.dart';
@@ -69,6 +70,22 @@ class UserDataTable extends StatelessWidget {
               color: Theme.of(context).appColors.textSecondary,
               context: context,
             )),
+            DataCell(
+              AppText.labelSmallDefault(
+                row.targetLocation ?? '-',
+                color: Theme.of(context).appColors.textSecondary,
+                context: context,
+              ),
+            ),
+            DataCell(
+              AppText.labelSmallDefault(
+                row.viewTargetLocationOnly!.value
+                    ? AppLocalizations.of(context)!.yes
+                    : AppLocalizations.of(context)!.no,
+                color: Theme.of(context).appColors.textSecondary,
+                context: context,
+              ),
+            ),
             DataCell(AppText.labelSmallDefault(
               row.status!.value
                   ? AppLocalizations.of(context)!.active
@@ -76,60 +93,87 @@ class UserDataTable extends StatelessWidget {
               color: Theme.of(context).appColors.textSecondary,
               context: context,
             )),
-            DataCell(Obx(() => Visibility(
-                  visible: row.role != "user",
-                  child: Switch(
-                    value: row.status!.value,
-                    onChanged: (value) {
-                      Get.dialog(
-                        AlertDialog(
-                          title: Center(
-                            child: AppText.labelDefaultEmphasis(
-                              AppLocalizations.of(context)!.change_status,
-                              context: context,
-                              color: Theme.of(context).appColors.textSecondary,
-                            ),
-                          ),
-                          content: AppText.labelSmallDefault(
-                            AppLocalizations.of(context)!.activate_confirmation(
-                                row.status!.value
-                                    ? AppLocalizations.of(context)!.active
-                                    : AppLocalizations.of(context)!.inactive,
-                                row.username!),
-                            context: context,
-                            color: Theme.of(context).appColors.textSecondary,
-                          ),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Get.back(closeOverlays: true),
-                              child: AppText.labelSmallDefault(
-                                AppLocalizations.of(context)!.cancel,
-                                context: context,
-                                color:
-                                    Theme.of(context).appColors.textSecondary,
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                controller.changeStatus(
-                                  row.id!.toString(),
-                                  row.username!,
-                                );
-                                Get.back(closeOverlays: true);
-                              },
-                              child: AppText.labelSmallDefault(
-                                AppLocalizations.of(context)!.ok,
-                                context: context,
-                                color:
-                                    Theme.of(context).appColors.textSecondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
+            DataCell(Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (row.role != "user")
+                  IconButton(
+                    icon: Icon(
+                      Icons.edit,
+                      color: Theme.of(context).appColors.iconPrimary,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      controller.prepareForEdit(row);
+                      Get.dialog(AddUserDialog(controller: controller));
                     },
+                    tooltip: "Edit User",
                   ),
-                ))),
+                Obx(() => Visibility(
+                      visible: row.role != "user",
+                      child: Switch(
+                        value: row.status!.value,
+                        onChanged: (value) {
+                          Get.dialog(
+                            AlertDialog(
+                              title: Center(
+                                child: AppText.labelDefaultEmphasis(
+                                  AppLocalizations.of(context)!.change_status,
+                                  context: context,
+                                  color:
+                                      Theme.of(context).appColors.textSecondary,
+                                ),
+                              ),
+                              content: AppText.labelSmallDefault(
+                                AppLocalizations.of(context)!
+                                    .activate_confirmation(
+                                        row.status!.value
+                                            ? AppLocalizations.of(context)!
+                                                .active
+                                            : AppLocalizations.of(context)!
+                                                .inactive,
+                                        row.username!),
+                                context: context,
+                                color:
+                                    Theme.of(context).appColors.textSecondary,
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Get.back(closeOverlays: true),
+                                  child: AppText.labelSmallDefault(
+                                    AppLocalizations.of(context)!.cancel,
+                                    context: context,
+                                    color: Theme.of(context)
+                                        .appColors
+                                        .textSecondary,
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    controller.changeStatus(
+                                      row.id!.toString(),
+                                      row.username!,
+                                    );
+                                    Get.back(closeOverlays: true);
+                                  },
+                                  child: AppText.labelSmallDefault(
+                                    AppLocalizations.of(context)!.ok,
+                                    context: context,
+                                    color: Theme.of(context)
+                                        .appColors
+                                        .textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    )),
+              ],
+            )),
           ],
         );
       }).toList();
@@ -166,8 +210,18 @@ class UserDataTable extends StatelessWidget {
                         AppLocalizations.of(context)!.email, 'email', 4),
                     _buildSortableColumn(
                         context, AppLocalizations.of(context)!.role, 'role', 5),
+                    _buildSortableColumn(
+                        context,
+                        AppLocalizations.of(context)!.location,
+                        "targetLocation",
+                        6),
+                    _buildSortableColumn(
+                        context,
+                        AppLocalizations.of(context)!.cant_view_other_location,
+                        'viewTargetLocationOnly',
+                        7),
                     _buildSortableColumn(context,
-                        AppLocalizations.of(context)!.status, 'status', 6),
+                        AppLocalizations.of(context)!.status, 'status', 8),
                     DataColumn(
                       label: AppText.labelSmallEmphasis(
                         AppLocalizations.of(context)!.action,

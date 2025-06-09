@@ -41,6 +41,7 @@ class ApiServices {
         "Access-Control-Allow-Origin": "*",
         'Accept': 'application/json',
         'Authorization': 'Bearer ${GetStorage().read('token')}',
+        'Content-Type': 'application/json',
       },
       body: body != null ? jsonEncode(body) : null,
     );

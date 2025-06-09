@@ -51,6 +51,8 @@ class User {
   String? email;
   String? role;
   RxBool? status;
+  String? targetLocation;
+  RxBool? viewTargetLocationOnly;
 
   User({
     this.id,
@@ -60,6 +62,8 @@ class User {
     this.email,
     this.role,
     this.status,
+    this.targetLocation,
+    this.viewTargetLocationOnly,
   });
 
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
@@ -74,6 +78,10 @@ class User {
         email: json["email"],
         role: json["role"]!,
         status: json["status"] == null ? null : RxBool(json["status"]),
+        targetLocation: json["target_location"],
+        viewTargetLocationOnly: json["view_target_location_only"] == null
+            ? null
+            : RxBool(json["view_target_location_only"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,5 +92,7 @@ class User {
         "email": email,
         "role": role,
         "status": status?.value,
+        "target_location": targetLocation,
+        "view_target_location_only": viewTargetLocationOnly?.value,
       };
 }

@@ -839,5 +839,25 @@
   "no_data_available": "Tidak Ada Data Tersedia",
   "@no_data_available": {
     "description": "Message shown when no data is available to display"
+  },
+  "viewing_data_for_location_restricted": "Menampilkan data untuk: {location} (tampilan terbatas)",
+  "@viewing_data_for_location_restricted": {
+    "description": "Pesan yang ditampilkan ketika pengguna hanya bisa melihat data untuk lokasi target mereka",
+    "placeholders": {
+      "location": {
+        "type": "String",
+        "example": "Jakarta"
+      }
+    }
+  },
+  "default_location_can_search_others": "Lokasi default: {location} (dapat mencari lokasi lain)",
+  "@default_location_can_search_others": {
+    "description": "Pesan yang ditampilkan ketika pengguna memiliki lokasi default tapi bisa mencari lokasi lain",
+    "placeholders": {
+      "location": {
+        "type": "String",
+        "example": "Jakarta"
+      }
+    }
   }
 }

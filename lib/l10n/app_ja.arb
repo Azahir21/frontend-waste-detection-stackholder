@@ -835,5 +835,25 @@
   "no_data_available": "データがありません",
   "@no_data_available": {
     "description": "Message shown when no data is available to display"
+  },
+  "viewing_data_for_location_restricted": "{location}のデータを表示中（制限ビュー）",
+  "@viewing_data_for_location_restricted": {
+    "description": "ユーザーがターゲット場所のデータのみを表示できる場合に表示されるメッセージ",
+    "placeholders": {
+      "location": {
+        "type": "String",
+        "example": "東京"
+      }
+    }
+  },
+  "default_location_can_search_others": "デフォルト場所：{location}（他の場所も検索可能）",
+  "@default_location_can_search_others": {
+    "description": "ユーザーがデフォルト場所を持っているが他の場所も検索できる場合に表示されるメッセージ",
+    "placeholders": {
+      "location": {
+        "type": "String",
+        "example": "東京"
+      }
+    }
   }
 }

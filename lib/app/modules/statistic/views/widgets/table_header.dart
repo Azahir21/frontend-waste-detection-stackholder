@@ -35,13 +35,14 @@ class TableHeader extends StatelessWidget {
 
     if (viewTargetLocationOnly) {
       // User has target location and can only see target location data
-      infoText = "Viewing data for: $targetLocation (restricted view)";
+      infoText = AppLocalizations.of(context)!
+          .viewing_data_for_location_restricted(targetLocation.toString());
       textColor = Colors.orange;
       icon = Icons.location_on;
     } else {
       // User has target location but can see other locations too
-      infoText =
-          "Default location: $targetLocation (can search other locations)";
+      infoText = AppLocalizations.of(context)!
+          .default_location_can_search_others(targetLocation.toString());
       textColor = Colors.grey;
       icon = Icons.search;
     }

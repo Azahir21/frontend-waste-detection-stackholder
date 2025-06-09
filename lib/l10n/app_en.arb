@@ -835,5 +835,25 @@
   "no_data_available": "No Data Available",
   "@no_data_available": {
     "description": "Message shown when no data is available to display"
+  },
+  "viewing_data_for_location_restricted": "Viewing data for: {location} (restricted view)",
+  "@viewing_data_for_location_restricted": {
+    "description": "Message shown when user can only view data for their target location",
+    "placeholders": {
+      "location": {
+        "type": "String",
+        "example": "Jakarta"
+      }
+    }
+  },
+  "default_location_can_search_others": "Default location: {location} (can search other locations)",
+  "@default_location_can_search_others": {
+    "description": "Message shown when user has a default location but can search other locations",
+    "placeholders": {
+      "location": {
+        "type": "String",
+        "example": "Jakarta"
+      }
+    }
   }
 }
